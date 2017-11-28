@@ -17,10 +17,10 @@ before_install:
 
 install:
    - eval "$(curl -fsSL "https://raw.githubusercontent.com/${OSX_PORTS_CACHE}/v${FREECAD_RELEASE}/travis-helpers.sh")"
-   - curl -LO https://raw.githubusercontent.com/probonopd/AppImages/master/recipes/meta/Recipe
+   - curl -LO https://raw.githubusercontent.com/AppImage/AppImages/master/pkg2appimage
 
 script:
-   - bash Recipe FreeCAD-nightly
+   - bash -ex ./pkg2appimage FreeCAD-nightly 
 
 after_success:
    - |
