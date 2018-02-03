@@ -21,6 +21,17 @@ install:
 
 script:
    - bash -ex ./pkg2appimage FreeCAD-nightly 
+   - cd out/
+   - echo 'import os, glob' >> version.py
+   - echo 'path = os.path.dirname(__file__)' >> version.py
+   - echo 'os.chdir(path)' >> version.py
+   - echo 'f = glob.glob("*.AppImage")[0]' >> version.py
+   - echo 'v = FreeCAD.Version()' >> version.py
+   - echo 'v = "FreeCAD_" + v[0] + "." + v[1] + "." + v[2].split()[0] + "." + "glibc2.17-x86_64.AppImage"' >> version.py
+   - echo 'os.rename(os.path.join(path, f), os.path.join(path, v))' >> version.py
+   - echo 'exit()' >> version.py
+   - cd ..
+   - out/*.AppImage --console $PWD/out/version.py
 
 after_success:
    - |
