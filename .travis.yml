@@ -31,7 +31,7 @@ script:
    - echo 'os.rename(os.path.join(path, f), os.path.join(path, v))' >> version.py
    - echo 'exit()' >> version.py
    - cd ..
-   - out/*.AppImage --console $PWD/out/version.py
+   - out/*.AppImage --console $TRAVIS_BUILD_DIR/out/version.py
 
 after_success:
    - |
