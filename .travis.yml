@@ -20,7 +20,7 @@ install:
    - curl -LO https://raw.githubusercontent.com/AppImage/AppImages/master/pkg2appimage
 
 script:
-   - bash -ex ./pkg2appimage FreeCAD-nightly 
+   - bash -ex ./pkg2appimage FreeCAD-Daily
    - cd out/
    - echo 'import os, glob' >> version.py
    - echo 'path = os.path.dirname(__file__)' >> version.py
