@@ -1,0 +1,12 @@
+[Desktop Entry]
+Version=1.0
+Name=FreeCAD Conda
+Exec=AppRun
+Icon=freecad_conda
+Type=Application
+Categories=Engineering;
+Comment=Feature based Parametric Modeler
+Terminal=false
+StartupNotify=true
+NoDisplay=false
+MimeType=application/x-extension-fcstd;

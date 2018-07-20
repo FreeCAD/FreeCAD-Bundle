@@ -18,26 +18,38 @@ before_install:
 install:
    - eval "$(curl -fsSL "https://raw.githubusercontent.com/${OSX_PORTS_CACHE}/v${FREECAD_RELEASE}/travis-helpers.sh")"
    - curl -LO https://raw.githubusercontent.com/AppImage/AppImages/master/pkg2appimage
+   # Conda
+   - wget "https://github.com/AppImage/AppImageKit/releases/download/continuous/appimagetool-x86_64.AppImage"
+   - chmod a+x appimagetool-x86_64.AppImage
+   - wget https://repo.continuum.io/miniconda/Miniconda2-latest-Linux-x86_64.sh -O miniconda.sh
+   - bash miniconda.sh -b -p $HOME/miniconda
+   - export PATH="$HOME/miniconda/bin:$PATH"
+   - hash -r
+   - conda config --set always_yes yes --set changeps1 no
+   - conda config --add channels conda-forge
+   - conda update -q conda
+   - source activate root
 
 script:
+   # PPA Py2Qt4
    - bash -ex ./pkg2appimage FreeCAD-Daily
-   - cd out/
-   - echo 'import os, glob' >> version.py
-   - echo 'path = os.path.dirname(__file__)' >> version.py
-   - echo 'os.chdir(path)' >> version.py
-   - echo 'f = glob.glob("*.AppImage")[0]' >> version.py
-   - echo 'v = FreeCAD.Version()' >> version.py
-   - echo 'v = "FreeCAD_" + v[0] + "." + v[1] + "." + v[2].split()[0] + "." + "glibc2.17-x86_64.AppImage"' >> version.py
-   - echo 'os.rename(os.path.join(path, f), os.path.join(path, v))' >> version.py
-   - echo 'exit(0)' >> version.py
-   - cd ..
    - out/*.AppImage --console $TRAVIS_BUILD_DIR/out/version.py
+   # Conda Py3Qt5
+   - cd conda
+   - bash ./conda.sh
+   - cd ..
 
 after_success:
    - |
      if [ "${DEPLOY}" == "1" ]; then
+        # PPA Py2Qt4
         export DEPLOYMENT_ARCHIVE=$(ls out/*.AppImage)
         export deployContext=$(create_helper_context repo=${DEPLOY_REPO} auth_token=${GH_TOKEN} release=${DEPLOY_RELEASE})
         gitHub_deploy_asset_to_release_named $deployContext ${DEPLOYMENT_ARCHIVE}
         gitHub_prune_assets_for_release_named $deployContext "glibc2.17-x86_64.AppImage" 1
+        # Conda Py3Qt5
+        export DEPLOYMENT_ARCHIVE=$(ls conda/*.AppImage)
+        export deployContext=$(create_helper_context repo=${DEPLOY_REPO} auth_token=${GH_TOKEN} release=${DEPLOY_RELEASE})
+        gitHub_deploy_asset_to_release_named $deployContext ${DEPLOYMENT_ARCHIVE}
+        gitHub_prune_assets_for_release_named $deployContext "glibc2.12-x86_64.AppImage" 1
      fi
