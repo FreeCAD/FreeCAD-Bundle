@@ -16,10 +16,12 @@ rm -rf AppDir/usr/bin_tmp
 #3 create the appimage
 chmod a+x ./AppDir/AppRun
 ARCH=x86_64 ../appimagetool-x86_64.AppImage $TRAVIS_BUILD_DIR/conda/AppDir
+ARCH=x86_64 ../appimagetool-x86_64.AppImage -u "gh-releases-zsync|FreeCAD|FreeCAD|0.18_pre|FreeCAD*glibc2.12-x86_64.AppImage.zsync" $TRAVIS_BUILD_DIR/conda/AppDir
 
 #4 setting rights for the appimage
 mv *.AppImage FreeCAD_0.18_Conda_Py3Qt5_glibc2.12-x86_64.AppImage
 chmod +x *.AppImage
+mv *.AppImage.zsync FreeCAD_0.18_Conda_Py3Qt5_glibc2.12-x86_64.AppImage.zsync
 
 #5 delete the created environment
 rm -rf AppDir/usr

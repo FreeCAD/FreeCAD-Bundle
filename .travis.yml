@@ -11,7 +11,7 @@ compiler: gcc
 language: cpp
 
 before_install:
-   - sudo apt-get update -qq && sudo apt-get install -y desktop-file-utils jq
+   - sudo apt-get update -qq && sudo apt-get install -y desktop-file-utils jq zsync
    - curl -LO "https://github.com/stedolan/jq/releases/download/jq-1.5/jq-linux64"
    - chmod +x jq-linux64 && sudo mv jq-linux64 $(which jq)
 
@@ -52,4 +52,9 @@ after_success:
         export deployContext=$(create_helper_context repo=${DEPLOY_REPO} auth_token=${GH_TOKEN} release=${DEPLOY_RELEASE})
         gitHub_deploy_asset_to_release_named $deployContext ${DEPLOYMENT_ARCHIVE}
         gitHub_prune_assets_for_release_named $deployContext "glibc2.12-x86_64.AppImage" 1
+        export DEPLOYMENT_ARCHIVE=$(ls conda/*.AppImage.zsync)
+        export deployContext=$(create_helper_context repo=${DEPLOY_REPO} auth_token=${GH_TOKEN} release=${DEPLOY_RELEASE})
+        gitHub_deploy_asset_to_release_named $deployContext ${DEPLOYMENT_ARCHIVE}
+        gitHub_prune_assets_for_release_named $deployContext "glibc2.12-x86_64.AppImage.zsync" 1
      fi
+
