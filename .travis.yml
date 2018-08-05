@@ -34,6 +34,15 @@ script:
    # PPA Py2Qt4
    - bash -ex ./pkg2appimage FreeCAD-Daily
    - out/*.AppImage --console $TRAVIS_BUILD_DIR/out/version.py
+   - cd out
+   - FC_VERSION=$(ls *.AppImage)
+   - rm *.AppImage
+   - |
+     ARCH=x86_64 $TRAVIS_BUILD_DIR/appimagetool-x86_64.AppImage \
+     -u "gh-releases-zsync|FreeCAD|FreeCAD|0.18_pre|FreeCAD*glibc2.17-x86_64.AppImage.zsync" \
+     $TRAVIS_BUILD_DIR/FreeCAD-Daily/FreeCAD-Daily.AppDir \
+     $TRAVIS_BUILD_DIR/out/$FC_VERSION
+   - cd ..
    # Conda Py3Qt5
    - cd conda
    - bash ./conda.sh
@@ -47,6 +56,10 @@ after_success:
         export deployContext=$(create_helper_context repo=${DEPLOY_REPO} auth_token=${GH_TOKEN} release=${DEPLOY_RELEASE})
         gitHub_deploy_asset_to_release_named $deployContext ${DEPLOYMENT_ARCHIVE}
         gitHub_prune_assets_for_release_named $deployContext "glibc2.17-x86_64.AppImage" 1
+        export DEPLOYMENT_ARCHIVE=$(ls out/*.AppImage.zsync)
+        export deployContext=$(create_helper_context repo=${DEPLOY_REPO} auth_token=${GH_TOKEN} release=${DEPLOY_RELEASE})
+        gitHub_deploy_asset_to_release_named $deployContext ${DEPLOYMENT_ARCHIVE}
+        gitHub_prune_assets_for_release_named $deployContext "glibc2.17-x86_64.AppImage.zsync" 1
         # Conda Py3Qt5
         export DEPLOYMENT_ARCHIVE=$(ls conda/*.AppImage)
         export deployContext=$(create_helper_context repo=${DEPLOY_REPO} auth_token=${GH_TOKEN} release=${DEPLOY_RELEASE})
