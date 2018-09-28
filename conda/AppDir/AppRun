@@ -7,4 +7,5 @@ export QT_QPA_PLATFORM_PLUGIN_PATH=$HERE/usr/plugins
 export QT_XKB_CONFIG_ROOT=$HERE/usr/lib
 export FONTCONFIG_FILE=/etc/fonts/fonts.conf
 export FONTCONFIG_PATH=/etc/fonts
+export QT_STYLE_OVERRIDE=gtk2
 ${HERE}/usr/bin/FreeCAD

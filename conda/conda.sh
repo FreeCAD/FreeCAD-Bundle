@@ -1,27 +1,53 @@
-#1 create a new environment in the AppDir with packages specified with a text-file
-conda create -p $TRAVIS_BUILD_DIR/conda/AppDir/usr --file freecad-spec-file.txt --copy
+# create a new environment in the AppDir
+conda create \
+    -p AppDir/usr \
+    freecad blas=*=openblas \
+    --copy \
+    --no-default-packages \
+    -c freecad/label/dev \
+    -c conda-forge \
+    -y
 
-#2 delete unnecessary stuff
+# activating the environment to install additional tools
+# this can be skipped if we create conda-packages from the pip-packages...
+# extract the version information
+source activate AppDir/usr
+FreeCAD --console $TRAVIS_BUILD_DIR/conda/version.py
+pip install https://github.com/looooo/freecad_pipintegration/archive/master.zip
+source activate base
+
+# this will create a huge env. We have to find some ways to make the env smaller
+# deleting some packages explicitly?
+conda remove -p AppDir/usr --force -y \
+    ruamel_yaml conda system tk json-c llvmdev \
+    nomkl readline xorg-fixesproto xorg-libsm mesalib \
+    xorg-libx11 curl gstreamer libtheora asn1crypto certifi chardet \
+    gst-plugins-base idna kiwisolver pycosat pycparser pysocks \
+    pytz sip solvespace tornado xorg-libxi xorg* cffi \
+    cycler python-dateutil setuptools cryptography pyqt soqt wheel \
+    requests libstdcxx-ng xz sqlite ncurses
+
+conda list -p AppDir/usr
+
+# delete unnecessary stuff
 rm -rf AppDir/usr/include
 find AppDir/usr -name \*.a -delete
 mv AppDir/usr/bin AppDir/usr/bin_tmp
 mkdir AppDir/usr/bin
 cp AppDir/usr/bin_tmp/FreeCAD AppDir/usr/bin/FreeCAD
-cp AppDir/usr/bin_tmp/activate AppDir/usr/bin/  
+cp AppDir/usr/bin_tmp/FreeCAD AppDir/usr/bin/
 cp AppDir/usr/bin_tmp/python AppDir/usr/bin/
-cp AppDir/usr/bin_tmp/widget.py AppDir/usr/bin/
+cp AppDir/usr/bin_tmp/pip AppDir/usr/bin/
+sed -i '1s|.*|#!/usr/bin/env python|' AppDir/usr/bin/pip
 rm -rf AppDir/usr/bin_tmp
 #+ deleting some specific libraries not needed. eg.: stdc++
 
-#3 create the appimage
+# create the appimage
 chmod a+x ./AppDir/AppRun
+FC_VERSION=$(ls *.AppImage)
+rm *.AppImage
 ARCH=x86_64 ../appimagetool-x86_64.AppImage \
   -u "gh-releases-zsync|FreeCAD|FreeCAD|0.18_pre|FreeCAD*glibc2.12-x86_64.AppImage.zsync" \
   $TRAVIS_BUILD_DIR/conda/AppDir \
-  $TRAVIS_BUILD_DIR/conda/FreeCAD_0.18_Conda_Py3Qt5_glibc2.12-x86_64.AppImage
+  $TRAVIS_BUILD_DIR/conda/$FC_VERSION
 
-#4 setting rights for the appimage
-chmod +x *.AppImage
-
-#5 delete the created environment
-rm -rf AppDir/usr
