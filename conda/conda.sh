@@ -24,7 +24,7 @@ conda remove -p AppDir/usr --force -y \
     xorg-libx11 curl gstreamer libtheora asn1crypto certifi chardet \
     gst-plugins-base idna kiwisolver pycosat pycparser pysocks \
     pytz sip solvespace tornado xorg-libxi xorg* cffi \
-    cycler python-dateutil setuptools cryptography pyqt soqt wheel \
+    cycler python-dateutil cryptography pyqt soqt wheel \
     requests libstdcxx-ng xz sqlite ncurses
 
 conda list -p AppDir/usr
