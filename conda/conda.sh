@@ -5,7 +5,7 @@ conda create \
     --copy \
     --no-default-packages \
     -c freecad/label/dev \
-    -c conda-forge \
+    -c conda-forge/label/cf201901 \
     -y
 
 # activating the environment to install additional tools
