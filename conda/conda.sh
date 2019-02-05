@@ -1,7 +1,7 @@
 # create a new environment in the AppDir
 conda create \
     -p AppDir/usr \
-    freecad blas=*=openblas \
+    freecad blas=*=openblas gitpython\
     --copy \
     --no-default-packages \
     -c freecad/label/dev \
@@ -13,17 +13,19 @@ conda create \
 # extract the version information
 source activate AppDir/usr
 FreeCAD --console $TRAVIS_BUILD_DIR/conda/version.py
-pip install https://github.com/looooo/freecad_pipintegration/archive/master.zip
+pip install https://github.com/looooo/freecad.pip/archive/master.zip --no-deps
+pip install https://github.com/FreeCAD/freecad.plot/archive/master.zip --no-deps
+pip install https://github.com/FreeCAD/freecad.ship/archive/master.zip --no-deps
 source activate base
 
 # this will create a huge env. We have to find some ways to make the env smaller
 # deleting some packages explicitly?
 conda remove -p AppDir/usr --force -y \
     ruamel_yaml conda system tk json-c llvmdev \
-    nomkl readline xorg-fixesproto xorg-libsm mesalib \
-    xorg-libx11 curl gstreamer libtheora asn1crypto certifi chardet \
+    nomkl readline mesalib \
+    curl gstreamer libtheora asn1crypto certifi chardet \
     gst-plugins-base idna kiwisolver pycosat pycparser pysocks \
-    pytz sip solvespace tornado xorg-libxi xorg* cffi \
+    pytz sip solvespace tornado xorg* cffi \
     cycler python-dateutil cryptography pyqt soqt wheel \
     requests libstdcxx-ng xz sqlite ncurses
 
