@@ -1,10 +1,10 @@
-# assume we have a working conda available
+assume we have a working conda available
 conda create \
     -p FreeCAD.app/Contents/Resources \
     freecad calculix blas=*=openblas \
     --copy \
     --no-default-packages \
-    -c freecad/label/dev \
+    -c freecad/label/testing \
     -c conda-forge \
     -y
 
@@ -39,8 +39,5 @@ cp FreeCAD.app/Contents/Resources/bin_tmp/FreeCAD FreeCAD.app/Contents/Resources
 cp FreeCAD.app/Contents/Resources/bin_tmp/python FreeCAD.app/Contents/Resources/bin/
 cp FreeCAD.app/Contents/Resources/bin_tmp/pip FreeCAD.app/Contents/Resources/bin/
 cp FreeCAD.app/Contents/Resources/bin_tmp/pyside2-rcc FreeCAD.app/Contents/Resources/bin/
-sed -i '1s|.*|#!/usr/bin/env python|' FreeCAD.app/Contents/Resources/bin/pip
+sed -i "" '1s|.*|#!/usr/bin/env python|' FreeCAD.app/Contents/Resources/bin/pip
 rm -rf FreeCAD.app/Contents/Resources/bin_tmp
-
-# linking the executeable
-ln -s FreeCAD.app/Contents/Resources/bin/FreeCAD FreeCAD.app/Contents/MacOS/FreeCAD
