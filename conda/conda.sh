@@ -1,7 +1,7 @@
 # create a new environment in the AppDir
 conda create \
     -p AppDir/usr \
-    freecad blas=*=openblas gitpython\
+    freecad calculix blas=*=openblas gitpython\
     --copy \
     --no-default-packages \
     -c freecad/label/dev \
