@@ -46,4 +46,4 @@ sed -i "" '1s|.*|#!/usr/bin/env python|' APP/FreeCAD.app/Contents/Resources/bin/
 rm -rf APP/FreeCAD.app/Contents/Resources/bin_tmp
 
 # create the dmg
-hdiutil create -volname "${version_name}" -srcfolder ./APP -ov -format UDZO "${version_name}"
+hdiutil create -volname "${version_name}" -srcfolder ./APP -ov -format UDZO "${version_name}.dmg"

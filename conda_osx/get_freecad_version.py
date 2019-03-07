@@ -16,4 +16,4 @@ version_info = subprocess.check_output("FreeCADCmd --version", shell=True)
 version_info = version_info.decode("utf-8").split(" ")
 dev_version = version_info[1]
 revision = version_info[3]
-print("FreeCAD_{}-{}-{}-{}-conda-Qt5-Py3.dmg".format(dev_version, revision, system, arch))
+print("FreeCAD_{}-{}-{}-{}-conda-Qt5-Py3".format(dev_version, revision, system, arch))
