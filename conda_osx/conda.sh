@@ -1,7 +1,7 @@
 # # assume we have a working conda available
 conda create \
     -p APP/FreeCAD.app/Contents/Resources \
-    freecad calculix blas=*=openblas gitpython numpy six \
+    freecad calculix blas=*=openblas gitpython numpy six pyyaml\
     --copy \
     --no-default-packages \
     -c freecad/label/testing \
@@ -26,7 +26,7 @@ conda remove -p APP/FreeCAD.app/Contents/Resources --force -y \
     curl gstreamer libtheora asn1crypto certifi chardet \
     gst-plugins-base idna kiwisolver pycosat pycparser pysocks \
     pytz sip solvespace tornado xorg* cffi \
-    cycler python-dateutil cryptography pyqt soqt wheel \
+    cycler python-dateutil cryptography-vectors pyqt soqt wheel \
     requests libstdcxx-ng xz sqlite ncurses
 
 conda list -p APP/FreeCAD.app/Contents/Resources

@@ -1,7 +1,7 @@
 # create a new environment in the AppDir
 conda create \
     -p AppDir/usr \
-    freecad calculix blas=*=openblas gitpython\
+    freecad calculix blas=*=openblas gitpython numpy six pyyaml \
     --copy \
     --no-default-packages \
     -c freecad/label/dev_cf201901 \
@@ -26,7 +26,7 @@ conda remove -p AppDir/usr --force -y \
     curl gstreamer libtheora asn1crypto certifi chardet \
     gst-plugins-base idna kiwisolver pycosat pycparser pysocks \
     pytz sip solvespace tornado xorg* cffi \
-    cycler python-dateutil cryptography pyqt soqt wheel \
+    cycler python-dateutil cryptography-vectors pyqt soqt wheel \
     requests libstdcxx-ng xz sqlite ncurses
 
 conda list -p AppDir/usr
