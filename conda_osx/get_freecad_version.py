@@ -2,6 +2,7 @@ import sys
 import os
 import subprocess
 import platform
+import jinja2
 
 platform_dict = {}
 platform_dict["Darwin"] = "OSX"
@@ -16,4 +17,13 @@ version_info = subprocess.check_output("FreeCADCmd --version", shell=True)
 version_info = version_info.decode("utf-8").split(" ")
 dev_version = version_info[1]
 revision = version_info[3]
+
+with open("Info.plist.template") as template_file:
+    template_str = template_file.read()
+template = jinja2.Template(template_str)
+rendered_str = template.render(FREECAD_VERSION="{}-{}".format(dev_version, revision), 
+                               APPLICATION_MENU_NAME="FreeCAD-{}-{}".format(dev_version, revision))
+with open("Contents/Info.plist", "w") as rendered_file:
+    rendered_file.write(rendered_str)
+
 print("FreeCAD_{}-{}-{}-{}-conda-Qt5-Py3".format(dev_version, revision, system, arch))
