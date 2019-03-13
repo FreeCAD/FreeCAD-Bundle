@@ -23,7 +23,7 @@ with open("Info.plist.template") as template_file:
 template = jinja2.Template(template_str)
 rendered_str = template.render(FREECAD_VERSION="{}-{}".format(dev_version, revision), 
                                APPLICATION_MENU_NAME="FreeCAD-{}-{}".format(dev_version, revision))
-with open("Contents/Info.plist", "w") as rendered_file:
+with open("APP/FreeCAD.app/Contents/Info.plist", "w") as rendered_file:
     rendered_file.write(rendered_str)
 
 print("FreeCAD_{}-{}-{}-{}-conda-Qt5-Py3".format(dev_version, revision, system, arch))
