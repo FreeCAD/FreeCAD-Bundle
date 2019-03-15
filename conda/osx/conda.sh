@@ -8,11 +8,8 @@ conda create \
     -c conda-forge \
     -y
 
-# activating the environment to install additional tools
-# this can be skipped if we create conda-packages from the pip-packages...
-# extract the version information
 
-#FreeCAD --console $TRAVIS_BUILD_DIR/conda/version.py
+# installing some additional libraries with pip
 version_name=$(conda run -p APP/FreeCAD.app/Contents/Resources python get_freecad_version.py)
 conda run -p APP/FreeCAD.app/Contents/Resources pip install https://github.com/looooo/freecad_pipintegration/archive/master.zip
 conda run -p APP/FreeCAD.app/Contents/Resources pip install https://github.com/FreeCAD/freecad.plot/archive/master.zip --no-deps
