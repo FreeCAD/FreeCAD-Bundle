@@ -1,7 +1,8 @@
 # # assume we have a working conda available
 conda create \
     -p APP/FreeCAD.app/Contents/Resources \
-    freecad calculix blas=*=openblas gitpython numpy six pyyaml jinja2\
+    freecad calculix blas=*=openblas gitpython \
+    numpy matplotlib six pyyaml jinja2\
     --copy \
     --no-default-packages \
     -c freecad/label/testing \
