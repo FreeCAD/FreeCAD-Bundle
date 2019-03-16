@@ -5,7 +5,7 @@ conda create \
     numpy matplotlib six pyyaml jinja2\
     --copy \
     --no-default-packages \
-    -c freecad/label/testing \
+    -c freecad/label/dev \
     -c conda-forge \
     -y
 
