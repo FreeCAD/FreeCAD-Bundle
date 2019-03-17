@@ -34,9 +34,9 @@ rm -rf AppDir/usr/include
 find AppDir/usr -name \*.a -delete
 mv AppDir/usr/bin AppDir/usr/bin_tmp
 mkdir AppDir/usr/bin
-cp AppDir/usr/bin_tmp/FreeCAD AppDir/usr/bin/FreeCAD
-cp AppDir/usr/bin_tmp/FreeCAD/FreeCADCmd AppDir/usr/bin/FreeCADCmd
-cp AppDir/usr/bin_tmp/FreeCAD/ccx AppDir/usr/bin/ccx
+cp AppDir/usr/bin_tmp/FreeCAD AppDir/usr/bin/
+cp AppDir/usr/bin_tmp/FreeCADCmd AppDir/usr/bin/
+cp AppDir/usr/bin_tmp/ccx AppDir/usr/bin/
 cp AppDir/usr/bin_tmp/python AppDir/usr/bin/
 cp AppDir/usr/bin_tmp/pip AppDir/usr/bin/
 cp AppDir/usr/bin_tmp/pyside2-rcc AppDir/usr/bin/

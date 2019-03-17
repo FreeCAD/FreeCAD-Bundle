@@ -8,7 +8,7 @@ platform_dict["Darwin"] = "OSX"
 
 sys_n_arch = platform.platform()
 sys_n_arch = sys_n_arch.split("-")
-system, arch = sys_n_arch[0], sys_n_arch[2]
+system, arch = sys_n_arch[0], sys_n_arch[4]
 if system in platform_dict:
     system = platform_dict[system]
 
