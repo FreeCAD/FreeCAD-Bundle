@@ -17,4 +17,4 @@ version_info = version_info.decode("utf-8").split(" ")
 dev_version = version_info[1]
 revision = version_info[3]
 
-print("FreeCAD_{}-{}-{}-{}-conda-Qt5-Py3".format(dev_version, revision, system, arch))
+print("FreeCAD_{}-{}-{}-_Conda_Py3Qt5_glibc2.12-x86_64".format(dev_version, revision, system))
