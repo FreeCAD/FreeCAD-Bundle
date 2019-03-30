@@ -2,7 +2,7 @@
 conda create \
     -p AppDir/usr \
     freecad calculix blas=*=openblas gitpython \
-    numpy matplotlib six pyyaml \
+    numpy matplotlib scipy sympy pandas six pyyaml \
     --copy \
     --no-default-packages \
     -c freecad/label/dev \
@@ -23,8 +23,8 @@ conda remove -p AppDir/usr --force -y \
     nomkl readline mesalib \
     curl gstreamer libtheora asn1crypto certifi chardet \
     gst-plugins-base idna kiwisolver pycosat pycparser pysocks \
-    pytz sip solvespace tornado xorg* cffi \
-    cycler python-dateutil cryptography-vectors pyqt soqt wheel \
+    sip solvespace tornado xorg* cffi \
+    cryptography-vectors pyqt soqt wheel \
     requests libstdcxx-ng xz sqlite ncurses
 
 conda list -p AppDir/usr

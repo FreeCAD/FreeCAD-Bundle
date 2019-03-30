@@ -2,7 +2,7 @@
 conda create \
     -p APP/FreeCAD.app/Contents/Resources \
     freecad calculix blas=*=openblas gitpython \
-    numpy matplotlib six pyyaml jinja2\
+    numpy matplotlib scipy sympy pandas six pyyaml jinja2 \
     --copy \
     --no-default-packages \
     -c freecad/label/dev \
@@ -23,8 +23,8 @@ conda remove -p APP/FreeCAD.app/Contents/Resources --force -y \
     nomkl readline mesalib \
     curl gstreamer libtheora asn1crypto certifi chardet \
     gst-plugins-base idna kiwisolver pycosat pycparser pysocks \
-    pytz sip solvespace tornado xorg* cffi \
-    cycler python-dateutil cryptography-vectors pyqt soqt wheel \
+    sip solvespace tornado xorg* cffi \
+    cryptography-vectors pyqt soqt wheel \
     requests libstdcxx-ng xz sqlite ncurses jinja2
 
 conda list -p APP/FreeCAD.app/Contents/Resources
