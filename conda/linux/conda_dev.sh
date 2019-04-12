@@ -48,5 +48,5 @@ rm -rf AppDir/usr/bin_tmp
 chmod a+x ./AppDir/AppRun
 rm *.AppImage
 ARCH=x86_64 ../../appimagetool-x86_64.AppImage \
-  -u "gh-releases-zsync|FreeCAD|FreeCAD|0.18_pre|FreeCAD*glibc2.12-x86_64.AppImage.zsync" \
+  -u "gh-releases-zsync|FreeCAD|FreeCAD|$DEPLOY_RELEASE|FreeCAD*glibc2.12-x86_64.AppImage.zsync" \
   AppDir  ${version_name}.AppImage
