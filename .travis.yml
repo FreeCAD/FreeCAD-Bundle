@@ -1,9 +1,9 @@
 env:
   global:
     # tag
-    - DEPLOY_RELEASE="0.18.1"
+    - DEPLOY_RELEASE="0.19_pre"
     # stable or dev
-    - RELEASE_TYPE="stable"
+    - RELEASE_TYPE="dev"
     ##
     - FREECAD_RELEASE="0.18"
     # - DEPLOY_RELEASE=${DEPLOY_RELEASE:-$FREECAD_RELEASE}
