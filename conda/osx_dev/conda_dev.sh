@@ -11,8 +11,7 @@ conda create \
 
 
 # installing some additional libraries with pip
-# version_name=$(conda run -p APP/FreeCAD.app/Contents/Resources python get_freecad_version.py)
-version_name="FreeCAD_0.19_dev"
+version_name=$(conda run -p APP/FreeCAD.app/Contents/Resources python get_freecad_version.py)
 conda run -p APP/FreeCAD.app/Contents/Resources pip install https://github.com/looooo/freecad_pipintegration/archive/master.zip
 conda run -p APP/FreeCAD.app/Contents/Resources pip install https://github.com/FreeCAD/freecad.plot/archive/master.zip --no-deps
 conda run -p APP/FreeCAD.app/Contents/Resources pip install https://github.com/FreeCAD/freecad.ship/archive/master.zip --no-deps

@@ -2,9 +2,7 @@ env:
   global:
     # tag
     - DEPLOY_RELEASE="0.19_pre"
-    # stable or dev
-    - RELEASE_TYPE="dev"
-    ##
+    #
     - FREECAD_RELEASE="0.18"
     # - DEPLOY_RELEASE=${DEPLOY_RELEASE:-$FREECAD_RELEASE}
     - OSX_PORTS_CACHE=${OSX_PORTS_CACHE:-FreeCAD/FreeCAD-ports-cache}
@@ -50,23 +48,19 @@ install:
     fi
 
 script:
-  - if [ "$TRAVIS_OS_NAME" == "linux" -a "$RELEASE_TYPE" == "stable" ]; then
-      cd conda/linux;
+  - if [ "$TRAVIS_OS_NAME" == "linux" ]; then
+      cd conda/linux_stable;
       bash ./conda_stable.sh;
       cd ..;
-    fi
-  - if [ "$TRAVIS_OS_NAME" == "linux" -a "$RELEASE_TYPE" == "dev" ]; then
-      cd conda/linux;
+      cd conda/linux_dev;
       bash ./conda_dev.sh;
       cd ..;
     fi
-  - if [ "$TRAVIS_OS_NAME" == "osx" -a "$RELEASE_TYPE" == "stable" ]; then
-      cd conda/osx;
+  - if [ "$TRAVIS_OS_NAME" == "osx" ]; then
+      cd conda/osx_stable;
       bash ./conda_stable.sh;
       cd ..;
-    fi
-  - if [ "$TRAVIS_OS_NAME" == "osx" -a "$RELEASE_TYPE" == "dev" ]; then
-      cd conda/osx;
+      cd conda/osx_dev;
       bash ./conda_dev.sh;
       cd ..;
     fi
@@ -76,15 +70,22 @@ after_success:
     if [ "$TRAVIS_OS_NAME" == "linux" -a "${DEPLOY}" == "1" ]; then
       export deployContext=$(create_helper_context repo=${DEPLOY_REPO} auth_token=${GH_TOKEN} release=${DEPLOY_RELEASE})
       gitHub_prune_assets_for_release_named $deployContext ".AppImage" 0
-      export DEPLOYMENT_ARCHIVE=$(ls linux/*.AppImage)
+      export DEPLOYMENT_ARCHIVE=$(ls linux_stable/*.AppImage)
       gitHub_deploy_asset_to_release_named $deployContext ${DEPLOYMENT_ARCHIVE}
-      export DEPLOYMENT_ARCHIVE=$(ls linux/*.AppImage.zsync)
+      export DEPLOYMENT_ARCHIVE=$(ls linux_stable/*.AppImage.zsync)
+      gitHub_deploy_asset_to_release_named $deployContext ${DEPLOYMENT_ARCHIVE}
+      export DEPLOYMENT_ARCHIVE=$(ls linux_dev/*.AppImage)
+      gitHub_deploy_asset_to_release_named $deployContext ${DEPLOYMENT_ARCHIVE}
+      export DEPLOYMENT_ARCHIVE=$(ls linux_dev/*.AppImage.zsync)
       gitHub_deploy_asset_to_release_named $deployContext ${DEPLOYMENT_ARCHIVE}
     fi
   - |
     if [ "$TRAVIS_OS_NAME" == "osx" -a "${DEPLOY}" == "1" ]; then
       export deployContext=$(create_helper_context repo=${DEPLOY_REPO} auth_token=${GH_TOKEN} release=${DEPLOY_RELEASE})
       gitHub_prune_assets_for_release_named $deployContext ".dmg" 0
-      export DEPLOYMENT_ARCHIVE=$(ls osx/*.dmg)
+      export DEPLOYMENT_ARCHIVE=$(ls osx_stable/*.dmg)
+      gitHub_deploy_asset_to_release_named $deployContext ${DEPLOYMENT_ARCHIVE}
+      export DEPLOYMENT_ARCHIVE=$(ls osx_dev/*.dmg)
       gitHub_deploy_asset_to_release_named $deployContext ${DEPLOYMENT_ARCHIVE}
     fi
+
