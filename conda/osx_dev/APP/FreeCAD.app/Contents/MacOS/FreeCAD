@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 HERE=$(dirname "$(dirname "$0")")
-PREFIX=$HERE/Resources
+export PREFIX=$HERE/Resources
 export LD_LIBRARY_PATH=$PREFIX/lib
 export PYTHONHOME=$PREFIX
 export QT_QPA_PLATFORM_PLUGIN_PATH=$PREFIX/plugins

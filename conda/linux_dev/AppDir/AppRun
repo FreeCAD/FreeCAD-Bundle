@@ -1,6 +1,7 @@
 #!/bin/bash
 HERE="$(dirname "$(readlink -f "${0}")")"
 echo ${HERE}
+export PREFIX=$HERE/usr
 export LD_LIBRARY_PATH=$HERE/usr/lib
 export PYTHONHOME=$HERE/usr
 export QT_QPA_PLATFORM_PLUGIN_PATH=$HERE/usr/plugins
