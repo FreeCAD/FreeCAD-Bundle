@@ -11,8 +11,7 @@ conda create \
 
 
 # installing some additional libraries with pip
-# version_name=$(conda run -p AppDir/usr python get_freecad_version.py)
-version_name="FreeCAD_0.18_stable"
+version_name=$(conda run -p AppDir/usr python get_freecad_version.py)
 conda run -p AppDir/usr pip install https://github.com/looooo/freecad_pipintegration/archive/master.zip
 
 # this will create a huge env. We have to find some ways to make the env smaller
