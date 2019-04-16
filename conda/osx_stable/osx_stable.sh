@@ -1,11 +1,12 @@
 # # assume we have a working conda available
 conda create \
     -p APP/FreeCAD.app/Contents/Resources \
-    freecad calculix blas=*=openblas gitpython \
+    freecad=0.18.1 calculix blas=*=openblas gitpython \
     numpy matplotlib scipy sympy pandas six pyyaml jinja2 \
     --copy \
     --no-default-packages \
-    -c conda-forge \
+    - freecad/label/dev_cf201901 \
+    -c conda-forge/label/cf201901 \
     -y
 
 

@@ -1,11 +1,12 @@
 # create a new environment in the AppDir
 conda create \
     -p AppDir/usr \
-    freecad calculix blas=*=openblas gitpython \
+    freecad=0.18.1 calculix blas=*=openblas gitpython \
     numpy matplotlib scipy sympy pandas six pyyaml \
     --copy \
     --no-default-packages \
-    -c conda-forge \
+    -c conda-forge/label/dev_cf201901 \
+    -c conda-forge/label/cf201901 \
     -y
 
 
