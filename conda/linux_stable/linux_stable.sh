@@ -39,6 +39,7 @@ cp AppDir/usr/bin_tmp/ccx AppDir/usr/bin/
 cp AppDir/usr/bin_tmp/python AppDir/usr/bin/
 cp AppDir/usr/bin_tmp/pip AppDir/usr/bin/
 cp AppDir/usr/bin_tmp/pyside2-rcc AppDir/usr/bin/
+cp AppDir/usr/bin_tmp/assistant AppDir/usr/bin/
 sed -i '1s|.*|#!/usr/bin/env python|' AppDir/usr/bin/pip
 rm -rf AppDir/usr/bin_tmp
 #+ deleting some specific libraries not needed. eg.: stdc++
