@@ -5,7 +5,7 @@ conda create \
     numpy matplotlib scipy sympy pandas six pyyaml \
     --copy \
     --no-default-packages \
-    -c conda-forge/label/dev_cf201901 \
+    -c freecad/label/dev_cf201901 \
     -c conda-forge/label/cf201901 \
     -y
 
