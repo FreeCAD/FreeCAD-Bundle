@@ -19,7 +19,7 @@ conda run -p APP/FreeCAD.app/Contents/Resources pip install https://github.com/l
 conda remove -p APP/FreeCAD.app/Contents/Resources --force -y \
     ruamel_yaml conda system tk json-c llvmdev \
     nomkl readline mesalib \
-    curl gstreamer libtheora asn1crypto certifi chardet \
+    gstreamer libtheora asn1crypto certifi chardet \
     gst-plugins-base idna kiwisolver pycosat pycparser pysocks \
     sip solvespace tornado xorg* cffi \
     cryptography-vectors pyqt soqt wheel \

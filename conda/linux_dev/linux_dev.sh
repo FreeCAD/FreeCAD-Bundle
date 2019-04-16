@@ -19,7 +19,7 @@ conda run -p AppDir/usr pip install https://github.com/looooo/freecad_pipintegra
 conda remove -p AppDir/usr --force -y \
     ruamel_yaml conda system tk json-c llvmdev \
     nomkl readline mesalib \
-    curl gstreamer libtheora asn1crypto certifi chardet \
+    gstreamer libtheora asn1crypto certifi chardet \
     gst-plugins-base idna kiwisolver pycosat pycparser pysocks \
     sip solvespace tornado xorg* cffi \
     cryptography-vectors pyqt soqt wheel \
