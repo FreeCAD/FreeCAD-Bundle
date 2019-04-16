@@ -13,8 +13,6 @@ conda create \
 # installing some additional libraries with pip
 version_name=$(conda run -p AppDir/usr python get_freecad_version.py)
 conda run -p AppDir/usr pip install https://github.com/looooo/freecad_pipintegration/archive/master.zip
-conda run -p AppDir/usr pip install https://github.com/FreeCAD/freecad.plot/archive/master.zip --no-deps
-conda run -p AppDir/usr pip install https://github.com/FreeCAD/freecad.ship/archive/master.zip --no-deps
 
 # this will create a huge env. We have to find some ways to make the env smaller
 # deleting some packages explicitly?
