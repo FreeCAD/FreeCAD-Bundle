@@ -68,8 +68,8 @@ after_success:
       gitHub_prune_assets_for_release_named $deployContext ".AppImage" 0
       export DEPLOYMENT_ARCHIVE=$(ls linux_stable/*.AppImage)
       gitHub_deploy_asset_to_release_named $deployContext ${DEPLOYMENT_ARCHIVE}
-      # export DEPLOYMENT_ARCHIVE=$(ls linux_stable/*.AppImage.zsync)
-      # gitHub_deploy_asset_to_release_named $deployContext ${DEPLOYMENT_ARCHIVE}
+      export DEPLOYMENT_ARCHIVE=$(ls linux_stable/*.AppImage.zsync)
+      gitHub_deploy_asset_to_release_named $deployContext ${DEPLOYMENT_ARCHIVE}
       export DEPLOYMENT_ARCHIVE=$(ls linux_dev/*.AppImage)
       gitHub_deploy_asset_to_release_named $deployContext ${DEPLOYMENT_ARCHIVE}
       export DEPLOYMENT_ARCHIVE=$(ls linux_dev/*.AppImage.zsync)

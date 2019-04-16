@@ -51,4 +51,5 @@ cp ../../doc/* AppDir/usr/doc/
 chmod a+x ./AppDir/AppRun
 rm *.AppImage
 ARCH=x86_64 ../../appimagetool-x86_64.AppImage \
+  -u "gh-releases-zsync|FreeCAD|FreeCAD|latest|FreeCAD*glibc2.12-x86_64.AppImage.zsync" \
   AppDir  ${version_name}.AppImage
