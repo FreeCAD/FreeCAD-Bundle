@@ -26,6 +26,20 @@ before_install:
 
 install:
   - eval "$(curl -fsSL "https://raw.githubusercontent.com/${OSX_PORTS_CACHE}/v${FREECAD_RELEASE}/travis-helpers.sh")"
+  - # Temp patch
+  - |
+    gitHub_release_named()
+    {
+       namedReleaseAsJSON=$(gitHub_releases ${1} | jq -r --arg releaseName ${2-$release} '.[] | select(.tag_name==$releaseName)')
+       echo ${namedReleaseAsJSON}
+    }
+  - # Temp patch
+  - |
+    gitHub_release_latest_freecad()
+    {
+       latestReleaseAsTagName=$(curl -s "https://api.github.com/repos/FreeCAD/FreeCAD/releases/latest" | jq -r .tag_name)
+       echo ${latestReleaseAsTagName}
+    }
   - if [ "$TRAVIS_OS_NAME" == "linux" ]; then
       curl -LO https://raw.githubusercontent.com/AppImage/AppImages/master/pkg2appimage;
       wget "https://github.com/AppImage/AppImageKit/releases/download/continuous/appimagetool-x86_64.AppImage";
@@ -63,13 +77,16 @@ script:
 
 after_success:
   - |
+    DEPLOY_RELEASE_STABLE=gitHub_release_latest_freecad
     if [ "$TRAVIS_OS_NAME" == "linux" -a "${DEPLOY}" == "1" ]; then
-      export deployContext=$(create_helper_context repo=${DEPLOY_REPO} auth_token=${GH_TOKEN} release=${DEPLOY_RELEASE})
+      export deployContext=$(create_helper_context repo=${DEPLOY_REPO} auth_token=${GH_TOKEN} release=${DEPLOY_RELEASE_STABLE})
       gitHub_prune_assets_for_release_named $deployContext ".AppImage" 0
       export DEPLOYMENT_ARCHIVE=$(ls linux_stable/*.AppImage)
       gitHub_deploy_asset_to_release_named $deployContext ${DEPLOYMENT_ARCHIVE}
       export DEPLOYMENT_ARCHIVE=$(ls linux_stable/*.AppImage.zsync)
       gitHub_deploy_asset_to_release_named $deployContext ${DEPLOYMENT_ARCHIVE}
+      export deployContext=$(create_helper_context repo=${DEPLOY_REPO} auth_token=${GH_TOKEN} release=${DEPLOY_RELEASE})
+      gitHub_prune_assets_for_release_named $deployContext ".AppImage" 0
       export DEPLOYMENT_ARCHIVE=$(ls linux_dev/*.AppImage)
       gitHub_deploy_asset_to_release_named $deployContext ${DEPLOYMENT_ARCHIVE}
       export DEPLOYMENT_ARCHIVE=$(ls linux_dev/*.AppImage.zsync)
@@ -77,10 +94,13 @@ after_success:
     fi
   - |
     if [ "$TRAVIS_OS_NAME" == "osx" -a "${DEPLOY}" == "1" ]; then
-      export deployContext=$(create_helper_context repo=${DEPLOY_REPO} auth_token=${GH_TOKEN} release=${DEPLOY_RELEASE})
+      export deployContext=$(create_helper_context repo=${DEPLOY_REPO} auth_token=${GH_TOKEN} release=${DEPLOY_RELEASE_STABLE})
       gitHub_prune_assets_for_release_named $deployContext ".dmg" 0
       export DEPLOYMENT_ARCHIVE=$(ls osx_stable/*.dmg)
       gitHub_deploy_asset_to_release_named $deployContext ${DEPLOYMENT_ARCHIVE}
+      export deployContext=$(create_helper_context repo=${DEPLOY_REPO} auth_token=${GH_TOKEN} release=${DEPLOY_RELEASE})
+      gitHub_prune_assets_for_release_named $deployContext ".dmg" 0
       export DEPLOYMENT_ARCHIVE=$(ls osx_dev/*.dmg)
       gitHub_deploy_asset_to_release_named $deployContext ${DEPLOYMENT_ARCHIVE}
     fi
+
