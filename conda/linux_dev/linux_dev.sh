@@ -23,7 +23,7 @@ conda remove -p AppDir/usr --force -y \
     gst-plugins-base idna kiwisolver pycosat pycparser pysocks \
     sip solvespace tornado xorg* cffi \
     cryptography-vectors pyqt soqt wheel \
-    requests libstdcxx-ng xz sqlite ncurses
+    requests xz sqlite ncurses
 
 conda list -p AppDir/usr
 
