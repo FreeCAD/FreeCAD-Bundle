@@ -14,16 +14,6 @@ conda create \
 version_name=$(conda run -p APP/FreeCAD.app/Contents/Resources python get_freecad_version.py)
 conda run -p APP/FreeCAD.app/Contents/Resources pip install https://github.com/looooo/freecad_pipintegration/archive/master.zip
 
-# this will create a huge env. We have to find some ways to make the env smaller
-# deleting some packages explicitly? 
-conda remove -p APP/FreeCAD.app/Contents/Resources --force -y \
-    ruamel_yaml conda system tk json-c llvmdev \
-    nomkl readline mesalib \
-    gstreamer libtheora asn1crypto certifi chardet \
-    gst-plugins-base idna kiwisolver pycosat pycparser pysocks \
-    sip solvespace tornado xorg* cffi \
-    cryptography-vectors pyqt soqt wheel \
-    requests libstdcxx-ng xz sqlite ncurses jinja2
 
 conda list -p APP/FreeCAD.app/Contents/Resources
 

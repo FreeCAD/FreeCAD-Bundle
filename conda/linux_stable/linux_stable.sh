@@ -14,16 +14,6 @@ conda create \
 version_name=$(conda run -p AppDir/usr python get_freecad_version.py)
 conda run -p AppDir/usr pip install https://github.com/looooo/freecad_pipintegration/archive/master.zip
 
-# this will create a huge env. We have to find some ways to make the env smaller
-# deleting some packages explicitly?
-conda remove -p AppDir/usr --force -y \
-    ruamel_yaml conda system tk json-c llvmdev \
-    nomkl readline mesalib \
-    gstreamer libtheora asn1crypto certifi chardet \
-    gst-plugins-base idna kiwisolver pycosat pycparser pysocks \
-    sip solvespace tornado xorg* cffi \
-    cryptography-vectors pyqt soqt wheel \
-    requests libstdcxx-ng xz sqlite ncurses
 
 conda list -p AppDir/usr
 
