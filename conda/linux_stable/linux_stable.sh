@@ -36,6 +36,11 @@ rm -rf AppDir/usr/bin_tmp
 # add documentation
 cp ../../doc/* AppDir/usr/doc/
 
+# Remove __pycache__ folders and .pyc files
+conda deactivate
+find . -path "*/__pycache__/*" -delete
+find . -name "*.pyc" -type f -delete
+
 # create the appimage
 chmod a+x ./AppDir/AppRun
 rm *.AppImage

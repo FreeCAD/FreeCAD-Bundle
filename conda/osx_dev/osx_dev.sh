@@ -30,5 +30,10 @@ cp PP/FreeCAD.app/Contents/Resources/bin_tmp/assistant PP/FreeCAD.app/Contents/R
 sed -i "" '1s|.*|#!/usr/bin/env python|' APP/FreeCAD.app/Contents/Resources/bin/pip
 rm -rf APP/FreeCAD.app/Contents/Resources/bin_tmp
 
+# Remove __pycache__ folders and .pyc files
+conda deactivate
+find . -path "*/__pycache__/*" -delete
+find . -name "*.pyc" -type f -delete
+
 # create the dmg
 hdiutil create -volname "${version_name}" -srcfolder ./APP -ov -format UDZO "${version_name}.dmg"

@@ -34,5 +34,10 @@ rm -rf APP/FreeCAD.app/Contents/Resources/bin_tmp
 # add documentation
 cp ../../doc/* APP/FreeCAD.app/Contents/Resources/doc
 
+# Remove __pycache__ folders and .pyc files
+conda deactivate
+find . -path "*/__pycache__/*" -delete
+find . -name "*.pyc" -type f -delete
+
 # create the dmg
 hdiutil create -volname "${version_name}" -srcfolder ./APP -ov -format UDZO "${version_name}.dmg"
