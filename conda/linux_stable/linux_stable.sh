@@ -41,6 +41,9 @@ conda deactivate
 find . -path "*/__pycache__/*" -delete
 find . -name "*.pyc" -type f -delete
 
+# Add libnsl (Fedora 28 and up)
+cp ../../libc6/lib/x86_64-linux-gnu/libnsl* AppDir/usr/lib/
+
 # create the appimage
 chmod a+x ./AppDir/AppRun
 rm *.AppImage

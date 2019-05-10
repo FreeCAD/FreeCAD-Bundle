@@ -21,6 +21,8 @@ before_install:
       sudo apt-get update -qq && sudo apt-get install -y desktop-file-utils jq zsync p7zip-full;
       curl -LO "https://github.com/stedolan/jq/releases/download/jq-1.5/jq-linux64";
       chmod +x jq-linux64 && sudo mv jq-linux64 $(which jq);
+      apt-get download glibc6
+      dpkg -x libc6*.deb libc6
     fi
   - if [ "$TRAVIS_OS_NAME" == "osx" ]; then brew install jq p7zip; fi
 
