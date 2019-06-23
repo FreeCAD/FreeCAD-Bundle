@@ -4,7 +4,7 @@ conda create \
     freecad calculix blas=*=openblas gitpython \
     numpy matplotlib scipy sympy pandas six pyyaml jinja2 \
     --copy \
-    -c freecad/label/testing \
+    -c freecad/label/dev \
     -c conda-forge \
     -y
 
