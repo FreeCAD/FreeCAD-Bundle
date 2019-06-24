@@ -14,7 +14,7 @@ conda create \
 version_name=$(conda run -p AppDir/usr python get_freecad_version.py)
 conda run -p AppDir/usr pip install https://github.com/looooo/freecad_pipintegration/archive/master.zip
 
-
+conda uninstall -p AppDir/usr gtk2 gdk-pixbuf --force -y
 conda list -p AppDir/usr
 
 # delete unnecessary stuff
@@ -32,6 +32,9 @@ cp AppDir/usr/bin_tmp/assistant AppDir/usr/bin/
 sed -i '1s|.*|#!/usr/bin/env python|' AppDir/usr/bin/pip
 rm -rf AppDir/usr/bin_tmp
 #+ deleting some specific libraries not needed. eg.: stdc++
+
+#copy qt.conf
+cp qt.conf AppDir/usr/bin/
 
 # Remove __pycache__ folders and .pyc files
 conda deactivate

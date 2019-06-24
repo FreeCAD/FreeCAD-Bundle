@@ -13,6 +13,8 @@ conda create \
 # installing some additional libraries with pip
 version_name=$(conda run -p APP/FreeCAD.app/Contents/Resources python get_freecad_version.py)
 
+conda uninstall -p APP/FreeCAD.app/Contents/Resources gtk2 gdk-pixbuf --force -y
+
 conda list -p APP/FreeCAD.app/Contents/Resources
 
 # # delete unnecessary stuff
@@ -29,6 +31,10 @@ cp APP/FreeCAD.app/Contents/Resources/bin_tmp/pyside2-rcc APP/FreeCAD.app/Conten
 cp PP/FreeCAD.app/Contents/Resources/bin_tmp/assistant PP/FreeCAD.app/Contents/Resources/bin/
 sed -i "" '1s|.*|#!/usr/bin/env python|' APP/FreeCAD.app/Contents/Resources/bin/pip
 rm -rf APP/FreeCAD.app/Contents/Resources/bin_tmp
+
+#copy qt.conf
+cp qt.conf APP/FreeCAD.app/Contents/Resources/bin/
+
 
 # Remove __pycache__ folders and .pyc files
 conda deactivate
