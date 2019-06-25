@@ -34,7 +34,7 @@ rm -rf APP/FreeCAD.app/Contents/Resources/bin_tmp
 
 #copy qt.conf
 cp qt.conf APP/FreeCAD.app/Contents/Resources/bin/
-
+cp qt.conf APP/FreeCAD.app/Contents/Resources/libexec/
 
 # Remove __pycache__ folders and .pyc files
 conda deactivate
