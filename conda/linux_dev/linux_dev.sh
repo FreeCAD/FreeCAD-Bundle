@@ -1,21 +1,23 @@
-# create a new environment in the AppDir
+# assume we have a working conda available
 conda create \
     -p AppDir/usr \
     freecad calculix blas=*=openblas gitpython \
     numpy matplotlib scipy sympy pandas six pyyaml \
-    qt=5.9 \
+    ifcopenshell qt=5.9 \
     --copy \
     -c freecad/label/dev \
     -c conda-forge \
     -y
 
+# uninstall some packages not needed
+conda uninstall -p AppDir/usr gtk2 gdk-pixbuf llvmdev clangdev --force -y
+conda list -p AppDir/usr
+
+version_name=$(conda run -p AppDir/usr python get_freecad_version.py)
 
 # installing some additional libraries with pip
-version_name=$(conda run -p AppDir/usr python get_freecad_version.py)
-conda run -p AppDir/usr pip install https://github.com/looooo/freecad_pipintegration/archive/master.zip
+conda run -p AppDir/usr pip install pycollada
 
-conda uninstall -p AppDir/usr gtk2 gdk-pixbuf --force -y
-conda list -p AppDir/usr
 
 # delete unnecessary stuff
 rm -rf AppDir/usr/include

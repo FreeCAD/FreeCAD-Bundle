@@ -1,23 +1,25 @@
-# # assume we have a working conda available
+# assume we have a working conda available
 conda create \
     -p APP/FreeCAD.app/Contents/Resources \
     freecad calculix blas=*=openblas gitpython \
     numpy matplotlib scipy sympy pandas six pyyaml jinja2 \
-    qt=5.9 \
+    ifcopenshell qt=5.9 \
     --copy \
     -c freecad/label/dev \
     -c conda-forge \
     -y
 
-
-# installing some additional libraries with pip
-version_name=$(conda run -p APP/FreeCAD.app/Contents/Resources python get_freecad_version.py)
-
-conda uninstall -p APP/FreeCAD.app/Contents/Resources gtk2 gdk-pixbuf --force -y
-
+# uninstall some packages not needed
+conda uninstall -p APP/FreeCAD.app/Contents/Resources gtk2 gdk-pixbuf  llvmdev clangdev --force -y
 conda list -p APP/FreeCAD.app/Contents/Resources
 
-# # delete unnecessary stuff
+version_name=$(conda run -p APP/FreeCAD.app/Contents/Resources python get_freecad_version.py)
+
+# installing some additional libraries with pip
+conda run -p AppDir/usr pip install pycollada
+
+
+# delete unnecessary stuff
 rm -rf APP/FreeCAD.app/Contents/Resources/include
 find APP/FreeCAD.app/Contents/Resources -name \*.a -delete
 mv APP/FreeCAD.app/Contents/Resources/bin APP/FreeCAD.app/Contents/Resources/bin_tmp
