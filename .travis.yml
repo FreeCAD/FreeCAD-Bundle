@@ -80,7 +80,7 @@ script:
 after_success:
   - |
     # DEPLOY_RELEASE_STABLE=gitHub_release_latest_freecad
-    DEPLOY_RELEASE_STABLE="0.18.1"
+    DEPLOY_RELEASE_STABLE="0.18.3"
     if [ "$TRAVIS_OS_NAME" == "linux" -a "${DEPLOY}" == "1" ]; then
       export deployContext=$(create_helper_context repo=${DEPLOY_REPO} auth_token=${GH_TOKEN} release=${DEPLOY_RELEASE_STABLE})
       gitHub_prune_assets_for_release_named $deployContext ".AppImage" 0
