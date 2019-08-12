@@ -2,8 +2,8 @@
 conda create \
     -p APP/FreeCAD.app/Contents/Resources \
     freecad calculix blas=*=openblas gitpython \
-    numpy matplotlib scipy sympy pandas six pyyaml jinja2 \
-    opencamlib ifcopenshell qt=5.9 \
+    numpy matplotlib-base scipy sympy pandas six pyyaml jinja2 \
+    opencamlib ifcopenshell qt=5.12 \
     --copy \
     -c freecad/label/dev \
     -c conda-forge \
