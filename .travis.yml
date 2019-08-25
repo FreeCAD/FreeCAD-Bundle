@@ -88,11 +88,15 @@ after_success:
       gitHub_deploy_asset_to_release_named $deployContext ${DEPLOYMENT_ARCHIVE}
       export DEPLOYMENT_ARCHIVE=$(ls linux_stable/*.AppImage.zsync)
       gitHub_deploy_asset_to_release_named $deployContext ${DEPLOYMENT_ARCHIVE}
+      export DEPLOYMENT_ARCHIVE=$(ls linux_stable/*.AppImage-SHA256.txt)
+      gitHub_deploy_asset_to_release_named $deployContext ${DEPLOYMENT_ARCHIVE}
       export deployContext=$(create_helper_context repo=${DEPLOY_REPO} auth_token=${GH_TOKEN} release=${DEPLOY_RELEASE})
       gitHub_prune_assets_for_release_named $deployContext ".AppImage" 0
       export DEPLOYMENT_ARCHIVE=$(ls linux_dev/*.AppImage)
       gitHub_deploy_asset_to_release_named $deployContext ${DEPLOYMENT_ARCHIVE}
       export DEPLOYMENT_ARCHIVE=$(ls linux_dev/*.AppImage.zsync)
+      gitHub_deploy_asset_to_release_named $deployContext ${DEPLOYMENT_ARCHIVE}
+      export DEPLOYMENT_ARCHIVE=$(ls linux_dev/*.AppImage-SHA256.txt)
       gitHub_deploy_asset_to_release_named $deployContext ${DEPLOYMENT_ARCHIVE}
     fi
   - |
@@ -101,9 +105,13 @@ after_success:
       gitHub_prune_assets_for_release_named $deployContext ".dmg" 0
       export DEPLOYMENT_ARCHIVE=$(ls osx_stable/*.dmg)
       gitHub_deploy_asset_to_release_named $deployContext ${DEPLOYMENT_ARCHIVE}
+      export DEPLOYMENT_ARCHIVE=$(ls osx_stable/*.dmg-SHA256.txt)
+      gitHub_deploy_asset_to_release_named $deployContext ${DEPLOYMENT_ARCHIVE}
       export deployContext=$(create_helper_context repo=${DEPLOY_REPO} auth_token=${GH_TOKEN} release=${DEPLOY_RELEASE})
       gitHub_prune_assets_for_release_named $deployContext ".dmg" 0
       export DEPLOYMENT_ARCHIVE=$(ls osx_dev/*.dmg)
+      gitHub_deploy_asset_to_release_named $deployContext ${DEPLOYMENT_ARCHIVE}
+      export DEPLOYMENT_ARCHIVE=$(ls osx_dev/*.dmg-SHA256.txt)
       gitHub_deploy_asset_to_release_named $deployContext ${DEPLOYMENT_ARCHIVE}
     fi
 

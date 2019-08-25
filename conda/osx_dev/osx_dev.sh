@@ -45,3 +45,6 @@ find . -name "*.pyc" -type f -delete
 
 # create the dmg
 hdiutil create -volname "${version_name}" -srcfolder ./APP -ov -format UDZO "${version_name}.dmg"
+
+# create hash
+shasum -a 256 ${version_name}.dmg > ${version_name}.dmg-SHA256.txt

@@ -50,3 +50,6 @@ rm *.AppImage
 ARCH=x86_64 ../../appimagetool-x86_64.AppImage \
   -u "gh-releases-zsync|FreeCAD|FreeCAD|latest|FreeCAD*glibc2.12-x86_64.AppImage.zsync" \
   AppDir  ${version_name}.AppImage
+
+# create hash
+shasum -a 256 ${version_name}.AppImage > ${version_name}.AppImage-SHA256.txt
