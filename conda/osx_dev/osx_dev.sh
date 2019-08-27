@@ -16,7 +16,7 @@ conda list -p APP/FreeCAD.app/Contents/Resources
 version_name=$(conda run -p APP/FreeCAD.app/Contents/Resources python get_freecad_version.py)
 
 # installing some additional libraries with pip
-conda run -p AppDir/usr pip install pycollada
+conda run -p APP/FreeCAD.app/Contents/Resources pip install pycollada
 
 
 # delete unnecessary stuff
