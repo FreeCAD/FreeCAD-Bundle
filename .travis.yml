@@ -33,13 +33,6 @@ install:
        namedReleaseAsJSON=$(gitHub_releases ${1} | jq -r --arg releaseName ${2-$release} '.[] | select(.tag_name==$releaseName)')
        echo ${namedReleaseAsJSON}
     }
-  - # Temp patch
-  - |
-    gitHub_release_latest_freecad()
-    {
-       latestReleaseAsTagName=$(curl -s "https://api.github.com/repos/FreeCAD/FreeCAD/releases/latest" | jq -r .tag_name)
-       echo ${latestReleaseAsTagName}
-    }
   - if [ "$TRAVIS_OS_NAME" == "linux" ]; then
       curl -LO https://raw.githubusercontent.com/AppImage/AppImages/master/pkg2appimage;
       wget "https://github.com/AppImage/AppImageKit/releases/download/continuous/appimagetool-x86_64.AppImage";
@@ -77,7 +70,7 @@ script:
 
 after_success:
   - # Deploy stable builds to latest 
-  - DEPLOY_RELEASE_STABLE="$(gitHub_release_latest_freecad)"
+  - DEPLOY_RELEASE_STABLE="$(curl -s 'https://api.github.com/repos/FreeCAD/FreeCAD/releases/latest' | jq -r .tag_name)"
   - # Uncomment to manually set the tag name
   - # DEPLOY_RELEASE_STABLE="0.18.3"
   - echo "$DEPLOY_RELEASE_STABLE"
