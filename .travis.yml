@@ -70,8 +70,9 @@ script:
     fi
 
 after_success:
-  - # Deploy stable builds to latest 
-  - DEPLOY_RELEASE_STABLE="$(curl -s 'https://api.github.com/repos/FreeCAD/FreeCAD/releases/latest' | jq -r .tag_name)"
+  - # Deploy stable builds to latest
+  - # Use an authentication token to avoid rate limit
+  - DEPLOY_RELEASE_STABLE="$(curl -s -H "Authorization:token ${GH_TOKEN}" "https://api.github.com/repos/FreeCAD/FreeCAD/releases/latest" | jq -r .tag_name)"
   - # Uncomment to manually set the tag name
   - # DEPLOY_RELEASE_STABLE="0.18.3"
   - echo "$DEPLOY_RELEASE_STABLE"
