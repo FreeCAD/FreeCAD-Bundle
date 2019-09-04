@@ -47,6 +47,7 @@ install:
       . $HOME/miniconda/etc/profile.d/conda.sh;
     fi
   - hash -r
+  - conda init bash
   - conda activate base
   - conda config --set always_yes yes --set changeps1 no
   - conda update -q --all
