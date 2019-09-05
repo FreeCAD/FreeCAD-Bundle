@@ -1,8 +1,12 @@
 # create a new environment in the AppDir
+
+# Use libstdcxx-ng=9.1.0 (libstdc++.so.6.0.26) due to version 7.2.0 (libstdc++.so.6.0.25)
+# results in crashes, on newer Linux distributions, such as Fedora 30.
+
 conda create \
     -p AppDir/usr \
     freecad=0.18 calculix blas=*=openblas gitpython \
-    numpy matplotlib scipy sympy pandas six pyyaml \
+    numpy matplotlib scipy sympy pandas six pyyaml libstdcxx-ng=9.1.0 \
     --copy \
     --no-default-packages \
     -c freecad/label/dev_cf201901 \
