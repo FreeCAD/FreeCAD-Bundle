@@ -10,7 +10,10 @@ conda create \
     -y
 
 # uninstall some packages not needed
-conda uninstall -p AppDir/usr gtk2 gdk-pixbuf llvmdev clangdev --force -y
+conda uninstall -p AppDir/usr gtk2 gdk-pixbuf llvm-tools \
+                              llvmdev clangdev clang clang-tools \
+                              clangxx libclang libllvm9 --force -y
+
 conda list -p AppDir/usr
 
 version_name=$(conda run -p AppDir/usr python get_freecad_version.py)
@@ -43,6 +46,16 @@ cp qt.conf AppDir/usr/libexec/
 conda deactivate
 find . -path "*/__pycache__/*" -delete
 find . -name "*.pyc" -type f -delete
+
+# reduce size
+rm -rf AppDir/usr/conda-meta/
+rm -rf AppDir/usr/doc/global/
+rm -rf AppDir/usr/share/doc/
+rm -rf AppDir/usr/share/gtk-doc/
+rm -rf AppDir/usr/lib/cmake/
+
+find . -name "*.h" -type f -delete
+find . -name "*.cmake" -type f -delete
 
 # Add libnsl (Fedora 28 and up)
 cp ../../libc6/lib/x86_64-linux-gnu/libnsl* AppDir/usr/lib/

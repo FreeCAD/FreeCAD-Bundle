@@ -18,6 +18,8 @@ conda create \
 version_name=$(conda run -p AppDir/usr python get_freecad_version.py)
 conda run -p AppDir/usr pip install https://github.com/looooo/freecad_pipintegration/archive/master.zip
 
+# uninstall some packages not needed
+conda uninstall -p AppDir/usr pyqt --force -y
 
 conda list -p AppDir/usr
 
@@ -48,6 +50,16 @@ cp qt.conf AppDir/usr/libexec/
 conda deactivate
 find . -path "*/__pycache__/*" -delete
 find . -name "*.pyc" -type f -delete
+
+# reduce size
+rm -rf AppDir/usr/conda-meta/
+rm -rf AppDir/usr/doc/global/
+rm -rf AppDir/usr/share/doc/
+rm -rf AppDir/usr/share/gtk-doc/
+rm -rf AppDir/usr/lib/cmake/
+
+find . -name "*.h" -type f -delete
+find . -name "*.cmake" -type f -delete
 
 # Add libnsl (Fedora 28 and up)
 cp ../../libc6/lib/x86_64-linux-gnu/libnsl* AppDir/usr/lib/
