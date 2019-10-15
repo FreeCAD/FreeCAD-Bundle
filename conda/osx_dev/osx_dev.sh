@@ -44,6 +44,9 @@ conda deactivate
 find . -path "*/__pycache__/*" -delete
 find . -name "*.pyc" -type f -delete
 
+# temporary fix for libfreeimage 3.17 / 3.18
+ln -s APP/FreeCAD.app/Contents/Resources/lib/libfreeimage-3.18.0.dylib APP/FreeCAD.app/Contents/Resources/lib/libfreeimage-3.17.0.dylib
+
 # create the dmg
 hdiutil create -volname "${version_name}" -srcfolder ./APP -ov -format UDZO "${version_name}.dmg"
 
