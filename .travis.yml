@@ -22,7 +22,11 @@ before_install:
       apt-get download libc6;
       dpkg -x libc6*.deb libc6;
     fi
-  - if [ "$TRAVIS_OS_NAME" == "osx" ]; then brew install jq p7zip; fi
+    # https://travis-ci.community/t/syntax-error-unexpected-keyword-rescue-expecting-keyword-end-in-homebrew/5623
+  - if [ "$TRAVIS_OS_NAME" == "osx" ]; then
+      brew update;
+      brew install jq p7zip;
+    fi
 
 install:
   - eval "$(curl -fsSL "https://raw.githubusercontent.com/${OSX_PORTS_CACHE}/v${FREECAD_RELEASE}/travis-helpers.sh")"
