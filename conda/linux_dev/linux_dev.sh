@@ -1,7 +1,7 @@
 # assume we have a working conda available
 conda create \
     -p AppDir/usr \
-    freecad calculix blas=*=openblas gitpython \
+    freecad.python calculix blas=*=openblas gitpython \
     numpy matplotlib-base scipy sympy pandas six \
     pyyaml solvespace opencamlib ifcopenshell qt=5.12 \
     --copy \
