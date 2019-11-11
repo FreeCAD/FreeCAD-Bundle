@@ -1,7 +1,7 @@
 # assume we have a working conda available
 conda create \
     -p APP/FreeCAD.app/Contents/Resources \
-    freecad.python calculix blas=*=openblas gitpython \
+    freecad calculix blas=*=openblas gitpython \
     numpy matplotlib-base scipy sympy pandas six \
     pyyaml jinja2 solvespace opencamlib ifcopenshell \
     qt=5.12 \
@@ -18,6 +18,7 @@ version_name=$(conda run -p APP/FreeCAD.app/Contents/Resources python get_freeca
 
 # installing some additional libraries with pip
 conda run -p APP/FreeCAD.app/Contents/Resources pip install pycollada
+conda run -p AppDir/usr pip install https://github.com/looooo/freecad.python/archive/master.zip
 
 
 # delete unnecessary stuff
