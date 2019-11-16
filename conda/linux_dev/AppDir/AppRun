@@ -16,4 +16,4 @@ export SSL_CERT_FILE=$PREFIX/ssl/cacert.pem
 # https://github.com/FreeCAD/FreeCAD-AppImage/pull/20
 export GIT_SSL_CAINFO=$HERE/usr/ssl/cacert.pem
 
-${HERE}/usr/bin/FreeCAD "$@"
+${HERE}/usr/bin/freecad "$@"
