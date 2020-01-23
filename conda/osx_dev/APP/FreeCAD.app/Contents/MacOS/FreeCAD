@@ -7,4 +7,5 @@ export PYTHONHOME=$PREFIX
 # export QT_XKB_CONFIG_ROOT=$PREFIX/lib
 export FONTCONFIG_FILE=/etc/fonts/fonts.conf
 export FONTCONFIG_PATH=/etc/fonts
+export LANG="UTF-8"  # https://forum.freecadweb.org/viewtopic.php?f=22&t=42644
 "$PREFIX/bin/freecad" $@
