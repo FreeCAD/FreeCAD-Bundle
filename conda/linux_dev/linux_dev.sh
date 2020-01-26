@@ -18,7 +18,6 @@ version_name=$(conda run -p AppDir/usr python get_freecad_version.py)
 
 # installing some additional libraries with pip
 conda run -p AppDir/usr pip install pycollada
-conda run -p AppDir/usr pip install https://github.com/looooo/freecad.python/archive/master.zip
 
 conda list -p AppDir/usr > AppDir/packages.txt
 sed -i "1s/.*/\n\nLIST OF PACKAGES:/"  AppDir/packages.txt
