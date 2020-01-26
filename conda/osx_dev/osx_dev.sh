@@ -42,7 +42,6 @@ cp qt.conf APP/FreeCAD.app/Contents/Resources/bin/
 cp qt.conf APP/FreeCAD.app/Contents/Resources/libexec/
 
 # Remove __pycache__ folders and .pyc files
-conda deactivate
 find . -path "*/__pycache__/*" -delete
 find . -name "*.pyc" -type f -delete
 
