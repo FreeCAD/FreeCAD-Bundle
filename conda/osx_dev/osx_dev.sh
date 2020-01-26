@@ -12,13 +12,15 @@ conda create \
 
 # uninstall some packages not needed
 conda uninstall -p APP/FreeCAD.app/Contents/Resources gtk2 gdk-pixbuf  llvmdev clangdev --force -y
-conda list -p APP/FreeCAD.app/Contents/Resources
 
 version_name=$(conda run -p APP/FreeCAD.app/Contents/Resources python get_freecad_version.py)
 
 # installing some additional libraries with pip
 conda run -p APP/FreeCAD.app/Contents/Resources pip install pycollada
 conda run -p AppDir/usr pip install https://github.com/looooo/freecad.python/archive/master.zip
+
+conda list -p APP/FreeCAD.app/Contents/Resources > APP/FreeCAD.app/packages.txt
+sed -i "1s/.*/\n\nLIST OF PACKAGES:/"  APP/FreeCAD.app/packages.txt
 
 
 # delete unnecessary stuff
