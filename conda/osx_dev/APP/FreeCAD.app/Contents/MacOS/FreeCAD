@@ -1,11 +1,12 @@
 #!/usr/bin/env bash
 HERE=$(dirname "$(dirname "$0")")
-export PREFIX=$HERE/Resources
-export LD_LIBRARY_PATH=$PREFIX/lib
-export PYTHONHOME=$PREFIX
-# export QT_QPA_PLATFORM_PLUGIN_PATH=$PREFIX/plugins
-# export QT_XKB_CONFIG_ROOT=$PREFIX/lib
+cat ${HERE}/packages.txt
+export PREFIX=${HERE}/Resources
+export LD_LIBRARY_PATH=${PREFIX}/lib
+export PYTHONHOME=${PREFIX}
+# export QT_QPA_PLATFORM_PLUGIN_PATH=${PREFIX}/plugins
+# export QT_XKB_CONFIG_ROOT=${PREFIX}/lib
 export FONTCONFIG_FILE=/etc/fonts/fonts.conf
 export FONTCONFIG_PATH=/etc/fonts
 export LANG="UTF-8"  # https://forum.freecadweb.org/viewtopic.php?f=22&t=42644
-"$PREFIX/bin/freecad" $@
+"${PREFIX}/bin/freecad" $@
