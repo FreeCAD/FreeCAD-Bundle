@@ -3,7 +3,8 @@ conda create \
     -p AppDir/usr \
     freecad calculix blas=*=openblas gitpython python=3.8 \
     numpy matplotlib-base scipy sympy pandas six \
-    pyyaml solvespace opencamlib ifcopenshell qt=5.12 \
+    pyyaml opencamlib ifcopenshell qt=5.12 \
+    freecad.asm3 \
     --copy \
     -c freecad/label/dev \
     -c conda-forge \
