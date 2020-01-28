@@ -4,7 +4,7 @@ conda create \
     freecad calculix blas=*=openblas gitpython python=3.8 \
     numpy matplotlib-base scipy sympy pandas six \
     pyyaml jinja2 opencamlib ifcopenshell qt=5.12 \
-    freecad.asm3 \
+    freecad.asm3 libredwg \
     --copy \
     -c freecad/label/dev \
     -c conda-forge \
@@ -44,6 +44,9 @@ cp qt.conf APP/FreeCAD.app/Contents/Resources/libexec/
 # Remove __pycache__ folders and .pyc files
 find . -path "*/__pycache__/*" -delete
 find . -name "*.pyc" -type f -delete
+
+# as we use several gpl3 libraries we need to ship a gpl3 license:
+wget -O APP/FreeCAD.app/LICENSE.txt  https://www.gnu.org/licenses/gpl.txt
 
 # create the dmg
 hdiutil create -volname "${version_name}" -srcfolder ./APP -ov -format UDZO "${version_name}.dmg"

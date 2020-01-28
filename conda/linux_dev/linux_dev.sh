@@ -4,7 +4,7 @@ conda create \
     freecad calculix blas=*=openblas gitpython python=3.8 \
     numpy matplotlib-base scipy sympy pandas six \
     pyyaml opencamlib ifcopenshell qt=5.12 \
-    freecad.asm3 \
+    freecad.asm3 libredwg \
     --copy \
     -c freecad/label/dev \
     -c conda-forge \
@@ -59,6 +59,9 @@ find . -name "*.cmake" -type f -delete
 
 # Add libnsl (Fedora 28 and up)
 cp ../../libc6/lib/x86_64-linux-gnu/libnsl* AppDir/usr/lib/
+
+# as we use several gpl3 libraries we need to ship a gpl3 license:
+wget -O AppDir/LICENSE.txt  https://www.gnu.org/licenses/gpl.txt
 
 # create the appimage
 chmod a+x ./AppDir/AppRun
