@@ -21,7 +21,7 @@ export GIT_SSL_CAINFO=$HERE/usr/ssl/cacert.pem
 if [ ! -z "$1" ] && [ -e "$HERE/usr/bin/$1" ] ; then
     MAIN="$HERE/usr/bin/$1" ; shift
 else
-    MAIN="$HERE/usr/bin/FreeCAD"
+    MAIN="$HERE/usr/bin/freecad"
 fi
 
 ${MAIN} "$@"
