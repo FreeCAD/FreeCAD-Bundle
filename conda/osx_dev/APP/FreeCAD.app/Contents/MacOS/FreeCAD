@@ -9,4 +9,6 @@ export PYTHONHOME=${PREFIX}
 export FONTCONFIG_FILE=/etc/fonts/fonts.conf
 export FONTCONFIG_PATH=/etc/fonts
 export LANG="UTF-8"  # https://forum.freecadweb.org/viewtopic.php?f=22&t=42644
+export SSL_CERT_FILE=${PREFIX}/ssl/cacert.pem # https://forum.freecadweb.org/viewtopic.php?f=3&t=42825
+export GIT_SSL_CAINFO=${PREFIX}/ssl/cacert.pem
 "${PREFIX}/bin/freecad" $@
