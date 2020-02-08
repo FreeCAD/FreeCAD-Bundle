@@ -47,14 +47,12 @@ cp qt.conf AppDir/usr/bin/
 cp qt.conf AppDir/usr/libexec/
 
 # Remove __pycache__ folders and .pyc files
-conda deactivate
-find . -path "*/__pycache__/*" -delete
-find . -name "*.pyc" -type f -delete
+# find . -path "*/__pycache__/*" -delete
+# find . -name "*.pyc" -type f -delete
 
 # reduce size
 rm -rf AppDir/usr/conda-meta/
 rm -rf AppDir/usr/doc/global/
-rm -rf AppDir/usr/share/doc/
 rm -rf AppDir/usr/share/gtk-doc/
 rm -rf AppDir/usr/lib/cmake/
 

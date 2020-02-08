@@ -50,7 +50,6 @@ cp qt.conf AppDir/usr/libexec/
 # reduce size
 rm -rf AppDir/usr/conda-meta/
 rm -rf AppDir/usr/doc/global/
-rm -rf AppDir/usr/share/doc/
 rm -rf AppDir/usr/share/gtk-doc/
 rm -rf AppDir/usr/lib/cmake/
 
