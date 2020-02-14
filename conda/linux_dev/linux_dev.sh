@@ -4,7 +4,7 @@ conda create \
     freecad calculix blas=*=openblas gitpython python=3.8 \
     numpy matplotlib-base scipy sympy pandas six \
     pyyaml opencamlib ifcopenshell qt=5.12 \
-    freecad.asm3 libredwg \
+    freecad.asm3 libredwg pycollada \
     --copy \
     -c freecad/label/dev \
     -c conda-forge \
@@ -16,9 +16,6 @@ conda uninstall -p AppDir/usr gtk2 gdk-pixbuf llvm-tools \
                               clangxx libclang libllvm9 --force -y
 
 version_name=$(conda run -p AppDir/usr python get_freecad_version.py)
-
-# installing some additional libraries with pip
-conda run -p AppDir/usr pip install pycollada
 
 conda list -p AppDir/usr > AppDir/packages.txt
 sed -i "1s/.*/\n\nLIST OF PACKAGES:/"  AppDir/packages.txt
