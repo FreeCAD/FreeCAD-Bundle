@@ -1,6 +1,5 @@
 #!/bin/bash
 HERE="$(dirname "$(readlink -f "${0}")")"
-cat ${HERE}/packages.txt
 export PREFIX=${HERE}/usr
 export LD_LIBRARY_PATH=${HERE}/usr/lib
 export PYTHONHOME=${HERE}/usr
@@ -9,6 +8,11 @@ export PYTHONHOME=${HERE}/usr
 export FONTCONFIG_FILE=/etc/fonts/fonts.conf
 export FONTCONFIG_PATH=/etc/fonts
 # export QTWEBENGINEPROCESS_PATH=${HERE}/usr/libexec/QtWebEngineProcess
+
+# Show packages info if DEBUG env variable is set
+if [ "$DEBUG" = 1 ]; then
+    cat ${HERE}/packages.txt
+fi
 
 # SSL
 # https://forum.freecadweb.org/viewtopic.php?f=4&t=34873&start=20#p327416
