@@ -14,6 +14,16 @@ if [ "$DEBUG" = 1 ]; then
     cat ${HERE}/packages.txt
 fi
 
+# Delete cached .qhc file if DOC env variable is set
+# https://github.com/FreeCAD/FreeCAD-AppImage/issues/25
+if [ "$DOC" = 1 ]; then
+    if [ -e "$HOME/.local/share/freecad/freecad/freecad.qhc" ]; then
+        rm $HOME/.local/share/freecad/freecad/freecad.qhc
+        echo "AppImage: DOC environment variable was set."
+        echo "AppImage: $HOME/.local/share/freecad/freecad/freecad.qhc was deleted."
+    fi
+fi
+
 # SSL
 # https://forum.freecadweb.org/viewtopic.php?f=4&t=34873&start=20#p327416
 export SSL_CERT_FILE=$PREFIX/ssl/cacert.pem
