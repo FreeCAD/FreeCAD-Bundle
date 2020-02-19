@@ -26,4 +26,4 @@ rendered_str = template.render(FREECAD_VERSION="{}-{}".format(dev_version, revis
 with open("APP/FreeCAD.app/Contents/Info.plist", "w") as rendered_file:
     rendered_file.write(rendered_str)
 
-print("FreeCAD_{}-{}-{}-{}-conda-Qt5-Py3".format(dev_version, revision, system, arch))
+print("FreeCAD_{}-{}-{}-{}-conda".format(dev_version, revision, system, arch))
