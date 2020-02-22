@@ -1,9 +1,9 @@
 # assume we have a working conda available
 conda create \
     -p AppDir/usr \
-    freecad calculix blas=*=openblas gitpython python=3.8 \
+    freecad calculix blas=*=openblas gitpython \
     numpy matplotlib-base scipy sympy pandas six \
-    pyyaml opencamlib ifcopenshell qt=5.12 \
+    pyyaml opencamlib ifcopenshell boost-cpp=1.72 \
     freecad.asm3 libredwg pycollada \
     --copy \
     -c freecad/label/dev \
