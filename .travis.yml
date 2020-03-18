@@ -52,9 +52,9 @@ install:
       . $HOME/miniconda/etc/profile.d/conda.sh;
     fi
   - if [ "$TRAVIS_OS_NAME" == "windows" ]; then
-      wget https://repo.anaconda.com/pkgs/misc/conda-execs/conda-latest-win-64.exe -O conda.exe
-      conda.exe create -q -p C:\conda conda conda-build=3.18.10 conda-verify python=3.7
-      call C:\conda\Scripts\activate
+      wget https://repo.anaconda.com/pkgs/misc/conda-execs/conda-latest-win-64.exe -O conda.exe;
+      conda.exe create -q -p C:\conda conda conda-build=3.18.10 conda-verify python=3.7;
+      C:\conda\Scripts\activate;
     fi
   - if [ "$TRAVIS_OS_NAME" == "osx" || "$TRAVIS_OS_NAME" == "linux" ]; then
       hash -r;
