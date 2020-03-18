@@ -79,7 +79,8 @@ script:
   - if [ "$TRAVIS_OS_NAME" == "windows" ]; then
       cd conda\win_dev;
       win_dev.bat;
-      cd ..
+      cd ..;
+    fi
 
 after_success:
   - # Deploy stable builds to latest
