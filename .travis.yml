@@ -53,16 +53,16 @@ install:
     fi
   - if [ "$TRAVIS_OS_NAME" == "windows" ]; then
       wget https://repo.anaconda.com/pkgs/misc/conda-execs/conda-latest-win-64.exe -O conda.exe --no-check-certificate;
-      conda.exe create -q -p C:\conda conda conda-build=3.18.10 conda-verify python=3.7;
-      call C:\conda\Scripts\activate;
+      cmd.exe //C 'conda.exe create -y -q -p C:\conda conda conda-build=3.18.10 conda-verify python=3.7';
+      cmd.exe //C 'call C:\conda\Scripts\activate';
     fi
   - if [ "$TRAVIS_OS_NAME" == "osx" || "$TRAVIS_OS_NAME" == "linux" ]; then
       hash -r;
       conda init bash;
       conda activate base;
+      conda config --set always_yes yes --set changeps1 no
+      conda update -q --all
     fi
-  - conda config --set always_yes yes --set changeps1 no
-  - conda update -q --all
   - wget "https://github.com/FreeCAD/FreeCAD/releases/download/0.18/FreeCAD.0_18.Offline.Doc.7z"
   - 7z x FreeCAD.0_18.Offline.Doc.7z
 
@@ -82,8 +82,8 @@ script:
       cd ..;
     fi
   - if [ "$TRAVIS_OS_NAME" == "windows" ]; then
-      cd conda\win_dev;
-      win_dev.bat;
+      cd conda/win_dev;
+      cmd.exe //C 'win_dev.bat';
       cd ..;
     fi
 
