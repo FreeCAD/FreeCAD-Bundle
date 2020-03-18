@@ -52,9 +52,9 @@ install:
       . $HOME/miniconda/etc/profile.d/conda.sh;
     fi
   - hash -r
-  if [[ "$TRAVIS_OS_NAME" == "osx" || "$TRAVIS_OS_NAME" == "linux" ]]; then
+  - if [ "$TRAVIS_OS_NAME" == "osx" || "$TRAVIS_OS_NAME" == "linux" ]; then
       conda init bash
-  fi
+    fi
   - conda activate base
   - conda config --set always_yes yes --set changeps1 no
   - conda update -q --all
