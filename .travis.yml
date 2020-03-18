@@ -10,8 +10,8 @@ env:
     - DEPLOY=${DEPLOY:-0}
 
 os:
-  - linux
-  - osx
+  # - linux
+  # - osx
   - windows
 
 compiler: gcc
@@ -51,11 +51,16 @@ install:
       bash miniconda.sh -b -p $HOME/miniconda;
       . $HOME/miniconda/etc/profile.d/conda.sh;
     fi
-  - hash -r
-  - if [ "$TRAVIS_OS_NAME" == "osx" || "$TRAVIS_OS_NAME" == "linux" ]; then
-      conda init bash;
+  - if [ "$TRAVIS_OS_NAME" == "windows" ]; then
+      wget https://repo.anaconda.com/pkgs/misc/conda-execs/conda-latest-win-64.exe -O conda.exe;
+      conda.exe create -q -p C:\conda conda conda-build=3.18.10 conda-verify python=3.7;
+      call C:\conda\Scripts\activate;
     fi
-  - conda activate base
+  - if [ "$TRAVIS_OS_NAME" == "osx" || "$TRAVIS_OS_NAME" == "linux" ]; then
+      hash -r;
+      conda init bash;
+      conda activate base;
+    fi
   - conda config --set always_yes yes --set changeps1 no
   - conda update -q --all
   - wget "https://github.com/FreeCAD/FreeCAD/releases/download/0.18/FreeCAD.0_18.Offline.Doc.7z"
