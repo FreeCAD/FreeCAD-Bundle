@@ -53,7 +53,7 @@ install:
     fi
   - if [ "$TRAVIS_OS_NAME" == "windows" ]; then
       wget https://repo.anaconda.com/pkgs/misc/conda-execs/conda-latest-win-64.exe -O conda.exe --no-check-certificate;
-      cmd.exe //C 'conda.exe create -y -q -p C:\conda conda conda-build=3.18.10 conda-verify python=3.7-c conda-forge';
+      cmd.exe //C 'conda.exe create -y -q -p C:\conda conda conda-build=3.18.10 conda-verify python=3.7 -c conda-forge';
       cmd.exe //C 'call C:\conda\Scripts\activate';
     fi
   - if [ ! "$TRAVIS_OS_NAME" == "windows" ]; then
