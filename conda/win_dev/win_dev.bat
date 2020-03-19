@@ -3,16 +3,16 @@ set copy_dir="FreeCAD_Conda_Build"
 
 mkdir %copy_dir%
 
-call conda create ^
-    -p %conda_env% ^
-    freecad calculix gitpython ^
-    numpy matplotlib-base scipy sympy pandas six ^
-    pyyaml opencamlib ifcopenshell ^
-    freecad.asm3 libredwg pycollada ^
-    --copy ^
-    -c freecad/label/dev ^
-    -c conda-forge ^
-    -y
+conda create ^
+ -p %conda_env% ^
+ freecad calculix gitpython ^
+ numpy matplotlib-base scipy sympy pandas six ^
+ pyyaml opencamlib ifcopenshell ^
+ freecad.asm3 libredwg pycollada ^
+ --copy ^
+ -c freecad/label/dev ^
+ -c conda-forge ^
+ -y
 
 
 REM Copy Conda's Python and (U)CRT to FreeCAD/bin
@@ -43,5 +43,5 @@ set /p fcver=<tempver.txt
 echo %fcver%
 cd %copy_dir%\..
 ren %copy_dir% FreeCAD_%fcver:~0,10%-Win-Conda_vc14.x-x86_64
-"%ProgramFiles%\7-Zip\7z.exe" a -t7z  -mx=9 -m9=LZMA2 -mmt=%NUMBER_OF_PROCESSORS% FreeCAD_%fcver:~0,10%-Win-Conda_vc14.x-x86_64.7z FreeCAD_%fcver:~0,10%-Win-Conda_vc14.x-x86_64\
+"%ProgramFiles%\7-Zip\7z.exe" a -t7z -mmt=%NUMBER_OF_PROCESSORS% FreeCAD_%fcver:~0,10%-Win-Conda_vc14.x-x86_64.7z FreeCAD_%fcver:~0,10%-Win-Conda_vc14.x-x86_64\
 certutil -hashfile "FreeCAD_%fcver:~0,10%-Win-Conda_vc14.x-x86_64.7z" SHA256 > "FreeCAD_%fcver:~0,10%-Win-Conda_vc14.x-x86_64.7z"-SHA256.txt
