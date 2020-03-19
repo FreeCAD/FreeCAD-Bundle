@@ -22,12 +22,12 @@ before_install:
       sudo apt-get update -qq && sudo apt-get install -y desktop-file-utils jq zsync p7zip-full;
       apt-get download libc6;
       dpkg -x libc6*.deb libc6;
-    fi
+      fi
     # https://travis-ci.community/t/syntax-error-unexpected-keyword-rescue-expecting-keyword-end-in-homebrew/5623
   - if [ "$TRAVIS_OS_NAME" == "osx" ]; then
       brew update;
       brew install jq p7zip;
-    fi
+      fi
 
 install:
   - eval "$(curl -fsSL "https://raw.githubusercontent.com/${OSX_PORTS_CACHE}/v${FREECAD_RELEASE}/travis-helpers.sh")"
@@ -45,24 +45,24 @@ install:
       wget https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh -O miniconda.sh;
       bash miniconda.sh -b -p $HOME/miniconda;
       . $HOME/miniconda/etc/profile.d/conda.sh;
-    fi
+      fi
   - if [ "$TRAVIS_OS_NAME" == "osx" ]; then
       wget https://repo.continuum.io/miniconda/Miniconda3-latest-MacOSX-x86_64.sh -O miniconda.sh;
       bash miniconda.sh -b -p $HOME/miniconda;
       . $HOME/miniconda/etc/profile.d/conda.sh;
-    fi
+      fi
   - if [ "$TRAVIS_OS_NAME" == "windows" ]; then
       wget https://repo.anaconda.com/pkgs/misc/conda-execs/conda-latest-win-64.exe -O conda.exe --no-check-certificate;
       cmd.exe //C 'conda.exe create -y -q -p C:\conda conda conda-build=3.18.10 conda-verify python=3.7 -c conda-forge';
       cmd.exe //C 'call C:\conda\Scripts\activate';
-    fi
+      fi
   - if [ "$TRAVIS_OS_NAME" != "windows" ]; then
       hash -r;
       conda init bash;
       conda activate base;
-      conda config --set always_yes yes --set changeps1 no
-      conda update -q --all
-    fi
+      conda config --set always_yes yes --set changeps1 no;
+      conda update -q --all;
+      fi
   - wget "https://github.com/FreeCAD/FreeCAD/releases/download/0.18/FreeCAD.0_18.Offline.Doc.7z"
   - 7z x FreeCAD.0_18.Offline.Doc.7z
 
@@ -73,19 +73,20 @@ script:
       cd ../linux_dev;
       bash ./linux_dev.sh;
       cd ..;
-    fi
+      fi
   - if [ "$TRAVIS_OS_NAME" == "osx" ]; then
       cd conda/osx_stable;
       bash ./osx_stable.sh;
       cd ../osx_dev;
       bash ./osx_dev.sh;
       cd ..;
-    fi
+      fi
   - if [ "$TRAVIS_OS_NAME" == "windows" ]; then
+      cp conda.exe conda/win_dev;
       cd conda/win_dev;
       cmd.exe //C 'win_dev.bat';
       cd ..;
-    fi
+      fi
 
 after_success:
   - # Deploy stable builds to latest
