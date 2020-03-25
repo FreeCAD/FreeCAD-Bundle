@@ -10,8 +10,8 @@ env:
     - DEPLOY=${DEPLOY:-0}
 
 os:
-  # - linux
-  # - osx
+  - linux
+  - osx
   - windows
 
 compiler: gcc
@@ -82,7 +82,6 @@ script:
       cd ..;
       fi
   - if [ "$TRAVIS_OS_NAME" == "windows" ]; then
-      cp conda.exe conda/win_dev;
       cd conda/win_dev;
       cmd.exe //C 'win_dev.bat';
       cd ..;
@@ -91,7 +90,7 @@ script:
 after_success:
   - # Deploy stable builds to latest
   - # Use an authentication token to avoid rate limit
-  - DEPLOY_RELEASE_STABLE="$(curl -s -H "Authorization:token ${GH_TOKEN}" "https://api.github.com/repos/FreeCAD/FreeCAD/releases/latest" | jq -r .tag_name)"
+  - DEPLOY_RELEASE_STABLE="$(curl -s -H "Authorization:token ${GH_TOKEN}" "https://api.github.com/repos/FreeCAD/FreeCAD/releases/latest" | jq -r .tag_name)" >/dev/null 2>&1
   - # Uncomment to manually set the tag name
   - # DEPLOY_RELEASE_STABLE="0.18.3"
   - echo "$DEPLOY_RELEASE_STABLE"
@@ -129,4 +128,18 @@ after_success:
       export DEPLOYMENT_ARCHIVE=$(ls osx_dev/*.dmg-SHA256.txt)
       gitHub_deploy_asset_to_release_named $deployContext ${DEPLOYMENT_ARCHIVE}
     fi
-
+  - |
+    if [ "$TRAVIS_OS_NAME" == "windows" -a "${DEPLOY}" == "1" ]; then
+      export deployContext=$(create_helper_context repo=${DEPLOY_REPO} auth_token=${GH_TOKEN} release=${DEPLOY_RELEASE_STABLE}) >/dev/null 2>&1
+      gitHub_prune_assets_for_release_named $deployContext "x86_64.7z" 0 >/dev/null 2>&1
+      export DEPLOYMENT_ARCHIVE=$(ls win_stable/*x86_64.7z)
+      gitHub_deploy_asset_to_release_named $deployContext ${DEPLOYMENT_ARCHIVE} >/dev/null 2>&1
+      export DEPLOYMENT_ARCHIVE=$(ls win_stable/*x86_64.7z-SHA256.txt)
+      gitHub_deploy_asset_to_release_named $deployContext ${DEPLOYMENT_ARCHIVE} >/dev/null 2>&1
+      export deployContext=$(create_helper_context repo=${DEPLOY_REPO} auth_token=${GH_TOKEN} release=${DEPLOY_RELEASE}) >/dev/null 2>&1
+      gitHub_prune_assets_for_release_named $deployContext "x86_64.7z" 0 >/dev/null 2>&1
+      export DEPLOYMENT_ARCHIVE=$(ls win_dev/*x86_64.7z)
+      gitHub_deploy_asset_to_release_named $deployContext ${DEPLOYMENT_ARCHIVE} >/dev/null 2>&1
+      export DEPLOYMENT_ARCHIVE=$(ls win_dev/*x86_64.7z-SHA256.txt)
+      gitHub_deploy_asset_to_release_named $deployContext ${DEPLOYMENT_ARCHIVE} >/dev/null 2>&1
+    fi
