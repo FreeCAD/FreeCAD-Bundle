@@ -130,12 +130,12 @@ after_success:
     fi
   - |
     if [ "$TRAVIS_OS_NAME" == "windows" -a "${DEPLOY}" == "1" ]; then
-      export deployContext=$(create_helper_context repo=${DEPLOY_REPO} auth_token=${GH_TOKEN} release=${DEPLOY_RELEASE_STABLE}) >/dev/null 2>&1
-      gitHub_prune_assets_for_release_named $deployContext "x86_64.7z" 0 >/dev/null 2>&1
-      export DEPLOYMENT_ARCHIVE=$(ls win_stable/*x86_64.7z)
-      gitHub_deploy_asset_to_release_named $deployContext ${DEPLOYMENT_ARCHIVE} >/dev/null 2>&1
-      export DEPLOYMENT_ARCHIVE=$(ls win_stable/*x86_64.7z-SHA256.txt)
-      gitHub_deploy_asset_to_release_named $deployContext ${DEPLOYMENT_ARCHIVE} >/dev/null 2>&1
+      # export deployContext=$(create_helper_context repo=${DEPLOY_REPO} auth_token=${GH_TOKEN} release=${DEPLOY_RELEASE_STABLE}) >/dev/null 2>&1
+      # gitHub_prune_assets_for_release_named $deployContext "x86_64.7z" 0 >/dev/null 2>&1
+      # export DEPLOYMENT_ARCHIVE=$(ls win_stable/*x86_64.7z)
+      # gitHub_deploy_asset_to_release_named $deployContext ${DEPLOYMENT_ARCHIVE} >/dev/null 2>&1
+      # export DEPLOYMENT_ARCHIVE=$(ls win_stable/*x86_64.7z-SHA256.txt)
+      # gitHub_deploy_asset_to_release_named $deployContext ${DEPLOYMENT_ARCHIVE} >/dev/null 2>&1
       export deployContext=$(create_helper_context repo=${DEPLOY_REPO} auth_token=${GH_TOKEN} release=${DEPLOY_RELEASE}) >/dev/null 2>&1
       gitHub_prune_assets_for_release_named $deployContext "x86_64.7z" 0 >/dev/null 2>&1
       export DEPLOYMENT_ARCHIVE=$(ls win_dev/*x86_64.7z)
