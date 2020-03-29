@@ -45,3 +45,4 @@ cd %copy_dir%\..
 ren %copy_dir% FreeCAD_%fcver:~0,10%-Win-Conda_vc14.x-x86_64
 "%ProgramFiles%\7-Zip\7z.exe" a -t7z -mmt=%NUMBER_OF_PROCESSORS% FreeCAD_%fcver:~0,10%-Win-Conda_vc14.x-x86_64.7z FreeCAD_%fcver:~0,10%-Win-Conda_vc14.x-x86_64\
 certutil -hashfile "FreeCAD_%fcver:~0,10%-Win-Conda_vc14.x-x86_64.7z" SHA256 > "FreeCAD_%fcver:~0,10%-Win-Conda_vc14.x-x86_64.7z"-SHA256.txt
+echo  %date%-%time% >>"FreeCAD_%fcver:~0,10%-Win-Conda_vc14.x-x86_64.7z"-SHA256.txt
