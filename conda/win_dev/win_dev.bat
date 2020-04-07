@@ -5,7 +5,7 @@ mkdir %copy_dir%
 
 conda create ^
  -p %conda_env% ^
- freecad calculix gitpython blas=*=*netlib^
+ freecad calculix gitpython blas=*=*netlib ^
  numpy matplotlib-base scipy sympy pandas six ^
  pyyaml opencamlib ifcopenshell ^
  freecad.asm3 libredwg pycollada ^
