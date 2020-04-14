@@ -22,6 +22,9 @@ robocopy %conda_env%\Scripts %copy_dir%\bin\Scripts /S /MT:%NUMBER_OF_PROCESSORS
 robocopy %conda_env%\ python*.* %copy_dir%\bin\ /XF *.pdb /MT:%NUMBER_OF_PROCESSORS% > nul
 robocopy %conda_env%\ msvc*.* %copy_dir%\bin\ /XF *.pdb /MT:%NUMBER_OF_PROCESSORS% > nul
 robocopy %conda_env%\ ucrt*.* %copy_dir%\bin\ /XF *.pdb /MT:%NUMBER_OF_PROCESSORS% > nul
+REM Copy gmsh and calculix
+robocopy %conda_env%\Library\bin ccx.exe %copy_dir%\bin\ /MT:%NUMBER_OF_PROCESSORS% > nul
+robocopy %conda_env%\Library\bin gmsh.exe %copy_dir%\bin\ /MT:%NUMBER_OF_PROCESSORS% > nul
 REM Copy Conda's QT5/plugins to FreeCAD/bin
 robocopy %conda_env%\Library\plugins %copy_dir%\bin\ /S /MT:%NUMBER_OF_PROCESSORS% > nul
 robocopy %conda_env%\Library\bin\ QtWebEngineProces* %copy_dir%\bin\ /MT:%NUMBER_OF_PROCESSORS% > nul
