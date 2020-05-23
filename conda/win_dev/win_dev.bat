@@ -9,6 +9,7 @@ conda create ^
  numpy matplotlib-base scipy sympy pandas six ^
  pyyaml opencamlib ifcopenshell ^
  freecad.asm3 libredwg pycollada ^
+ lxml xlutils olefile requests ^
  --copy ^
  -c freecad/label/dev ^
  -c conda-forge ^
