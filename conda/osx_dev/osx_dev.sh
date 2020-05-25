@@ -6,6 +6,7 @@ conda create \
     pyyaml jinja2 opencamlib ifcopenshell boost-cpp=1.72 \
     freecad.asm3 libredwg pycollada \
     lxml xlutils olefile requests \
+    blinker opencv qt.py gdal \
     --copy \
     -c freecad/label/dev \
     -c conda-forge \
