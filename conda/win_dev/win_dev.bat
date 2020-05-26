@@ -10,7 +10,7 @@ conda create ^
  pyyaml opencamlib ifcopenshell ^
  freecad.asm3 libredwg pycollada ^
  lxml xlutils olefile requests ^
- blinker opencv qt.py gdal ^
+ blinker opencv qt.py ^
  --copy ^
  -c freecad/label/dev ^
  -c conda-forge ^
