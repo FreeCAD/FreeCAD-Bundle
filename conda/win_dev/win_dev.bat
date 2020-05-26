@@ -5,7 +5,7 @@ mkdir %copy_dir%
 
 conda create ^
  -p %conda_env% ^
- freecad libredwg calculix gitpython gmsh ^
+ freecad libredwg calculix gitpython gmsh netgen=6.2.1808 ^
  numpy matplotlib-base scipy sympy pandas six ^
  pyyaml opencamlib ifcopenshell ^
  freecad.asm3 libredwg pycollada ^
