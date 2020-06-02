@@ -12,6 +12,8 @@ conda create \
     -c conda-forge \
     -y
 
+conda run -p AppDir/usr pip install https://github.com/looooo/freecad.appimage_updater/archive/master.zip
+
 # uninstall some packages not needed
 conda uninstall -p AppDir/usr gtk2 gdk-pixbuf llvm-tools \
                               llvmdev clangdev clang clang-tools \
