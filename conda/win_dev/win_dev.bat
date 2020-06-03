@@ -44,8 +44,8 @@ REM robocopy %conda_env%\Library\doc\ *.html %copy_dir%\doc MT:%NUMBER_OF_PROCES
 robocopy %conda_env%\Library\Ext %copy_dir%\Ext /S /XD __pycache__ /MT:%NUMBER_OF_PROCESSORS% > nul
 robocopy %conda_env%\Library\lib %copy_dir%\lib /XF *.lib /XF *.prl /XF *.sh /MT:%NUMBER_OF_PROCESSORS% > nul
 robocopy %conda_env%\Library\Mod %copy_dir%\Mod /S /XD __pycache__ /MT:%NUMBER_OF_PROCESSORS% > nul
-robocopy %copy_dir%\bin\Lib\ ssl.py %copy_dir%\bin\Lib\ ssl-orig.py /MT:%NUMBER_OF_PROCESSORS% > nul
-robocopy ssl-patch.py %copy_dir%\bin\Lib\ ssl.py /MT:%NUMBER_OF_PROCESSORS% > nul
+rename %copy_dir%\bin\Lib\ssl.py %copy_dir%\bin\Lib\ssl-orig.py
+copy ssl-patch.py %copy_dir%\bin\Lib\ssl.py
 %copy_dir%\bin\python.exe -c "import FreeCAD;print((FreeCAD.Version()[0]) +'.' + (FreeCAD.Version()[1]) +'.' + (FreeCAD.Version()[2]))" > tempver.txt
 set /p fcver=<tempver.txt
 echo %fcver%
