@@ -2,7 +2,7 @@
 conda create \
     -p APP/FreeCAD.app/Contents/Resources \
     freecad calculix blas=*=openblas gitpython netgen=6.2.1808 \
-    numpy matplotlib-base scipy sympy pandas six \
+    numpy matplotlib-base scipy=1.4.1 sympy pandas six \
     pyyaml jinja2 opencamlib ifcopenshell boost-cpp=1.72 \
     freecad.asm3 libredwg pycollada \
     lxml xlutils olefile requests \
