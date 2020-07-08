@@ -84,7 +84,7 @@ script:
   - if [ "$TRAVIS_OS_NAME" == "windows" ]; then
       cp conda.exe conda/win_dev;
       cd conda/win_dev;
-      cmd.exe //C 'win_dev.bat';
+      travis-wait cmd.exe //C 'win_dev.bat';
       cd ..;
       fi
 
