@@ -7,7 +7,7 @@ conda create ^
  -p %conda_env% ^
  freecad libredwg calculix gitpython gmsh netgen=6.2.1808 ^
  numpy matplotlib-base scipy=1.4.1 sympy pandas pythonocc-core six ^
- pyyaml opencamlib ^
+ pyyaml opencamlib ifcopenshell ^
  freecad.asm3 libredwg pycollada ^
  lxml xlutils olefile requests ^
  blinker opencv qt.py nine docutils ^
