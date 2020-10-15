@@ -69,14 +69,14 @@ install:
 script:
   - if [ "$TRAVIS_OS_NAME" == "linux" ]; then
       cd conda/linux_stable;
-      bash ./linux_stable.sh;
+      #bash ./linux_stable.sh;
       cd ../linux_dev;
       bash ./linux_dev.sh;
       cd ..;
       fi
   - if [ "$TRAVIS_OS_NAME" == "osx" ]; then
       cd conda/osx_stable;
-      bash ./osx_stable.sh;
+      #bash ./osx_stable.sh;
       cd ../osx_dev;
       bash ./osx_dev.sh;
       cd ..;
@@ -97,14 +97,14 @@ after_success:
   - echo "$DEPLOY_RELEASE_STABLE"
   - |
     if [ "$TRAVIS_OS_NAME" == "linux" -a "${DEPLOY}" == "1" ]; then
-      export deployContext=$(create_helper_context repo=${DEPLOY_REPO} auth_token=${GH_TOKEN} release=${DEPLOY_RELEASE_STABLE})
-      gitHub_prune_assets_for_release_named $deployContext ".AppImage" 0
-      export DEPLOYMENT_ARCHIVE=$(ls linux_stable/*.AppImage)
-      gitHub_deploy_asset_to_release_named $deployContext ${DEPLOYMENT_ARCHIVE}
-      export DEPLOYMENT_ARCHIVE=$(ls linux_stable/*.AppImage.zsync)
-      gitHub_deploy_asset_to_release_named $deployContext ${DEPLOYMENT_ARCHIVE}
-      export DEPLOYMENT_ARCHIVE=$(ls linux_stable/*.AppImage-SHA256.txt)
-      gitHub_deploy_asset_to_release_named $deployContext ${DEPLOYMENT_ARCHIVE}
+      #export deployContext=$(create_helper_context repo=${DEPLOY_REPO} auth_token=${GH_TOKEN} release=${DEPLOY_RELEASE_STABLE})
+      #gitHub_prune_assets_for_release_named $deployContext ".AppImage" 0
+      #export DEPLOYMENT_ARCHIVE=$(ls linux_stable/*.AppImage)
+      #gitHub_deploy_asset_to_release_named $deployContext ${DEPLOYMENT_ARCHIVE}
+      #export DEPLOYMENT_ARCHIVE=$(ls linux_stable/*.AppImage.zsync)
+      #gitHub_deploy_asset_to_release_named $deployContext ${DEPLOYMENT_ARCHIVE}
+      #export DEPLOYMENT_ARCHIVE=$(ls linux_stable/*.AppImage-SHA256.txt)
+      #gitHub_deploy_asset_to_release_named $deployContext ${DEPLOYMENT_ARCHIVE}
       export deployContext=$(create_helper_context repo=${DEPLOY_REPO} auth_token=${GH_TOKEN} release=${DEPLOY_RELEASE})
       gitHub_prune_assets_for_release_named $deployContext ".AppImage" 0
       export DEPLOYMENT_ARCHIVE=$(ls linux_dev/*.AppImage)
@@ -116,12 +116,12 @@ after_success:
     fi
   - |
     if [ "$TRAVIS_OS_NAME" == "osx" -a "${DEPLOY}" == "1" ]; then
-      export deployContext=$(create_helper_context repo=${DEPLOY_REPO} auth_token=${GH_TOKEN} release=${DEPLOY_RELEASE_STABLE})
-      gitHub_prune_assets_for_release_named $deployContext ".dmg" 0
-      export DEPLOYMENT_ARCHIVE=$(ls osx_stable/*.dmg)
-      gitHub_deploy_asset_to_release_named $deployContext ${DEPLOYMENT_ARCHIVE}
-      export DEPLOYMENT_ARCHIVE=$(ls osx_stable/*.dmg-SHA256.txt)
-      gitHub_deploy_asset_to_release_named $deployContext ${DEPLOYMENT_ARCHIVE}
+      #export deployContext=$(create_helper_context repo=${DEPLOY_REPO} auth_token=${GH_TOKEN} release=${DEPLOY_RELEASE_STABLE})
+      #gitHub_prune_assets_for_release_named $deployContext ".dmg" 0
+      #export DEPLOYMENT_ARCHIVE=$(ls osx_stable/*.dmg)
+      #gitHub_deploy_asset_to_release_named $deployContext ${DEPLOYMENT_ARCHIVE}
+      #export DEPLOYMENT_ARCHIVE=$(ls osx_stable/*.dmg-SHA256.txt)
+      #gitHub_deploy_asset_to_release_named $deployContext ${DEPLOYMENT_ARCHIVE}
       export deployContext=$(create_helper_context repo=${DEPLOY_REPO} auth_token=${GH_TOKEN} release=${DEPLOY_RELEASE})
       gitHub_prune_assets_for_release_named $deployContext ".dmg" 0
       export DEPLOYMENT_ARCHIVE=$(ls osx_dev/*.dmg)
