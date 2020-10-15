@@ -82,6 +82,7 @@ script:
       cd ..;
       fi
   - if [ "$TRAVIS_OS_NAME" == "windows" ]; then
+      #placeholder for stable build
       cp conda.exe conda/win_dev;
       cd conda/win_dev;
       cmd.exe //C 'win_dev.bat';
