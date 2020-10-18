@@ -2,7 +2,7 @@
 HERE="$(dirname "$(readlink -f "${0}")")"
 echo ${HERE}
 export PREFIX=$HERE/usr
-export LD_LIBRARY_PATH=$HERE/usr/lib
+export LD_LIBRARY_PATH=${HERE}/usr/lib${LD_LIBRARY_PATH:+':'}$LD_LIBRARY_PATH
 export PYTHONHOME=$HERE/usr
 export QT_QPA_PLATFORM_PLUGIN_PATH=$HERE/usr/plugins
 export QT_XKB_CONFIG_ROOT=$HERE/usr/lib
