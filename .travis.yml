@@ -72,7 +72,7 @@ script:
       cd conda/linux_dev;
       bash ./linux_dev.sh;
       cd ..;
-      fi || travis_terminate 1;
+      fi
   - if [ "$TRAVIS_OS_NAME" == "osx" ]; then
       cd conda/osx_dev;
       bash ./osx_dev.sh;
