@@ -67,13 +67,14 @@ install:
   - 7z x FreeCAD.0_18.Offline.Doc.7z
 
 script:
+  - set -e
   - if [ "$TRAVIS_OS_NAME" == "linux" ]; then
-      cd linux_dev;
+      cd conda/linux_dev;
       bash ./linux_dev.sh;
       cd ..;
-      fi
+      fi || travis_terminate 1;
   - if [ "$TRAVIS_OS_NAME" == "osx" ]; then
-      cd osx_dev;
+      cd conda/osx_dev;
       bash ./osx_dev.sh;
       cd ..;
       fi
@@ -83,6 +84,7 @@ script:
       cmd.exe //C 'win_dev.bat';
       cd ..;
       fi
+  - set +e
 
 after_success:
   - # Deploy stable builds to latest
