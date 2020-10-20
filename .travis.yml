@@ -84,20 +84,20 @@ after_success:
     if [ "$TRAVIS_OS_NAME" == "linux" -a "${DEPLOY}" == "1" ]; then
       export deployContext=$(create_helper_context repo=${DEPLOY_REPO} auth_token=${GH_TOKEN} release=${DEPLOY_RELEASE})
       gitHub_prune_assets_for_release_named $deployContext ".AppImage" 0
-      export DEPLOYMENT_ARCHIVE=$(ls linux_dev/*.AppImage)
+      export DEPLOYMENT_ARCHIVE=$(ls linux/*.AppImage)
       gitHub_deploy_asset_to_release_named $deployContext ${DEPLOYMENT_ARCHIVE}
-      export DEPLOYMENT_ARCHIVE=$(ls linux_dev/*.AppImage.zsync)
+      export DEPLOYMENT_ARCHIVE=$(ls linux/*.AppImage.zsync)
       gitHub_deploy_asset_to_release_named $deployContext ${DEPLOYMENT_ARCHIVE}
-      export DEPLOYMENT_ARCHIVE=$(ls linux_dev/*.AppImage-SHA256.txt)
+      export DEPLOYMENT_ARCHIVE=$(ls linux/*.AppImage-SHA256.txt)
       gitHub_deploy_asset_to_release_named $deployContext ${DEPLOYMENT_ARCHIVE}
     fi
   - |
     if [ "$TRAVIS_OS_NAME" == "osx" -a "${DEPLOY}" == "1" ]; then
       export deployContext=$(create_helper_context repo=${DEPLOY_REPO} auth_token=${GH_TOKEN} release=${DEPLOY_RELEASE})
       gitHub_prune_assets_for_release_named $deployContext ".dmg" 0
-      export DEPLOYMENT_ARCHIVE=$(ls osx_dev/*.dmg)
+      export DEPLOYMENT_ARCHIVE=$(ls osx/*.dmg)
       gitHub_deploy_asset_to_release_named $deployContext ${DEPLOYMENT_ARCHIVE}
-      export DEPLOYMENT_ARCHIVE=$(ls osx_dev/*.dmg-SHA256.txt)
+      export DEPLOYMENT_ARCHIVE=$(ls osx/*.dmg-SHA256.txt)
       gitHub_deploy_asset_to_release_named $deployContext ${DEPLOYMENT_ARCHIVE}
     fi
   - |
@@ -105,8 +105,8 @@ after_success:
       export deployContext=$(create_helper_context repo=${DEPLOY_REPO} auth_token=${GH_TOKEN} release=${DEPLOY_RELEASE})
       gitHub_prune_assets_for_release_named $deployContext "x86_64.7z" 0
       gitHub_prune_assets_for_release_named $deployContext "x86_64.7z-SHA256.txt" 0
-      export DEPLOYMENT_ARCHIVE=$(ls win_dev/*x86_64.7z)
+      export DEPLOYMENT_ARCHIVE=$(ls win/*x86_64.7z)
       gitHub_deploy_asset_to_release_named $deployContext ${DEPLOYMENT_ARCHIVE}
-      export DEPLOYMENT_ARCHIVE=$(ls win_dev/*x86_64.7z-SHA256.txt)
+      export DEPLOYMENT_ARCHIVE=$(ls win/*x86_64.7z-SHA256.txt)
       gitHub_deploy_asset_to_release_named $deployContext ${DEPLOYMENT_ARCHIVE}
     fi
