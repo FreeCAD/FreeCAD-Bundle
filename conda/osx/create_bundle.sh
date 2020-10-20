@@ -34,6 +34,10 @@ rm -rf APP/FreeCAD.app/Contents/Resources/bin_tmp
 # add documentation
 cp ../../doc/* APP/FreeCAD.app/Contents/Resources/doc
 
+# Addon-manager fix:
+rm AppDir/usr/Mod/AddonManager/AddonManager.py
+cp ../modifications/AddonManager_modified.py AppDir/usr/Mod/AddonManager/AddonManager.py
+
 # Remove __pycache__ folders and .pyc files
 conda deactivate
 find . -path "*/__pycache__/*" -delete

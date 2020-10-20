@@ -62,6 +62,10 @@ find . -name "*.cmake" -type f -delete
 # Add libnsl (Fedora 28 and up)
 cp ../../libc6/lib/x86_64-linux-gnu/libnsl* AppDir/usr/lib/
 
+# Addon-manager fix:
+rm AppDir/usr/Mod/AddonManager/AddonManager.py
+cp ../modifications/AddonManager_modified.py AppDir/usr/Mod/AddonManager/AddonManager.py
+
 # create the appimage
 chmod a+x ./AppDir/AppRun
 rm *.AppImage
