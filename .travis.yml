@@ -2,10 +2,6 @@ env:
   global:
     # tag
     - DEPLOY_RELEASE="0.19_pre"
-    #
-    - FREECAD_RELEASE="0.18"
-    # - DEPLOY_RELEASE=${DEPLOY_RELEASE:-$FREECAD_RELEASE}
-    - OSX_PORTS_CACHE=${OSX_PORTS_CACHE:-FreeCAD/FreeCAD-ports-cache}
     - DEPLOY_REPO=${DEPLOY_REPO:-FreeCAD/FreeCAD}
     - DEPLOY=${DEPLOY:-0}
 
@@ -30,7 +26,6 @@ before_install:
       fi
 
 install:
-  - eval "$(curl -fsSL "https://raw.githubusercontent.com/${OSX_PORTS_CACHE}/v${FREECAD_RELEASE}/travis-helpers.sh")"
   - # Temp patch
   - |
     gitHub_release_named()
@@ -68,29 +63,23 @@ install:
 
 script:
   - if [ "$TRAVIS_OS_NAME" == "linux" ]; then
-      cd conda/linux_dev;
-      bash ./linux_dev.sh;
+      cd conda/linux;
+      bash ./create_bundle.sh;
       cd ..;
       fi
   - if [ "$TRAVIS_OS_NAME" == "osx" ]; then
-      cd conda/osx_dev;
-      bash ./osx_dev.sh;
+      cd conda/osx;
+      bash ./create_bundle.sh;
       cd ..;
       fi
   - if [ "$TRAVIS_OS_NAME" == "windows" ]; then
-      cp conda.exe conda/win_dev;
-      cd conda/win_dev;
-      cmd.exe //C 'win_dev.bat';
+      cp conda.exe conda/win;
+      cd conda/win;
+      cmd.exe //C 'create_bundle.bat';
       cd ..;
       fi
 
 after_success:
-  - # Deploy stable builds to latest
-  - # Use an authentication token to avoid rate limit
-  - DEPLOY_RELEASE_STABLE="$(curl -s -H "Authorization:token ${GH_TOKEN}" "https://api.github.com/repos/FreeCAD/FreeCAD/releases/latest" | jq -r .tag_name)"
-  - # Uncomment to manually set the tag name
-  - # DEPLOY_RELEASE_STABLE="0.18.3"
-  - echo "$DEPLOY_RELEASE_STABLE"
   - |
     if [ "$TRAVIS_OS_NAME" == "linux" -a "${DEPLOY}" == "1" ]; then
       export deployContext=$(create_helper_context repo=${DEPLOY_REPO} auth_token=${GH_TOKEN} release=${DEPLOY_RELEASE})
