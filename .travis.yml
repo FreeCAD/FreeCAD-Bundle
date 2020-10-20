@@ -1,10 +1,8 @@
 env:
   global:
     # tag
-    - DEPLOY_RELEASE="0.19_pre"
     #
     - FREECAD_RELEASE="0.18"
-    # - DEPLOY_RELEASE=${DEPLOY_RELEASE:-$FREECAD_RELEASE}
     - OSX_PORTS_CACHE=${OSX_PORTS_CACHE:-FreeCAD/FreeCAD-ports-cache}
     - DEPLOY_REPO=${DEPLOY_REPO:-FreeCAD/FreeCAD}
     - DEPLOY=${DEPLOY:-0}
