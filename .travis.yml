@@ -26,6 +26,7 @@ before_install:
       fi
 
 install:
+  - eval "$(curl -fsSL "https://raw.githubusercontent.com/${OSX_PORTS_CACHE}/v${FREECAD_RELEASE}/travis-helpers.sh")"
   - # Temp patch
   - |
     gitHub_release_named()
