@@ -3,6 +3,7 @@ env:
     # tag
     - DEPLOY_RELEASE="0.19_pre"
     - OSX_PORTS_CACHE=${OSX_PORTS_CACHE:-FreeCAD/FreeCAD-ports-cache}
+    - OSX_PORTS_CACHE_BRANCHE="master"
     - DEPLOY_REPO=${DEPLOY_REPO:-FreeCAD/FreeCAD}
     - DEPLOY=${DEPLOY:-0}
 
@@ -27,7 +28,7 @@ before_install:
       fi
 
 install:
-  - eval "$(curl -fsSL "https://raw.githubusercontent.com/${OSX_PORTS_CACHE}/v${FREECAD_RELEASE}/travis-helpers.sh")"
+  - eval "$(curl -fsSL "https://raw.githubusercontent.com/${OSX_PORTS_CACHE}/${OSX_PORTS_CACHE_BRANCHE}/travis-helpers.sh")"
   - # Temp patch
   - |
     gitHub_release_named()
