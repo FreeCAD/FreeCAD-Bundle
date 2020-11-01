@@ -64,6 +64,10 @@ cp ../../libc6/lib/x86_64-linux-gnu/libnsl* AppDir/usr/lib/
 mkdir -p AppDir/usr/share/doc/FreeCAD/
 cp ../../doc/* AppDir/usr/share/doc/FreeCAD/
 
+# mpmath fix:
+rm AppDir/usr/lib/python3.8/site-packages/mpmath/ctx_mp_python.py
+cp ../modifications/ctx_mp_python.py AppDir/usr/lib/python3.8/site-packages/mpmath/ctx_mp_python.py
+
 # create the appimage
 chmod a+x ./AppDir/AppRun
 rm *.AppImage

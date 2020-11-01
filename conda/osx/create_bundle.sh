@@ -40,6 +40,10 @@ rm -rf APP/FreeCAD.app/Contents/Resources/bin_tmp
 cp qt.conf APP/FreeCAD.app/Contents/Resources/bin/
 cp qt.conf APP/FreeCAD.app/Contents/Resources/libexec/
 
+# mpmath fix:
+rm AppDir/usr/lib/python3.8/site-packages/mpmath/ctx_mp_python.py
+cp ../modifications/ctx_mp_python.py AppDir/usr/lib/python3.8/site-packages/mpmath/ctx_mp_python.py
+
 # Remove __pycache__ folders and .pyc files
 find . -path "*/__pycache__/*" -delete
 find . -name "*.pyc" -type f -delete

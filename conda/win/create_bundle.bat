@@ -53,7 +53,11 @@ echo %fcver%
 cd %copy_dir%\..
 ren %copy_dir% FreeCAD_%fcver:~0,10%-Win-Conda_vc14.x-x86_64
 
-if errorlevel 1 exit 1
+REM mpmath PY3.8 fix:
+del FreeCAD_%fcver:~0,10%-Win-Conda_vc14.x-x86_64/bin/Lib/site-packages/mpmath/ctx_mp_python.py
+copy ../modifications/ctx_mp_python.py FreeCAD_%fcver:~0,10%-Win-Conda_vc14.x-x86_64/bin/Lib/site-packages/mpmath/ctx_mp_python.py
+
+if errorlevel1 exit 1
 
 "%ProgramFiles%\7-Zip\7z.exe" a -t7z -mmt=%NUMBER_OF_PROCESSORS% FreeCAD_%fcver:~0,10%-Win-Conda_vc14.x-x86_64.7z FreeCAD_%fcver:~0,10%-Win-Conda_vc14.x-x86_64\ -bb
 certutil -hashfile "FreeCAD_%fcver:~0,10%-Win-Conda_vc14.x-x86_64.7z" SHA256 > "FreeCAD_%fcver:~0,10%-Win-Conda_vc14.x-x86_64.7z"-SHA256.txt
