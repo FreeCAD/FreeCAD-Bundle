@@ -45,17 +45,17 @@ REM robocopy %conda_env%\Library\doc\ *.html %copy_dir%\doc MT:%NUMBER_OF_PROCES
 robocopy %conda_env%\Library\Ext %copy_dir%\Ext /S /XD __pycache__ /MT:%NUMBER_OF_PROCESSORS% > nul
 robocopy %conda_env%\Library\lib %copy_dir%\lib /XF *.lib /XF *.prl /XF *.sh /MT:%NUMBER_OF_PROCESSORS% > nul
 robocopy %conda_env%\Library\Mod %copy_dir%\Mod /S /XD __pycache__ /MT:%NUMBER_OF_PROCESSORS% > nul
+REM Apply Patches
 rename %copy_dir%\bin\Lib\ssl.py ssl-orig.py
 copy ssl-patch.py %copy_dir%\bin\Lib\ssl.py
+rename %copy_dir%\bin\Lib\site-packages\mpmath\ctx_mp_python.py ctx_mp_python-orig.py
+copy C:/Users/travis/build/FreeCAD/FreeCAD-AppImage/conda/modifications/ctx_mp_python.py %copy_dir%\bin\Lib\site-packages\mpmath\ctx_mp_python.py
+
 %copy_dir%\bin\python.exe -c "import FreeCAD;print((FreeCAD.Version()[0]) +'.' + (FreeCAD.Version()[1]) +'.' + (FreeCAD.Version()[2]))" > tempver.txt
 set /p fcver=<tempver.txt
 echo %fcver%
 cd %copy_dir%\..
 ren %copy_dir% FreeCAD_%fcver:~0,10%-Win-Conda_vc14.x-x86_64
-
-REM mpmath PY3.8 fix:
-del FreeCAD_%fcver:~0,10%-Win-Conda_vc14.x-x86_64/bin/Lib/site-packages/mpmath/ctx_mp_python.py
-copy ../modifications/ctx_mp_python.py FreeCAD_%fcver:~0,10%-Win-Conda_vc14.x-x86_64/bin/Lib/site-packages/mpmath/ctx_mp_python.py
 
 if errorlevel1 exit 1
 
