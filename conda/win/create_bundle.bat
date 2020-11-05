@@ -59,7 +59,7 @@ ren %copy_dir% FreeCAD_%fcver:~0,10%-Win-Conda_vc14.x-x86_64
 echo %cd%
 dir
 
-if errorlevel1 exit 1
+REM if errorlevel1 exit 1
 
 "%ProgramFiles%\7-Zip\7z.exe" a -t7z -mmt=%NUMBER_OF_PROCESSORS% FreeCAD_%fcver:~0,10%-Win-Conda_vc14.x-x86_64.7z FreeCAD_%fcver:~0,10%-Win-Conda_vc14.x-x86_64\ -bb
 certutil -hashfile "FreeCAD_%fcver:~0,10%-Win-Conda_vc14.x-x86_64.7z" SHA256 > "FreeCAD_%fcver:~0,10%-Win-Conda_vc14.x-x86_64.7z"-SHA256.txt
