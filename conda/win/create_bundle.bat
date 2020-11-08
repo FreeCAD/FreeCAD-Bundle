@@ -56,7 +56,6 @@ set /p fcver=<tempver.txt
 echo %fcver%
 cd %copy_dir%\..
 ren %copy_dir% FreeCAD_%fcver:~0,10%-Win-Conda_vc14.x-x86_64
-echo %cd%
 dir
 
 REM if errorlevel1 exit 1
