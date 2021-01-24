@@ -42,13 +42,11 @@ install:
       wget https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh -O miniconda.sh;
       bash miniconda.sh -b -p $HOME/miniconda;
       . $HOME/miniconda/etc/profile.d/conda.sh;
-      conda install p7zip -y
       fi
   - if [ "$TRAVIS_OS_NAME" == "osx" ]; then
       wget https://repo.continuum.io/miniconda/Miniconda3-latest-MacOSX-x86_64.sh -O miniconda.sh;
       bash miniconda.sh -b -p $HOME/miniconda;
       . $HOME/miniconda/etc/profile.d/conda.sh;
-      conda install p7zip -y
       fi
   - if [ "$TRAVIS_OS_NAME" == "windows" ]; then
       wget https://repo.anaconda.com/pkgs/misc/conda-execs/conda-latest-win-64.exe -O conda.exe --no-check-certificate;
@@ -61,6 +59,7 @@ install:
       conda activate base;
       conda config --set always_yes yes --set changeps1 no;
       conda update -q --all;
+      conda install p7zip -y;
       fi
   - wget "https://github.com/FreeCAD/FreeCAD/releases/download/0.18/FreeCAD.0_18.Offline.Doc.7z"
   - 7z x FreeCAD.0_18.Offline.Doc.7z
