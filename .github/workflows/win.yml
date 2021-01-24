@@ -9,6 +9,8 @@ jobs:
       max-parallel: 5
 
     steps:
+    - uses: actions/checkout@v2
+      name: Checkout
     - uses: conda-incubator/setup-miniconda@v2
       with:
         auto-update-conda: true

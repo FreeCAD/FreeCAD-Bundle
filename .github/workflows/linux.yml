@@ -24,7 +24,12 @@ jobs:
       run: |
         conda config --set always_yes yes --set changeps1 no;
         conda update -q --all;
-        conda install p7zip sed -y -c conda-forge;
+        conda install p7zip sed wget curl -y -c conda-forge;
+    - name: appimage tools
+      run: |
+        curl -LO https://raw.githubusercontent.com/AppImage/AppImages/master/pkg2appimage;
+        wget "https://github.com/AppImage/AppImageKit/releases/download/continuous/appimagetool-x86_64.AppImage";
+        chmod a+x appimagetool-x86_64.AppImage;
     - name: get docs
       run: wget "https://github.com/FreeCAD/FreeCAD/releases/download/0.18/FreeCAD.0_18.Offline.Doc.7z"
     - name: extract docs
