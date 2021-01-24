@@ -8,12 +8,11 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       max-parallel: 5
-
     steps:
     - uses: conda-incubator/setup-miniconda@v2
-        with:
-          auto-update-conda: true
-          python-version: 3.8
+      with:
+        auto-update-conda: true
+        python-version: 3.8
     - name: update system
       run: |
         sudo apt-get update -qq && sudo apt-get install -y desktop-file-utils jq zsync;
