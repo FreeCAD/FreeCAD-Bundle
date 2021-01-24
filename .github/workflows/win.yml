@@ -11,6 +11,8 @@ jobs:
     steps:
     - uses: actions/checkout@v2
       name: Checkout
+    - uses: msys2/setup-msys2@v2
+      name: msys2
     - uses: conda-incubator/setup-miniconda@v2
       with:
         auto-update-conda: true
