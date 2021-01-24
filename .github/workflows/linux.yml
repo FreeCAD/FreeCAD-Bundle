@@ -22,7 +22,7 @@ jobs:
         dpkg -x libc6*.deb libc6;
     - name: Install conda dependencies
       run: |
-        conda install wget curl -y -c conda-forge;
+        conda install p7zip sed wget curl -y -c conda-forge;
     - name: appimage tools
       run: |
         curl -LO https://raw.githubusercontent.com/AppImage/AppImages/master/pkg2appimage;
