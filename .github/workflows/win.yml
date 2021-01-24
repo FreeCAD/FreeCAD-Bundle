@@ -15,16 +15,13 @@ jobs:
       with:
         auto-update-conda: true
         python-version: 3.8
-    - name: Install conda dependencies    
-      run: |
-        conda install wget -y -c conda-forge;
     - name: get docs
       run: wget "https://github.com/FreeCAD/FreeCAD/releases/download/0.18/FreeCAD.0_18.Offline.Doc.7z"
     - name: extract docs
       run: 7z x FreeCAD.0_18.Offline.Doc.7z
     - name: create bundle
       run: |
-        cd ..\conda\win;
+        cd conda\win;
         create_bundle.bat;
         cd ..;
         
