@@ -48,10 +48,17 @@ jobs:
       - name: extract docs
         run: 7z x FreeCAD.0_18.Offline.Doc.7z
 
-      - if: matrix.os != 'windows-latest'
+      - if: matrix.os == 'macos-latest'
         name: create bundle
         run: |
           cd conda/osx;
+          bash ./create_bundle.sh;
+          cd ..;
+
+      - if: matrix.os == 'ubuntu-latest'
+        name: create bundle
+        run: |
+          cd conda/linux;
           bash ./create_bundle.sh;
           cd ..;
 
