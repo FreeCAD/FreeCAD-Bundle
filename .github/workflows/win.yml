@@ -25,6 +25,6 @@ jobs:
     - name: create bundle
       run: |
         cd conda\win;
-        create_bundle.bat;
+        cmd.exe //C 'create_bundle.bat';
         cd ..;
         
