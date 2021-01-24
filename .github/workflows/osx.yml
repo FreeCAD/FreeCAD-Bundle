@@ -3,7 +3,7 @@ name: Python Package using Conda
 on: [push]
 
 jobs:
-  build-linux:
+  build-osx:
     runs-on: macos-latest
     strategy:
       max-parallel: 5
