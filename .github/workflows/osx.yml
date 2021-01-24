@@ -1,0 +1,33 @@
+name: Python Package using Conda
+
+on: [push]
+
+jobs:
+  build-linux:
+    runs-on: macos-latest
+    strategy:
+      max-parallel: 5
+
+    steps:
+    - uses: conda-incubator/setup-miniconda@v2
+      with:
+        auto-update-conda: true
+        python-version: 3.8
+    - name: update system
+      run: |
+        brew update;
+    - name: Install conda dependencies
+      run: |
+        conda config --set always_yes yes --set changeps1 no;
+        conda update -q --all;
+        conda install p7zip sed -y -c conda-forge;
+    - name: get docs
+      run: wget "https://github.com/FreeCAD/FreeCAD/releases/download/0.18/FreeCAD.0_18.Offline.Doc.7z"
+    - name: extract docs
+      run: 7z x FreeCAD.0_18.Offline.Doc.7z
+    - name: create bundle
+      run: |
+        cd conda/osx;
+        bash ./create_bundle.sh;
+        cd ..;
+        
