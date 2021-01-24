@@ -11,19 +11,18 @@ jobs:
         os: [macos-latest, ubuntu-latest, windows-latest]
 
     steps:
-    - if: matrix.os == 'windows-latest'
-        - uses: msys2/setup-msys2@v2
-          name: msys2
+      - name: msys2
+        uses: msys2/setup-msys2@v2
 
-    - uses: actions/checkout@v2
-      name: Checkout
+      - uses: actions/checkout@v2
+        name: Checkout
 
-    - uses: conda-incubator/setup-miniconda@v2
-      with:
-        auto-update-conda: true
+      - uses: conda-incubator/setup-miniconda@v2
+        with:
+          auto-update-conda: true
 
-    - name: update system
       - if: matrix.os == 'macos-latest'
+        name: update mac
         run: |
           brew update;
       - if: matrix.os == 'ubuntu-latest'
@@ -32,27 +31,31 @@ jobs:
           apt-get download libc6;
           dpkg -x libc6*.deb libc6;
 
-    - name: Install conda dependencies
       - if: matrix.os != 'windows_latest'
+        name: install conda dependencies for unix
         run: |
           conda install p7zip sed curl -y -c conda-forge;
+
       - if: matrix.os == 'windows_latest'
+        name: install conda dependencies for windows
         run: |
           conda install curl -y -c conda-forge;
 
-    - name: get docs
-      run: curl -LO "https://github.com/FreeCAD/FreeCAD/releases/download/0.18/FreeCAD.0_18.Offline.Doc.7z"
+      - name: get docs
+        run: curl -LO "https://github.com/FreeCAD/FreeCAD/releases/download/0.18/FreeCAD.0_18.Offline.Doc.7z"
 
-    - name: extract docs
-      run: 7z x FreeCAD.0_18.Offline.Doc.7z
+      - name: extract docs
+        run: 7z x FreeCAD.0_18.Offline.Doc.7z
 
-    - name: create bundle
       - if: matrix.os != 'windows_latest'
+        name: create bundle
         run: |
           cd conda/osx;
           bash ./create_bundle.sh;
           cd ..;
+
       - if: matrix.os == 'windows_latest'
+        name: create bundle
         run: |
           cd conda\win;
           cmd.exe //C 'create_bundle.bat';
