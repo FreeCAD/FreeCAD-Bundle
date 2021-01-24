@@ -1,39 +1,39 @@
-name: Python Package using Conda
+# name: Python Package using Conda
 
-on: [push]
+# on: [push]
 
 
-jobs:
-  build-linux:
-    runs-on: ubuntu-latest
-    strategy:
-      max-parallel: 5
-    steps:
-    - uses: actions/checkout@v2
-      name: Checkout
-    # - uses: conda-incubator/setup-miniconda@v2
-    #   with:
-    #     auto-update-conda: true
-    # - name: update system
-    #   run: |
-    #     sudo apt-get update -qq && sudo apt-get install -y desktop-file-utils jq zsync;
-    #     apt-get download libc6;
-    #     dpkg -x libc6*.deb libc6;
-    # - name: Install conda dependencies
-    #   run: |
-    #     conda install p7zip sed wget curl -y -c conda-forge;
-    # - name: appimage tools
-    #   run: |
-    #     curl -LO https://raw.githubusercontent.com/AppImage/AppImages/master/pkg2appimage;
-    #     wget "https://github.com/AppImage/AppImageKit/releases/download/continuous/appimagetool-x86_64.AppImage";
-    #     chmod a+x appimagetool-x86_64.AppImage;
-    # - name: get docs
-    #   run: wget "https://github.com/FreeCAD/FreeCAD/releases/download/0.18/FreeCAD.0_18.Offline.Doc.7z"
-    # - name: extract docs
-    #   run: 7z x FreeCAD.0_18.Offline.Doc.7z
-    # - name: create bundle
-    #   run: |
-    #     cd conda/linux;
-    #     bash ./create_bundle.sh;
-    #     cd ..;
+# jobs:
+#   build-linux:
+#     runs-on: ubuntu-latest
+#     strategy:
+#       max-parallel: 5
+#     steps:
+#     - uses: actions/checkout@v2
+#       name: Checkout
+#     - uses: conda-incubator/setup-miniconda@v2
+#       with:
+#         auto-update-conda: true
+#     - name: update system
+#       run: |
+#         sudo apt-get update -qq && sudo apt-get install -y desktop-file-utils jq zsync;
+#         apt-get download libc6;
+#         dpkg -x libc6*.deb libc6;
+#     - name: Install conda dependencies
+#       run: |
+#         conda install p7zip sed curl -y -c conda-forge;
+#     - name: appimage tools
+#       run: |
+#         curl -LO https://raw.githubusercontent.com/AppImage/AppImages/master/pkg2appimage;
+#         curl -L0 https://github.com/AppImage/AppImageKit/releases/download/continuous/appimagetool-x86_64.AppImage;
+#         chmod a+x appimagetool-x86_64.AppImage;
+#     - name: get docs
+#       run: curl -L0 https://github.com/FreeCAD/FreeCAD/releases/download/0.18/FreeCAD.0_18.Offline.Doc.7z
+#     - name: extract docs
+#       run: 7z x FreeCAD.0_18.Offline.Doc.7z
+#     - name: create bundle
+#       run: |
+#         cd conda/linux;
+#         bash ./create_bundle.sh;
+#         cd ..;
         

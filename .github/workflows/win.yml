@@ -1,30 +1,30 @@
-name: Python Package using Conda
+# name: Python Package using Conda
 
-on: [push]
+# on: [push]
 
-jobs:
-  build-windows4:
-    runs-on: windows-latest
-    strategy:
-      max-parallel: 5
+# jobs:
+#   build-windows4:
+#     runs-on: windows-latest
+#     strategy:
+#       max-parallel: 5
 
-    steps:
-    - uses: actions/checkout@v2
-      name: Checkout
-    - uses: msys2/setup-msys2@v2
-      name: msys2
-    - uses: conda-incubator/setup-miniconda@v2
-      with:
-        auto-update-conda: true
-    - name: install deps
-      run: conda install curl
-    - name: get docs
-      run: curl -LO  "https://github.com/FreeCAD/FreeCAD/releases/download/0.18/FreeCAD.0_18.Offline.Doc.7z"
-    - name: extract docs
-      run: 7z x FreeCAD.0_18.Offline.Doc.7z
-    - name: create bundle
-      run: |
-        cd conda\win;
-        cmd.exe //C 'create_bundle.bat';
-        cd ..;
+#     steps:
+#     - uses: actions/checkout@v2
+#       name: Checkout
+#     - uses: msys2/setup-msys2@v2
+#       name: msys2
+#     - uses: conda-incubator/setup-miniconda@v2
+#       with:
+#         auto-update-conda: true
+#     - name: install deps
+#       run: conda install curl
+#     - name: get docs
+#       run: curl -LO  "https://github.com/FreeCAD/FreeCAD/releases/download/0.18/FreeCAD.0_18.Offline.Doc.7z"
+#     - name: extract docs
+#       run: 7z x FreeCAD.0_18.Offline.Doc.7z
+#     - name: create bundle
+#       run: |
+#         cd conda\win;
+#         cmd.exe //C 'create_bundle.bat';
+#         cd ..;
         
