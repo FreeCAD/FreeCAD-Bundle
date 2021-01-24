@@ -27,7 +27,7 @@ jobs:
       run: 7z x FreeCAD.0_18.Offline.Doc.7z
     - name: create bundle
       run: |
-        cd ../conda/osx;
+        cd conda/osx;
         bash ./create_bundle.sh;
         cd ..;
         
