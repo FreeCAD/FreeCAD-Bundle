@@ -1,0 +1,40 @@
+name: Python Package using Conda
+
+on: [push]
+
+jobs:
+  build-linux:
+    runs-on: ubuntu-latest
+    strategy:
+      max-parallel: 5
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: update system
+      run: |
+        sudo apt-get update -qq && sudo apt-get install -y desktop-file-utils jq zsync;
+        apt-get download libc6;
+        dpkg -x libc6*.deb libc6;
+    - name: Set up Python 3.8
+      uses: actions/setup-python@v2
+      with:
+        python-version: 3.8
+    - name: Add conda to system path
+      run: |
+        # $CONDA is an environment variable pointing to the root of the miniconda directory
+        echo $CONDA/bin >> $GITHUB_PATH
+    - name: Install dependencies
+      run: |
+        conda config --set always_yes yes --set changeps1 no;
+        conda update -q --all;
+        conda install p7zip sed -y -c conda-forge;
+    - name: get docs
+      run: wget "https://github.com/FreeCAD/FreeCAD/releases/download/0.18/FreeCAD.0_18.Offline.Doc.7z"
+    - name: extract docs
+      run: 7z x FreeCAD.0_18.Offline.Doc.7z
+    - name: create bundle
+      run: |
+        cd conda/linux;
+        bash ./create_bundle.sh;
+        cd ..;
+        
