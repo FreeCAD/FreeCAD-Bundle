@@ -22,8 +22,6 @@ jobs:
         dpkg -x libc6*.deb libc6;
     - name: Install conda dependencies
       run: |
-        conda config --set always_yes yes --set changeps1 no;
-        conda update -q --all;
         conda install p7zip sed wget curl -y -c conda-forge;
     - name: appimage tools
       run: |

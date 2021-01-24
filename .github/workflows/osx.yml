@@ -20,8 +20,6 @@ jobs:
         brew update;
     - name: Install conda dependencies
       run: |
-        conda config --set always_yes yes --set changeps1 no;
-        conda update -q --all;
         conda install p7zip sed wget -y -c conda-forge;
     - name: get docs
       run: wget "https://github.com/FreeCAD/FreeCAD/releases/download/0.18/FreeCAD.0_18.Offline.Doc.7z"
