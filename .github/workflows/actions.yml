@@ -41,6 +41,7 @@ jobs:
         name: install conda dependencies for unix
         run: |
           conda install p7zip sed curl -y -c conda-forge;
+          conda config --show channels;
 
       - if: matrix.os == 'windows-latest'
         name: install conda dependencies for windows
