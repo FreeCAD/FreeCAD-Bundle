@@ -59,7 +59,7 @@ install:
       conda activate base;
       conda config --set always_yes yes --set changeps1 no;
       conda update -q --all;
-      conda install p7zip -y -c conda-forge;
+      conda install p7zip sed -y -c conda-forge;
       fi
   - wget "https://github.com/FreeCAD/FreeCAD/releases/download/0.18/FreeCAD.0_18.Offline.Doc.7z"
   - 7z x FreeCAD.0_18.Offline.Doc.7z
