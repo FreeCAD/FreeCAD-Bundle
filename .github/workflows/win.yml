@@ -3,7 +3,7 @@ name: Python Package using Conda
 on: [push]
 
 jobs:
-  build-windows:
+  build-windows4:
     runs-on: windows-latest
     strategy:
       max-parallel: 5
@@ -19,7 +19,7 @@ jobs:
       run: 7z x FreeCAD.0_18.Offline.Doc.7z
     - name: create bundle
       run: |
-        cd conda\linux;
+        cd ..\conda\win;
         create_bundle.bat;
         cd ..;
         
