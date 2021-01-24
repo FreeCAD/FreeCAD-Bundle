@@ -9,6 +9,8 @@ jobs:
     strategy:
       max-parallel: 5
     steps:
+    - uses: actions/checkout
+      name: Checkout
     - uses: conda-incubator/setup-miniconda@v2
       with:
         auto-update-conda: true
@@ -29,7 +31,7 @@ jobs:
       run: 7z x FreeCAD.0_18.Offline.Doc.7z
     - name: create bundle
       run: |
-        cd ../conda/linux;
+        cd conda/linux;
         bash ./create_bundle.sh;
         cd ..;
         
