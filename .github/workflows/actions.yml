@@ -80,7 +80,7 @@ jobs:
         uses: svenstaro/upload-release-action@v2
         with:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
+          file_glob: true
           file: conda/linux/FreeCAD*
-          asset_name: FreeCAD_Appimage
           tag: 0.19-pre
           overwrite: true
