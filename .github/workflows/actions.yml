@@ -72,7 +72,7 @@ jobs:
         name: create windows bundle
         run: |
           cd conda\win;
-          cmd.exe //C 'create_bundle.bat';
+          call create_bundle.bat;
           cd ..\..;
         shell: cmd
 
