@@ -76,10 +76,11 @@ jobs:
           cd ..\..;
 
       - if: matrix.os == 'ubuntu-latest'
-        name: upload bundles
-        uses: skx/github-action-publish-binaries@release-1.3
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        name: Upload binaries to release
+        uses: svenstaro/upload-release-action@v2
         with:
-          args: conda/linux/FreeCAD*
-          releaseId: 0.19-pre
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          file: conda/linux/FreeCAD*
+          asset_name: FreeCAD_Appimage
+          tag: 0.19-pre
+          overwrite: true
