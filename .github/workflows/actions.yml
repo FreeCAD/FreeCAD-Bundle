@@ -72,7 +72,6 @@ jobs:
         name: create windows bundle
         run: |
           cd conda\win;
-        shell: cmd
 
       - if: matrix.os == 'ubuntu-latest'
         name: Upload binaries to release
