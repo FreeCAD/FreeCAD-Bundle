@@ -8,7 +8,7 @@ jobs:
     strategy:
       max-parallel: 5
       matrix:
-        os: [macos-latest, ubuntu-latest, windows-latest]
+        os: [windows-latest]
 
     steps:
       - if: matrix.os == 'windows-latest'
@@ -71,7 +71,7 @@ jobs:
       - if: matrix.os == 'windows-latest'
         name: create windows bundle
         run: |
-          cd conda\win & create_bundle.bat
+          cd conda\win & call create_bundle.bat
         shell: cmd
 
       - if: matrix.os == 'ubuntu-latest'
