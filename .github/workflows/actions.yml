@@ -70,7 +70,9 @@ jobs:
 
       - if: matrix.os == 'windows-latest'
         name: create windows bundle
-        run: cd conda\win & dir & cmd.exe /C 'create_bundle.bat'
+        run: |
+          cd conda\win & create_bundle.bat
+        shell: cmd
 
       - if: matrix.os == 'ubuntu-latest'
         name: Upload binaries to release
