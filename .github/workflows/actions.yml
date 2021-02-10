@@ -71,7 +71,7 @@ jobs:
       - if: matrix.os == 'windows-latest'
         name: create windows bundle
         run: |
-          cd conda\win & call create_bundle.bat
+          cd conda\win & cmd.exe /C create_bundle.bat
         shell: cmd
 
       - if: matrix.os == 'ubuntu-latest'
