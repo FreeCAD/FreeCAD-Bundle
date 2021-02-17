@@ -56,12 +56,12 @@ jobs:
 
       - if: matrix.os == 'macos-latest'
         name: create osx bundle
-        run: "create_bundle.sh"
+        run: "bash ./create_bundle.sh"
         working-directory: conda/osx
 
       - if: matrix.os == 'ubuntu-latest'
         name: create linux bundle
-        run: "create_bundle.sh"
+        run: "bash ./create_bundle.sh"
         working-directory: conda/linux
 
       - if: matrix.os == 'windows-latest'
