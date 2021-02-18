@@ -3,7 +3,7 @@ set copy_dir="FreeCAD_Conda_Build"
 
 mkdir %copy_dir%
 
-conda create ^
+call conda create ^
  -p %conda_env% ^
  freecad libredwg calculix gitpython gmsh netgen=6.2.1808 ^
  numpy matplotlib-base scipy=1.4.1 sympy pandas pythonocc-core six ^
