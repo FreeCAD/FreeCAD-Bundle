@@ -16,7 +16,7 @@ jobs:
         uses: mknejp/delete-release-assets@v1
         with:
           token: ${{ github.token }}
-          tag: ${{ matrix.tag }} # This may also be of the form 'refs/tags/staging'
+          tag: ${{ matrix.tag }}
           assets: FreeCAD*
           fail-if-no-assets: false
           fail-if-no-release: false
@@ -86,7 +86,7 @@ jobs:
         with:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           file: conda/linux/FreeCAD*
-          tag: 0.19-pre
+          tag: ${{ matrix.tag }}
           overwrite: true
           file_glob: true
 
@@ -96,7 +96,7 @@ jobs:
         with:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           file: conda/osx/FreeCAD*
-          tag: 0.19-pre
+          tag: ${{ matrix.tag }}
           overwrite: true
           file_glob: true
           
@@ -106,6 +106,6 @@ jobs:
         with:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           file: conda\win\FreeCAD*
-          tag: 0.19-pre
+          tag: ${{ matrix.tag }}
           overwrite: true
           file_glob: true
