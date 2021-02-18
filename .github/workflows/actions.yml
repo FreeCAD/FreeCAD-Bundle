@@ -1,0 +1,111 @@
+name: FreeCAD bundeling
+
+on: [push]
+
+jobs:
+  build-bundles:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      max-parallel: 5
+      matrix:
+        os: [windows-latest, macos-latest, ubuntu-latest]
+        tag: ["0.19-pre"]
+
+    steps:
+      - name: delete old assets
+        uses: mknejp/delete-release-assets@v1
+        with:
+          token: ${{ github.token }}
+          tag: ${{ matrix.tag }}
+          assets: FreeCAD*
+          fail-if-no-assets: false
+          fail-if-no-release: false
+
+      - if: matrix.os == 'windows-latest'
+        name: msys2
+        uses: msys2/setup-msys2@v2
+
+      - uses: actions/checkout@v2
+        name: Checkout
+
+      - uses: conda-incubator/setup-miniconda@v2
+        with:
+          auto-update-conda: true
+
+      - if: matrix.os == 'macos-latest'
+        name: update mac
+        run: |
+          brew update;
+
+      - if: matrix.os == 'ubuntu-latest'
+        name: update linux
+        run: |
+          sudo apt-get update -qq && sudo apt-get install -y desktop-file-utils jq zsync;
+          apt-get download libc6;
+          dpkg -x libc6*.deb libc6;
+          curl -LO https://raw.githubusercontent.com/AppImage/AppImages/master/pkg2appimage;
+          curl -LO https://github.com/AppImage/AppImageKit/releases/download/continuous/appimagetool-x86_64.AppImage;
+          chmod a+x appimagetool-x86_64.AppImage;
+
+      - if: matrix.os != 'windows-latest'
+        name: install conda dependencies for unix
+        run: |
+          conda install p7zip sed curl -y -c conda-forge;
+          conda config --show channels;
+
+      - if: matrix.os == 'windows-latest'
+        name: install conda dependencies for windows
+        run: |
+          conda install curl -y -c conda-forge;
+
+      - name: get docs
+        run: curl -LO "https://github.com/FreeCAD/FreeCAD/releases/download/0.18/FreeCAD.0_18.Offline.Doc.7z"
+
+      - name: extract docs
+        run: 7z x FreeCAD.0_18.Offline.Doc.7z
+
+      - if: matrix.os == 'macos-latest'
+        name: create osx bundle
+        run: "bash ./create_bundle.sh"
+        working-directory: conda/osx
+
+      - if: matrix.os == 'ubuntu-latest'
+        name: create linux bundle
+        run: "bash ./create_bundle.sh"
+        working-directory: conda/linux
+
+      - if: matrix.os == 'windows-latest'
+        name: create windows bundle
+        run: "call create_bundle.bat"
+        shell: cmd
+        working-directory: conda\win
+
+      - if: matrix.os == 'ubuntu-latest'
+        name: Upload binaries to release
+        uses: svenstaro/upload-release-action@v2
+        with:
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          file: conda/linux/FreeCAD*
+          tag: ${{ matrix.tag }}
+          overwrite: true
+          file_glob: true
+
+      - if: matrix.os == 'macos-latest'
+        name: Upload binaries to release
+        uses: svenstaro/upload-release-action@v2
+        with:
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          file: conda/osx/FreeCAD*
+          tag: ${{ matrix.tag }}
+          overwrite: true
+          file_glob: true
+          
+      - if: matrix.os == 'windows-latest'
+        name: Upload binaries to release
+        uses: svenstaro/upload-release-action@v2
+        with:
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          file: conda\win\FreeCAD*
+          tag: ${{ matrix.tag }}
+          overwrite: true
+          file_glob: true

@@ -3,7 +3,7 @@ set copy_dir="FreeCAD_Conda_Build"
 
 mkdir %copy_dir%
 
-conda create ^
+call conda create ^
  -p %conda_env% ^
  freecad libredwg calculix gitpython gmsh netgen=6.2.1808 ^
  numpy matplotlib-base scipy=1.4.1 sympy pandas pythonocc-core six ^
@@ -15,8 +15,6 @@ conda create ^
  -c freecad/label/dev ^
  -c conda-forge ^
  -y
-
-if errorlevel 1 exit 1
 
 REM Copy Conda's Python and (U)CRT to FreeCAD/bin
 robocopy %conda_env%\DLLs %copy_dir%\bin\DLLs /S /MT:%NUMBER_OF_PROCESSORS% > nul
