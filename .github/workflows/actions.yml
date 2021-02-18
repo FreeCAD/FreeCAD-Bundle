@@ -12,6 +12,24 @@ jobs:
         tag: ["0.19-pre"]
 
     steps:
+      - if: matrix.os == 'windows-latest'
+        name: declare variables
+        env:
+          filepath: conda\win\
+          command: "call create_bundle.bat"
+      
+      - if: matrix.os == 'ubuntu-latest'
+        name: declare variables
+        env:
+          filepath: conda/linux/
+          commands: "bash ./create_bundle.sh"
+      
+      - if: matrix.os == 'macos-latest'
+        name: declare variables
+        env:
+          filepath: conda/osx/
+          command: "bash ./create_bundle.sh"
+
       - name: delete old assets
         uses: mknejp/delete-release-assets@v1
         with:
@@ -64,48 +82,16 @@ jobs:
       - name: extract docs
         run: 7z x FreeCAD.0_18.Offline.Doc.7z
 
-      - if: matrix.os == 'macos-latest'
-        name: create osx bundle
-        run: "bash ./create_bundle.sh"
-        working-directory: conda/osx
-
-      - if: matrix.os == 'ubuntu-latest'
-        name: create linux bundle
-        run: "bash ./create_bundle.sh"
-        working-directory: conda/linux
-
-      - if: matrix.os == 'windows-latest'
-        name: create windows bundle
-        run: "call create_bundle.bat"
+      - name: create bundle
+        run: ${{ env.command }}
         shell: cmd
-        working-directory: conda\win
+        working-directory: ${{ env.filepath }}
 
-      - if: matrix.os == 'ubuntu-latest'
-        name: Upload binaries to release
+      - name: Upload binaries to release
         uses: svenstaro/upload-release-action@v2
         with:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
-          file: conda/linux/FreeCAD*
-          tag: ${{ matrix.tag }}
-          overwrite: true
-          file_glob: true
-
-      - if: matrix.os == 'macos-latest'
-        name: Upload binaries to release
-        uses: svenstaro/upload-release-action@v2
-        with:
-          repo_token: ${{ secrets.GITHUB_TOKEN }}
-          file: conda/osx/FreeCAD*
-          tag: ${{ matrix.tag }}
-          overwrite: true
-          file_glob: true
-          
-      - if: matrix.os == 'windows-latest'
-        name: Upload binaries to release
-        uses: svenstaro/upload-release-action@v2
-        with:
-          repo_token: ${{ secrets.GITHUB_TOKEN }}
-          file: conda\win\FreeCAD*
+          file: ${{ env.filepath }}FreeCAD*
           tag: ${{ matrix.tag }}
           overwrite: true
           file_glob: true
