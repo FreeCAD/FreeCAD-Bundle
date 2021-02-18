@@ -9,8 +9,16 @@ jobs:
       max-parallel: 5
       matrix:
         os: [windows-latest, macos-latest, ubuntu-latest]
+        tag: [0.19-pre]
 
     steps:
+      - name: delete old assets
+        uses: mknejp/delete-release-assets@v1
+        with:
+          token: ${{ github.token }}
+          tag: matrix.tag # This may also be of the form 'refs/tags/staging'
+          assets: FreeCAD*
+
       - if: matrix.os == 'windows-latest'
         name: msys2
         uses: msys2/setup-msys2@v2
