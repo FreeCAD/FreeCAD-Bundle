@@ -18,6 +18,8 @@ jobs:
           token: ${{ github.token }}
           tag: ${{ matrix.tag }} # This may also be of the form 'refs/tags/staging'
           assets: FreeCAD*
+          fail-if-no-assets: false
+          fail-if-no-release: false
 
       - if: matrix.os == 'windows-latest'
         name: msys2
