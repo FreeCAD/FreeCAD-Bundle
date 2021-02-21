@@ -1,6 +1,13 @@
 name: FreeCAD bundeling
-
-on: [push]
+on:
+  schedule:
+   - cron: "0 13 * * 6"
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
 
 jobs:
   build-bundles:
