@@ -4,10 +4,10 @@ on:
    - cron: "0 13 * * 6"
   push:
     branches:
-      - main
+      - master
   pull_request:
     branches:
-      - main
+      - master
 
 jobs:
   build-bundles:
