@@ -13,7 +13,7 @@ jobs:
   build-bundles:
     runs-on: ${{ matrix.os }}
     strategy:
-      max-parallel: 5
+      max-parallel: 1
       matrix:
         os: [windows-latest, macos-latest, ubuntu-latest]
         tag: ["0.19-pre"]
