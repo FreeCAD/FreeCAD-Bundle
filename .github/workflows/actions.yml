@@ -17,6 +17,8 @@ jobs:
       matrix:
         os: [windows-latest, macos-latest, ubuntu-latest]
         tag: ["0.19-pre"]
+    env:
+        DEPLOY_RELEASE: ${{ matrix.tag }}
 
     steps:
       - if: matrix.os == 'macos-latest'
