@@ -16,7 +16,7 @@ jobs:
       max-parallel: 3
       matrix:
         os: [windows-latest, macos-latest, ubuntu-latest]
-        tag: ["0.19-pre"]
+        tag: ["weekly-builds"]
     env:
         DEPLOY_RELEASE: ${{ matrix.tag }}
 
