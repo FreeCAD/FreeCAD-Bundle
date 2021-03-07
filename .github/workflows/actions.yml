@@ -17,8 +17,6 @@ jobs:
       matrix:
         os: [windows-latest, macos-latest, ubuntu-latest]
         tag: ["weekly-builds"]
-    env:
-        DEPLOY_RELEASE: ${{ matrix.tag }}
 
     steps:
       - if: matrix.os == 'macos-latest'
@@ -103,6 +101,8 @@ jobs:
         name: create linux bundle
         run: "bash ./create_bundle.sh"
         working-directory: conda/linux
+        env:
+            DEPLOY_RELEASE: ${{ matrix.tag }}
 
       - if: matrix.os == 'windows-latest'
         name: create windows bundle
