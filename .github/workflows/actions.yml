@@ -96,6 +96,8 @@ jobs:
         name: create osx bundle
         run: "bash ./create_bundle.sh"
         working-directory: conda/osx
+        env:
+            DEPLOY_RELEASE: ${{ matrix.tag }}
 
       - if: matrix.os == 'ubuntu-latest'
         name: create linux bundle
@@ -109,6 +111,8 @@ jobs:
         run: "call create_bundle.bat"
         shell: cmd
         working-directory: conda\win
+        env:
+            DEPLOY_RELEASE: ${{ matrix.tag }}
 
       - if: matrix.os == 'ubuntu-latest'
         name: Upload binaries to release
