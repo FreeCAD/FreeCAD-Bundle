@@ -17,4 +17,7 @@ version_info = version_info.decode("utf-8").split(" ")
 dev_version = version_info[1]
 revision = version_info[3]
 
+if os.env["DEPLOY_RELEASE"] == "weekly-builds":
+	dev_version = "weekly-builds"
+
 print("FreeCAD_{}-{}-{}-Conda_glibc2.12-x86_64".format(dev_version, revision, system))
