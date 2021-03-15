@@ -54,7 +54,7 @@ copy C:\Users\travis\build\FreeCAD\FreeCAD-AppImage\conda\modifications\ctx_mp_p
 set /p fcver=<tempver.txt
 
 IF "%DEPLOY_RELEASE%"=="weekly-builds" (
-    set fcver="weekly-builds"
+    set fcver=weekly-builds
 )
 ELSE (
     set fcver=%fcver:~0,10%
