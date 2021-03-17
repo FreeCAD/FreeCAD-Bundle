@@ -12,8 +12,8 @@ call conda create ^
  lxml xlutils olefile requests ^
  blinker opencv qt.py nine docutils ^
  --copy ^
- -c freecad/label/dev ^
  -c conda-forge ^
+ -c freecad/label/dev ^
  -y
 
 REM Copy Conda's Python and (U)CRT to FreeCAD/bin

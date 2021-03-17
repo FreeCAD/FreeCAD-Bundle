@@ -8,8 +8,8 @@ conda create \
     lxml xlutils olefile requests openglider \
     blinker opencv qt.py nine docutils \
     --copy \
-    -c freecad/label/dev \
     -c conda-forge \
+    -c freecad/label/dev \
     -y
 
 conda run -p AppDir/usr pip install https://github.com/looooo/freecad.appimage_updater/archive/master.zip

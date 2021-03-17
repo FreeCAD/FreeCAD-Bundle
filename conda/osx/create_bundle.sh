@@ -8,8 +8,8 @@ conda create \
     lxml xlutils olefile requests \
     blinker opencv qt.py nine docutils \
     --copy \
-    -c freecad/label/dev \
     -c conda-forge \
+    -c freecad/label/dev \
     -y
 
 # uninstall some packages not needed
