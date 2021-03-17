@@ -36,6 +36,9 @@ cp APP/FreeCAD.app/Contents/Resources/bin_tmp/assistant APP/FreeCAD.app/Contents
 sed -i "" '1s|.*|#!/usr/bin/env python|' APP/FreeCAD.app/Contents/Resources/bin/pip
 rm -rf APP/FreeCAD.app/Contents/Resources/bin_tmp
 
+# add documentation
+cp ../../doc/* APP/FreeCAD.app/Contents/Resources/doc
+
 #copy qt.conf
 cp qt.conf APP/FreeCAD.app/Contents/Resources/bin/
 cp qt.conf APP/FreeCAD.app/Contents/Resources/libexec/
