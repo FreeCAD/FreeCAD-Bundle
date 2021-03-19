@@ -37,8 +37,8 @@ sed -i "" '1s|.*|#!/usr/bin/env python|' APP/FreeCAD.app/Contents/Resources/bin/
 rm -rf APP/FreeCAD.app/Contents/Resources/bin_tmp
 
 # add documentation
-mkdir -p APP/FreeCAD.app/Contents/Resources/share/doc
-cp ../../doc/* APP/FreeCAD.app/Contents/Resources/share/doc
+mkdir -p APP/FreeCAD.app/Contents/Resources/share/doc/FreeCAD
+cp ../../doc/* APP/FreeCAD.app/Contents/Resources/share/doc/FreeCAD
 
 #copy qt.conf
 cp qt.conf APP/FreeCAD.app/Contents/Resources/bin/
