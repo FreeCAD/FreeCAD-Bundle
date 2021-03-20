@@ -60,9 +60,8 @@ find . -name "*.cmake" -type f -delete
 # Add libnsl (Fedora 28 and up)
 cp ../../libc6/lib/x86_64-linux-gnu/libnsl* AppDir/usr/lib/
 
-# Add documentation
-mkdir -p AppDir/usr/share/doc/FreeCAD/
-cp ../../doc/* AppDir/usr/share/doc/FreeCAD/
+# add documentation
+cp ../../doc/* AppDir/usr/doc/
 
 # mpmath fix:
 rm AppDir/usr/lib/python3.8/site-packages/mpmath/ctx_mp_python.py
