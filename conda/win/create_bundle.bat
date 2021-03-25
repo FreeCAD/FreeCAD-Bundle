@@ -50,15 +50,13 @@ copy ssl-patch.py %copy_dir%\bin\Lib\ssl.py
 rename %copy_dir%\bin\Lib\site-packages\mpmath\ctx_mp_python.py ctx_mp_python-orig.py
 copy C:\Users\travis\build\FreeCAD\FreeCAD-AppImage\conda\modifications\ctx_mp_python.py %copy_dir%\bin\Lib\site-packages\mpmath\ctx_mp_python.py
 
+if "%DEPLOY_RELEASE%"=="weekly-builds" (
+%copy_dir%\bin\python.exe -c "import FreeCAD;print("weekly-builds-" + FreeCAD.Version()[2])" > tempver.txt
+) else (
 %copy_dir%\bin\python.exe -c "import FreeCAD;print((FreeCAD.Version()[0]) +'.' + (FreeCAD.Version()[1]) +'.' + (FreeCAD.Version()[2]))" > tempver.txt
+)
 set /p fcver=<tempver.txt
 
-IF "%DEPLOY_RELEASE%"=="weekly-builds" (
-    set fcver=weekly-builds
-)
-ELSE (
-    set fcver=%fcver:~0,10%
-)
 echo %fcver%
 cd %copy_dir%\..
 ren %copy_dir% FreeCAD_%fcver%-Win-Conda_vc14.x-x86_64
