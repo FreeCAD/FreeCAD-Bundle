@@ -1,9 +1,9 @@
 # assume we have a working conda available
 conda create \
     -p AppDir/usr \
-    freecad calculix blas=*=openblas gitpython netgen=6.2.1808 \
-    numpy matplotlib-base scipy=1.4.1 sympy pandas pythonocc-core six \
-    pyyaml opencamlib ifcopenshell boost-cpp=1.72 \
+    freecad occt=7.5 vtk=9 calculix blas=*=openblas gitpython \
+    numpy matplotlib-base scipy sympy pandas six \
+    pyyaml opencamlib ifcopenshell  \
     freecad.asm3 libredwg pycollada appimage-updater-bridge \
     lxml xlutils olefile requests openglider \
     blinker opencv qt.py nine docutils \
