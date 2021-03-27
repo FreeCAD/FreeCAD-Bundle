@@ -25,7 +25,7 @@ jobs:
         with:
           token: ${{ github.token }}
           tag: ${{ matrix.tag }}
-          assets: FreeCAD*macOS*.dmg
+          assets: FreeCAD*macOS*
           fail-if-no-assets: false
           fail-if-no-release: false 
 
@@ -35,7 +35,7 @@ jobs:
         with:
           token: ${{ github.token }}
           tag: ${{ matrix.tag }}
-          assets: FreeCAD*.AppImgage*
+          assets: FreeCAD*AppImgage*
           fail-if-no-assets: false
           fail-if-no-release: false
 
