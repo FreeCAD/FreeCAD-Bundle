@@ -3,7 +3,7 @@ conda create \
     -p APP/FreeCAD.app/Contents/Resources \
     freecad occt=7.5 vtk=9 calculix blas=*=openblas gitpython \
     numpy matplotlib-base scipy sympy pandas six \
-    pyyaml jinja2 opencamlib ifcopenshell \
+    pyyaml jinja2 opencamlib ifcopenshell pythonocc-core \
     freecad.asm3 libredwg pycollada openglider \
     lxml xlutils olefile requests \
     blinker opencv qt.py nine docutils \
@@ -39,6 +39,13 @@ rm -rf APP/FreeCAD.app/Contents/Resources/bin_tmp
 #copy qt.conf
 cp qt.conf APP/FreeCAD.app/Contents/Resources/bin/
 cp qt.conf APP/FreeCAD.app/Contents/Resources/libexec/
+
+# add documentation
+if [ ${ADD_DOCS} ]
+then
+    mkdir -p APP/FreeCAD.app/Contents/Resources/share/doc/FreeCAD
+    cp ../../doc/* APP/FreeCAD.app/Contents/Resources/share/doc/FreeCAD
+fi
 
 # mpmath fix:
 rm APP/FreeCAD.app/Contents/Resources/lib/python3.8/site-packages/mpmath/ctx_mp_python.py

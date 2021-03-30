@@ -3,7 +3,7 @@ conda create \
     -p AppDir/usr \
     freecad occt=7.5 vtk=9 calculix blas=*=openblas gitpython \
     numpy matplotlib-base scipy sympy pandas six \
-    pyyaml opencamlib ifcopenshell  \
+    pyyaml opencamlib ifcopenshell pythonocc-core \
     freecad.asm3 libredwg pycollada appimage-updater-bridge \
     lxml xlutils olefile requests openglider \
     blinker opencv qt.py nine docutils \
@@ -60,9 +60,9 @@ find . -name "*.cmake" -type f -delete
 # Add libnsl (Fedora 28 and up)
 cp ../../libc6/lib/x86_64-linux-gnu/libnsl* AppDir/usr/lib/
 
-# Add documentation
-mkdir -p AppDir/usr/share/doc/FreeCAD/
-cp ../../doc/* AppDir/usr/share/doc/FreeCAD/
+# add documentation
+# mkdir -p AppDir/usr/share/doc/FreeCAD
+# cp ../../doc/* AppDir/usr/share/doc/FreeCAD
 
 # mpmath fix:
 rm AppDir/usr/lib/python3.8/site-packages/mpmath/ctx_mp_python.py
