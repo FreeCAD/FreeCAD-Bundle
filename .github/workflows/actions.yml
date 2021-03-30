@@ -60,7 +60,8 @@ jobs:
         run: |
           conda install curl -y -c conda-forge;
 
-      - name: get docs
+      - if: ${{ ADD_DOCS }}
+        name: get docs
         run: curl -LO "https://github.com/FreeCAD/FreeCAD/releases/download/0.18/FreeCAD.0_18.Offline.Doc.7z"
 
       - name: extract docs

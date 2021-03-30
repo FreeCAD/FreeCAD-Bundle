@@ -61,8 +61,11 @@ find . -name "*.cmake" -type f -delete
 cp ../../libc6/lib/x86_64-linux-gnu/libnsl* AppDir/usr/lib/
 
 # add documentation
-# mkdir -p AppDir/usr/share/doc/FreeCAD
-# cp ../../doc/* AppDir/usr/share/doc/FreeCAD
+if [ ${ADD_DOCS} ]
+then
+  mkdir -p AppDir/usr/share/doc/FreeCAD
+  cp ../../doc/* AppDir/usr/share/doc/FreeCAD
+fi
 
 # mpmath fix:
 rm AppDir/usr/lib/python3.8/site-packages/mpmath/ctx_mp_python.py
