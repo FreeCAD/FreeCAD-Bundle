@@ -19,35 +19,6 @@ jobs:
         tag: ["weekly-builds"]
 
     steps:
-      - if: matrix.os == 'macos-latest'
-        name: delete old mac assets
-        uses: mknejp/delete-release-assets@v1
-        with:
-          token: ${{ github.token }}
-          tag: ${{ matrix.tag }}
-          assets: FreeCAD*macOS*
-          fail-if-no-assets: false
-          fail-if-no-release: false 
-
-      - if: matrix.os == 'ubuntu-latest'
-        name: delete old linux assets
-        uses: mknejp/delete-release-assets@v1
-        with:
-          token: ${{ github.token }}
-          tag: ${{ matrix.tag }}
-          assets: FreeCAD*Linux*
-          fail-if-no-assets: false
-          fail-if-no-release: false
-
-      - if: matrix.os == 'windows-latest'
-        name: delete old win assets
-        uses: mknejp/delete-release-assets@v1
-        with:
-          token: ${{ github.token }}
-          tag: ${{ matrix.tag }}
-          assets: FreeCAD*Win-Conda*
-          fail-if-no-assets: false
-          fail-if-no-release: false
 
       - if: matrix.os == 'windows-latest'
         name: msys2
@@ -113,6 +84,36 @@ jobs:
         working-directory: conda\win
         env:
             DEPLOY_RELEASE: ${{ matrix.tag }}
+
+      - if: matrix.os == 'macos-latest'
+        name: delete old mac assets
+        uses: mknejp/delete-release-assets@v1
+        with:
+          token: ${{ github.token }}
+          tag: ${{ matrix.tag }}
+          assets: FreeCAD*macOS*
+          fail-if-no-assets: false
+          fail-if-no-release: false 
+
+      - if: matrix.os == 'ubuntu-latest'
+        name: delete old linux assets
+        uses: mknejp/delete-release-assets@v1
+        with:
+          token: ${{ github.token }}
+          tag: ${{ matrix.tag }}
+          assets: FreeCAD*Linux*
+          fail-if-no-assets: false
+          fail-if-no-release: false
+
+      - if: matrix.os == 'windows-latest'
+        name: delete old win assets
+        uses: mknejp/delete-release-assets@v1
+        with:
+          token: ${{ github.token }}
+          tag: ${{ matrix.tag }}
+          assets: FreeCAD*Win-Conda*
+          fail-if-no-assets: false
+          fail-if-no-release: false
 
       - if: matrix.os == 'ubuntu-latest'
         name: Upload binaries to release
