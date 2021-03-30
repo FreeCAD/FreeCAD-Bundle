@@ -16,9 +16,8 @@ jobs:
       max-parallel: 3
       matrix:
         os: [windows-latest, macos-latest, ubuntu-latest]
-    env:
-      ADD_DOCS: 0
-      DEPLOY_RELEASE: "weekly-builds"
+        tag: ["weekly-builds"]
+        docs: ["0"]
 
     steps:
       - if: matrix.os == 'windows-latest'
@@ -58,7 +57,7 @@ jobs:
         run: |
           conda install curl -y -c conda-forge;
 
-      - if: ${{ ADD_DOCS }}
+      - if: ${{ matrix.docs }}
         name: get docs
         run: curl -LO "https://github.com/FreeCAD/FreeCAD/releases/download/0.18/FreeCAD.0_18.Offline.Doc.7z"
 
@@ -69,24 +68,33 @@ jobs:
         name: create osx bundle
         run: "bash ./create_bundle.sh"
         working-directory: conda/osx
+        env:
+            DEPLOY_RELEASE: ${{ matrix.tag }}
+            ADD_DOCS: ${{ matrix.docs }}
 
       - if: matrix.os == 'ubuntu-latest'
         name: create linux bundle
         run: "bash ./create_bundle.sh"
         working-directory: conda/linux
+        env:
+            DEPLOY_RELEASE: ${{ matrix.tag }}
+            ADD_DOCS: ${{ matrix.docs }}
 
       - if: matrix.os == 'windows-latest'
         name: create windows bundle
         run: "call create_bundle.bat"
         shell: cmd
         working-directory: conda\win
+        env:
+            DEPLOY_RELEASE: ${{ matrix.tag }}
+            ADD_DOCS: ${{ matrix.docs }}
 
       - if: matrix.os == 'macos-latest'
         name: delete old mac assets
         uses: mknejp/delete-release-assets@v1
         with:
           token: ${{ github.token }}
-          tag: ${{ DEPLOY_RELEASE }}
+          tag: ${{ matrix.tag }}
           assets: FreeCAD*macOS*
           fail-if-no-assets: false
           fail-if-no-release: false 
@@ -96,7 +104,7 @@ jobs:
         uses: mknejp/delete-release-assets@v1
         with:
           token: ${{ github.token }}
-          tag: ${{ DEPLOY_RELEASE }}
+          tag: ${{ matrix.tag }}
           assets: FreeCAD*Linux*
           fail-if-no-assets: false
           fail-if-no-release: false
@@ -106,7 +114,7 @@ jobs:
         uses: mknejp/delete-release-assets@v1
         with:
           token: ${{ github.token }}
-          tag: ${{ DEPLOY_RELEASE }}
+          tag: ${{ matrix.tag }}
           assets: FreeCAD*Win-Conda*
           fail-if-no-assets: false
           fail-if-no-release: false
@@ -117,7 +125,7 @@ jobs:
         with:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           file: conda/linux/FreeCAD*
-          tag: ${{ DEPLOY_RELEASE }}
+          tag: ${{ matrix.tag }}
           overwrite: true
           file_glob: true
 
@@ -127,7 +135,7 @@ jobs:
         with:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           file: conda/osx/FreeCAD*
-          tag: ${{ DEPLOY_RELEASE }}
+          tag: ${{ matrix.tag }}
           overwrite: true
           file_glob: true
           
@@ -137,6 +145,6 @@ jobs:
         with:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           file: conda\win\FreeCAD*
-          tag: ${{ DEPLOY_RELEASE }}
+          tag: ${{ matrix.tag }}
           overwrite: true
           file_glob: true
