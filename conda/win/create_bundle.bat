@@ -42,7 +42,7 @@ robocopy %conda_env%\Library\bin FreeCAD* %copy_dir%\bin /XF *.pdb /MT:%NUMBER_O
 robocopy %conda_env%\Library\data %copy_dir%\data /XF *.txt /S /MT:%NUMBER_OF_PROCESSORS% > nul
 REM robocopy %conda_env%\Library\doc\ *.html %copy_dir%\doc MT:%NUMBER_OF_PROCESSORS% > nul
 
-if %ADD_DOCS% (
+if %ADD_DOCS% == 1 (
 mkdir -p %copy_dir%\doc
 robocopy ..\..\doc %copy_dir%\doc /S /XD __pycache__ /MT:%NUMBER_OF_PROCESSORS% > nul )
 
