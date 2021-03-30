@@ -29,7 +29,7 @@ jobs:
         name: Checkout
 
       - uses: conda-incubator/setup-miniconda@v2
-        with:btw. I tested the appimage-updater tool for the freecad-appimage today: nice job .
+        with:
           auto-update-conda: true
 
       - if: matrix.os == 'macos-latest'
