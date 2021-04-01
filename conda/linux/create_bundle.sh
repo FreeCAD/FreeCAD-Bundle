@@ -2,10 +2,10 @@
 conda create \
     -p AppDir/usr \
     freecad=0.19.1 calculix blas=*=openblas gitpython netgen=6.2.1808 \
-    numpy matplotlib-base scipy=1.4.1 sympy pandas pythonocc-core six \
+    numpy matplotlib-base scipy=1.4.1 six \
     pyyaml opencamlib ifcopenshell boost-cpp=1.72 \
-    freecad.asm3 libredwg pycollada appimage-updater-bridge \
-    lxml xlutils olefile requests openglider \
+    libredwg pycollada appimage-updater-bridge \
+    lxml xlutils olefile requests \
     blinker opencv qt.py nine docutils \
     --copy \
     -c conda-forge \
