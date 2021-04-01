@@ -71,7 +71,7 @@ cp ../modifications/ctx_mp_python.py AppDir/usr/lib/python3.8/site-packages/mpma
 # create the appimage
 chmod a+x ./AppDir/AppRun
 ARCH=x86_64 ../../appimagetool-x86_64.AppImage \
-  -u "gh-releases-zsync|FreeCAD|FreeCAD-Appimage|$DEPLOY_RELEASE|FreeCAD*glibc2.12-x86_64.AppImage.zsync" \
+  -u "gh-releases-zsync|FreeCAD|FreeCAD-Appimage|latest|FreeCAD*glibc2.12-x86_64.AppImage.zsync" \
   AppDir  ${version_name}.AppImage
 
 # create hash
