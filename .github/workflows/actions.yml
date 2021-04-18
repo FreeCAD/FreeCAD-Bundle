@@ -1,7 +1,7 @@
 name: FreeCAD bundeling
 on:
   schedule:
-   - cron: "0 13 * * 6"
+   - cron: "0 13 * * 0"
   push:
     branches:
       - "*"
