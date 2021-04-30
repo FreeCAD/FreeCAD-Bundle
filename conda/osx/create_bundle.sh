@@ -20,6 +20,8 @@ version_name=$(conda run -p APP/FreeCAD.app/Contents/Resources python get_freeca
 conda list -p APP/FreeCAD.app/Contents/Resources > APP/FreeCAD.app/Contents/packages.txt
 sed -i "1s/.*/\n\nLIST OF PACKAGES:/"  APP/FreeCAD.app/Contents/packages.txt
 
+# add a bundle Identifier
+/usr/libexec/PlistBuddy -c "Set :CFBundleIdentifier 'org.freecadteam.freecad'" "APP/FreeCAD.app/Contents/Info.plist"
 
 # delete unnecessary stuff
 rm -rf APP/FreeCAD.app/Contents/Resources/include
