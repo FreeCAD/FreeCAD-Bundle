@@ -20,20 +20,22 @@ jobs:
       - name: Run a multi-line script
         run: |
           git clone https://github.com/FreeCAD/FreeCAD
-          touch version.txt
+          touch freecad_version.txt
           cd FreeCAD
-          echo "commit-number: " >> ../version.txt
-          git rev-list --count master >> ../version.txt
-          echo "branch: " >> ../version.txt
-          git branch >> ../version.txt
-          echo "date: " >> ../version.txt
-          date +"%Y/%m/%d">> ../version.txt
+          echo "commit-number: " >> ../freecad_version.txt
+          git rev-list --count master >> ../freecad_version.txt
+          echo "branch: " >> ../freecad_version.txt
+          git branch >> ../freecad_version.txt
+          echo "date: " >> ../freecad_version.txt
+          date +"%Y/%m/%d">> ../freecad_version.txt
+          cd ..
+          tar -czvf freecad_source.tar.gz FreeCAD
           
       - name: Upload binaries to release
         uses: svenstaro/upload-release-action@v2
         with:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
-          file: version.txt
+          file: freecad*
           tag: ${{ matrix.tag }}
           overwrite: true
           file_glob: true
