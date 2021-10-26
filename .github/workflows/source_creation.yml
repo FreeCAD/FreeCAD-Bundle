@@ -22,14 +22,10 @@ jobs:
         run: |
           git clone https://github.com/FreeCAD/FreeCAD
           touch freecad_version.txt
+          wget https://raw.githubusercontent.com/FreeCAD/FreeCAD-Bundle/master/make_version_file.py
           cd FreeCAD
           git checkout ${{ matrix.branch }}
-          echo "commit-number: " >> ../freecad_version.txt
-          git rev-list --count master >> ../freecad_version.txt
-          echo "branch: " >> ../freecad_version.txt
-          git branch >> ../freecad_version.txt
-          echo "date: " >> ../freecad_version.txt
-          date +"%Y/%m/%d">> ../freecad_version.txt
+          python ../make_version_file.py ../freecad_version.txt
           git archive ${{ matrix.branch }} -o ../freecad_source.tar.gz
           
       - name: Upload binaries to release
