@@ -24,10 +24,10 @@ jobs:
           cd FreeCAD
           echo "commit-number: " >> ../version.txt
           git rev-list --count master >> ../version.txt
-          echo "\nbranch: " >> ../version.txt
+          echo "branch: " >> ../version.txt
           git branch >> ../version.txt
-          echo "\ndate: " >> ../version.txt
-          date +"Year: %Y, Month: %m, Day: %d" >> ../version.txt
+          echo "date: " >> ../version.txt
+          date +"%Y/%m/%d">> ../version.txt
           
       - name: Upload binaries to release
         uses: svenstaro/upload-release-action@v2
