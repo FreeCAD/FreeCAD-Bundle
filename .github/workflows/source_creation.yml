@@ -21,9 +21,9 @@ jobs:
       - name: Run a multi-line script
         run: |
           git clone https://github.com/FreeCAD/FreeCAD
-          git checkout ${{ matrix.branch }}
           touch freecad_version.txt
           cd FreeCAD
+          git checkout ${{ matrix.branch }}
           echo "commit-number: " >> ../freecad_version.txt
           git rev-list --count master >> ../freecad_version.txt
           echo "branch: " >> ../freecad_version.txt
