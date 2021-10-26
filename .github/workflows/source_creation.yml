@@ -30,8 +30,7 @@ jobs:
           git branch >> ../freecad_version.txt
           echo "date: " >> ../freecad_version.txt
           date +"%Y/%m/%d">> ../freecad_version.txt
-          cd ..
-          tar -czvf freecad_source.tar.gz FreeCAD
+          git archive ${{ matrix.branch }} -o ../freecad_source.tar.gz
           
       - name: Upload binaries to release
         uses: svenstaro/upload-release-action@v2
