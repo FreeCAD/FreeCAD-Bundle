@@ -40,3 +40,5 @@ with open("src/Build/Version.h.cmake", "r+") as f:
 
 p5 = subprocess.Popen(["git", "commit" "-m", "add git information"], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
 out5, err5 = p5.communicate()
+print(out5)
+print(err5)
