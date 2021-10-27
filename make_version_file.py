@@ -35,11 +35,18 @@ with open("src/Build/Version.h.cmake", "r+") as f:
 	text = f.read()
 	text = text.replace("${PACKAGE_WCREF}", rev_number)
 	text = text.replace("${PACKAGE_WCDATE}", f"Hash: ({commit_hash}), Date: {commit_date}")
-	print(text)
 	f.write(text)
+with open("src/Build/Version.h.cmake", "r") as f:
+	print(f.read())
 
-p5 = subprocess.Popen(["git", "-c", "user.name='ghaction'", "-c", "user.email='gh@action.org'",
+p5 = subprocess.Popen(["git", "add", "src/Build/Version.h.cmake", stdout=subprocess.PIPE, stderr=subprocess.PIPE
+p6 = subprocess.Popen(["git", "-c", "user.name='ghaction'", "-c", "user.email='gh@action.org'",
 		       "commit", "-m", "add git information"], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+
 out5, err5 = p5.communicate()
-print(out5)
-print(err5)
+out6, err6 = p6.communicate()
+		       
+print(out5.decode())
+print(err5.decode())		       
+print(out6.decode())
+print(err6.decode())
