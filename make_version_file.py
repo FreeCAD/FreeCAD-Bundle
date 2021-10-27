@@ -20,15 +20,19 @@ out4, err4 = p4.communicate()
 rev_number = out1.decode()
 branch_name = out2.decode().split(" ")[-1]
 commit_date = out3.decode().replace("-", "/").split(" ")
-commit_date = commit_date[0] + " " + commit_date[1] + "\n"
+commit_date = commit_date[0] + " " + commit_date[1]
 commit_hash = out4.decode()
 
+rev_number = rev_number.replace("\n", "")
+branch_name = branch_name.replace("\n", "")
+commit_date = commit_date.replace("\n", "")
+commit_hash = commit_hash.replace("\n", "")
 
 with open(sys.argv[1], "w") as f:
-	f.write(f"rev_number: {rev_number}")
-	f.write(f"branch_name: {branch_name}")
-	f.write(f"commit_date: {commit_date}")
-	f.write(f"commit_hash: {commit_hash}")
+	f.write(f"rev_number: {rev_number}\n")
+	f.write(f"branch_name: {branch_name}\n")
+	f.write(f"commit_date: {commit_date}\n")
+	f.write(f"commit_hash: {commit_hash}\n")
 	
 # replace numbers in version.h.cmake file
 with open("src/Build/Version.h.cmake", "r+") as f:
