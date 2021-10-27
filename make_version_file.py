@@ -38,7 +38,9 @@ with open("src/Build/Version.h.cmake", "r+") as f:
 	print(text)
 	f.write(text)
 
-p5 = subprocess.Popen(["git", "commit", "-m", "add git information"], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+p5 = subprocess.Popen(["git", "-c", "user.name='ghaction'", "-c", "user.email='gh@action.org'",
+		       "commit", "-m", "add git information"], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+git -c user.name='Paul Draper' -c user.email='my@email.org' commit -m
 out5, err5 = p5.communicate()
 print(out5)
 print(err5)
