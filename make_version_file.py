@@ -35,13 +35,13 @@ with open(sys.argv[1], "w") as f:
 	f.write(f"commit_hash: {commit_hash}\n")
 	
 # replace numbers in version.h.cmake file
-with open("src/Build/Version.h.cmake", "r+") as f:
+with open("src/Build/Version.h.cmake", "r") as f:
 	text = f.read()
 	text = text.replace("${PACKAGE_WCREF}", rev_number)
 	text = text.replace("${PACKAGE_WCDATE}", f"Hash: ({commit_hash}), Date: {commit_date}")
+	
+with open("src/Build/Version.h.cmake", "w") as f:
 	f.write(text)
-with open("src/Build/Version.h.cmake", "r") as f:
-	print(f.read())
 
 p5 = subprocess.Popen(["git", "add", "src/Build/Version.h.cmake"], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
 p6 = subprocess.Popen(["git", "-c", "user.name='ghaction'", "-c", "user.email='gh@action.org'",
