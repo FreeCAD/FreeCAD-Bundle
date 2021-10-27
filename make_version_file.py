@@ -9,7 +9,7 @@ import subprocess
 # get number of commits:
 p1 = subprocess.Popen(["git", "rev-list", "--count", "master"], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
 p2 = subprocess.Popen(["git", "branch"], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-p3 = subprocess.Popen(["git", "log", "-1", "--format=%ai"], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+p3 = subprocess.Popen(["git", "log", "-1", "--format=%ci"], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
 p4 = subprocess.Popen(["git", "rev-parse", "--short", "HEAD"], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
 
 out1, err1 = p1.communicate()
@@ -29,4 +29,14 @@ with open(sys.argv[1], "w") as f:
 	f.write(f"branch_name: {branch_name}")
 	f.write(f"commit_date: {commit_date}")
 	f.write(f"commit_hash: {commit_hash}")
+	
+# replace numbers in version.h.cmake file
+with open("src/Build/Version.h.cmake", "rw") as f:
+	text = f.read()
+	text.replace("${PACKAGE_WCREF}", rev_number)
+	text.replace("${PACKAGE_WCDATE}", commit_date)
+	text.replace("${PACKAGE_WCREF}", f"Hash: ({commit_hash}), Date: {commit_date}")
+	f.write(text)
 
+p5 = subprocess.Popen(["git", "commit" "-m", "add git information"], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+out5, err5 = p5.communicate()
