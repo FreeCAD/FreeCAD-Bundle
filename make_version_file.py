@@ -37,8 +37,8 @@ with open(sys.argv[1], "w") as f:
 # replace numbers in version.h.cmake file
 with open("src/Build/Version.h.cmake", "r") as f:
 	text = f.read()
-	text = text.replace("${PACKAGE_WCREF}", rev_number)
-	text = text.replace("${PACKAGE_WCDATE}", f"Hash: ({commit_hash}), Date: {commit_date}")
+	text = text.replace("${PACKAGE_WCREF}", f"{rev_number} (Git))
+	text = text.replace("${PACKAGE_WCDATE}", commit_date)
 	
 with open("src/Build/Version.h.cmake", "w") as f:
 	f.write(text)
