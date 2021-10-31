@@ -7,8 +7,6 @@ import platform
 sys_n_arch = platform.platform()
 sys_n_arch = sys_n_arch.split("-")
 system, arch = sys_n_arch[0], sys_n_arch[4]
-if system in platform_dict:
-    system = platform_dict[system]
 
 version_info = subprocess.check_output("freecadcmd --version", shell=True)
 version_info = version_info.decode("utf-8").split(" ")
