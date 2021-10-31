@@ -3,8 +3,6 @@ import os
 import subprocess
 import platform
 
-platform_dict = {}
-platform_dict["Darwin"] = "OSX"
 
 sys_n_arch = platform.platform()
 sys_n_arch = sys_n_arch.split("-")
@@ -16,6 +14,7 @@ version_info = subprocess.check_output("freecadcmd --version", shell=True)
 version_info = version_info.decode("utf-8").split(" ")
 dev_version = version_info[1]
 revision = version_info[3]
+revision = revision.rstrip("\n")
 
 if os.environ["DEPLOY_RELEASE"] == "weekly-builds":
     dev_version = "weekly-builds"

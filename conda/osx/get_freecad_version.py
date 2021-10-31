@@ -17,6 +17,7 @@ version_info = subprocess.check_output("freecadcmd --version", shell=True)
 version_info = version_info.decode("utf-8").split(" ")
 dev_version = version_info[1]
 revision = version_info[3]
+revision = revision.rstrip("\n")
 
 with open("Info.plist.template") as template_file:
     template_str = template_file.read()
