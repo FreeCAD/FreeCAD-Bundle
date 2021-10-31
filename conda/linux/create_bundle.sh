@@ -20,6 +20,9 @@ conda uninstall -p AppDir/usr gtk2 gdk-pixbuf llvm-tools \
                               clangxx libclang libllvm9 --force -y
 
 version_name=$(conda run -p AppDir/usr python get_freecad_version.py)
+echo "################"
+echo ${version_name}
+echo "################"
 
 conda list -p AppDir/usr > AppDir/packages.txt
 sed -i "1s/.*/\n\nLIST OF PACKAGES:/"  AppDir/packages.txt
