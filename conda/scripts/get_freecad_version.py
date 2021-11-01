@@ -34,5 +34,5 @@ if os.environ["DEPLOY_RELEASE"] == "weekly-builds":
 
 if system == "OSX":
     print("FreeCAD_{}-{}-{}-{}-conda".format(dev_version, revision, system, arch))
-elif system == "linux":
+elif system == "Linux":
     print("FreeCAD_{}-{}-{}-Conda_glibc2.12-x86_64".format(dev_version, revision, system))
