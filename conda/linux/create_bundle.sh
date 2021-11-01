@@ -19,7 +19,7 @@ conda uninstall -p AppDir/usr gtk2 gdk-pixbuf llvm-tools \
                               llvmdev clangdev clang clang-tools \
                               clangxx libclang libllvm9 --force -y
 
-version_name=$(conda run -p AppDir/usr python get_freecad_version.py)
+version_name=$(conda run -p AppDir/usr python ../scripty/get_freecad_version.py)
 echo "################"
 echo ${version_name}
 echo "################"
