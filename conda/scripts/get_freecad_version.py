@@ -2,7 +2,6 @@ import sys
 import os
 import subprocess
 import platform
-import jinja2
 
 platform_dict = {}
 platform_dict["Darwin"] = "OSX"
@@ -20,6 +19,7 @@ revision = version_info[3]
 revision = revision.rstrip("\n")
 
 if system == "OSX":
+    import jinja2
     with open("Info.plist.template") as template_file:
         template_str = template_file.read()
     template = jinja2.Template(template_str)
