@@ -4,16 +4,13 @@ import subprocess
 import platform
 
 platform_dict = {}
-platform_dict["Darwin"] = "OSX"
+platform_dict["macOS"] = "OSX"
 
 sys_n_arch = platform.platform()
 sys_n_arch = sys_n_arch.split("-")
 system, arch = sys_n_arch[0], sys_n_arch[2]
 if system in platform_dict:
     system = platform_dict[system]
-
-print("system: {}".format(system))
-print("arch: {}".format(arch))
 
 version_info = subprocess.check_output("freecadcmd --version", shell=True)
 version_info = version_info.decode("utf-8").split(" ")
@@ -24,7 +21,6 @@ revision = revision.rstrip("\n")
 if system == "OSX":
     import jinja2
     osx_directory = os.path.join(os.path.dirname(__file__), "..", "osx")
-    print("osx directory: {}".format(osx_directory))
     with open(os.path.join(osx_directory, "Info.plist.template")) as template_file:
         template_str = template_file.read()
     template = jinja2.Template(template_str)
