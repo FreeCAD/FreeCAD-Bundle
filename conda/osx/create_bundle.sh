@@ -17,6 +17,10 @@ conda uninstall -p APP/FreeCAD.app/Contents/Resources gtk2 gdk-pixbuf  llvmdev c
 
 version_name=$(conda run -p APP/FreeCAD.app/Contents/Resources python ../scripts/get_freecad_version.py)
 
+echo "######################"
+echo ${version_name}
+echo "######################"
+
 conda list -p APP/FreeCAD.app/Contents/Resources > APP/FreeCAD.app/Contents/packages.txt
 sed -i "1s/.*/\n\nLIST OF PACKAGES:/"  APP/FreeCAD.app/Contents/packages.txt
 
