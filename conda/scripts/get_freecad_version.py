@@ -13,6 +13,7 @@ if system in platform_dict:
     system = platform_dict[system]
 
 print("system: {}".format(system))
+print("arch: {}".format(arch))
 
 version_info = subprocess.check_output("freecadcmd --version", shell=True)
 version_info = version_info.decode("utf-8").split(" ")
