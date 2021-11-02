@@ -20,13 +20,14 @@ revision = revision.rstrip("\n")
 
 if system == "OSX":
     import jinja2
-    directory = os.path.dirname(__file__)
-    with open(os.path.join(directory, "../osx/Info.plist.template")) as template_file:
+    osx_directory = os.path.join(os.path.dirname(__file__), "..", "osx")
+    print("osx directory: {}".format(osx_directory))
+    with open(os.path.join(osx_directory, "Info.plist.template")) as template_file:
         template_str = template_file.read()
     template = jinja2.Template(template_str)
     rendered_str = template.render(FREECAD_VERSION="{}-{}".format(dev_version, revision), 
                                    APPLICATION_MENU_NAME="FreeCAD-{}-{}".format(dev_version, revision))
-    with open(os.path.join(directory, "../osx/APP/FreeCAD.app/Contents/Info.plist"), "w") as rendered_file:
+    with open(os.path.join(osx_directory, "APP", "FreeCAD.app", "Contents", "Info.plist"), "w") as rendered_file:
         rendered_file.write(rendered_str)
 
 
