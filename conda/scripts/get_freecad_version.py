@@ -12,6 +12,8 @@ system, arch = sys_n_arch[0], sys_n_arch[2]
 if system in platform_dict:
     system = platform_dict[system]
 
+print("system: {}".format(system))
+
 version_info = subprocess.check_output("freecadcmd --version", shell=True)
 version_info = version_info.decode("utf-8").split(" ")
 dev_version = version_info[1]
