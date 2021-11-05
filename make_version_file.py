@@ -43,14 +43,10 @@ with open("src/Build/Version.h.cmake", "r") as f:
 with open("src/Build/Version.h.cmake", "w") as f:
 	f.write(text)
 
-p5 = subprocess.Popen(["git", "add", "src/Build/Version.h.cmake"], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
 p6 = subprocess.Popen(["git", "-c", "user.name='ghaction'", "-c", "user.email='gh@action.org'",
 		       "commit", "-a", "-m", "add git information"], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
 
-out5, err5 = p5.communicate()
 out6, err6 = p6.communicate()
-		       
-print(out5.decode())
-print(err5.decode())		       
+		     		       
 print(out6.decode())
 print(err6.decode())
