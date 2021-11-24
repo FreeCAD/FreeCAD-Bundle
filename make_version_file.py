@@ -7,7 +7,7 @@ import sys
 import subprocess
 
 # get number of commits:
-p1 = subprocess.Popen(["git", "rev-list", "--count", "master"], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+p1 = subprocess.Popen(["git", "rev-list", "HEAD", --count"], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
 p2 = subprocess.Popen(["git", "branch"], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
 p3 = subprocess.Popen(["git", "log", "-1", "--format=%ci"], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
 p4 = subprocess.Popen(["git", "rev-parse", "--short", "HEAD"], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
