@@ -17,8 +17,8 @@ jobs:
       max-parallel: 3
       matrix:
         os: [windows-latest, macos-latest, ubuntu-latest]
-        tag: ["weekly-builds"]
-        docs: ["0"]
+        tag: ["0.19.3"]
+        docs: ["1"]
 
     steps:
       - if: matrix.os == 'windows-latest'
