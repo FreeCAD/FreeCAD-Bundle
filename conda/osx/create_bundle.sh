@@ -12,9 +12,6 @@ conda create \
     -c conda-forge \
     -y
 
-# uninstall some packages not needed
-conda uninstall -p APP/FreeCAD.app/Contents/Resources gtk2 gdk-pixbuf  llvmdev clangdev --force -y
-
 version_name=$(conda run -p APP/FreeCAD.app/Contents/Resources python ../scripts/get_freecad_version.py)
 
 echo "######################"
