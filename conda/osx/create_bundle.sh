@@ -50,10 +50,6 @@ then
     cp ../../doc/* APP/FreeCAD.app/Contents/Resources/share/doc/FreeCAD
 fi
 
-# mpmath fix:
-rm APP/FreeCAD.app/Contents/Resources/lib/python3.8/site-packages/mpmath/ctx_mp_python.py
-cp ../modifications/ctx_mp_python.py APP/FreeCAD.app/Contents/Resources/lib/python3.8/site-packages/mpmath/ctx_mp_python.py
-
 # Remove __pycache__ folders and .pyc files
 find . -path "*/__pycache__/*" -delete
 find . -name "*.pyc" -type f -delete
