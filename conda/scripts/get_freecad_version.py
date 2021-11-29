@@ -29,9 +29,9 @@ if system == "OSX":
     with open(os.path.join(osx_directory, "APP", "FreeCAD.app", "Contents", "Info.plist"), "w") as rendered_file:
         rendered_file.write(rendered_str)
 
-
-if os.environ["DEPLOY_RELEASE"] == "weekly-builds":
+if "DEPLOY_RELEASE" in os.environ and os.environ["DEPLOY_RELEASE"] == "weekly-builds":
     dev_version = "weekly-builds"
+
 
 if system == "OSX":
     print("FreeCAD_{}-{}-{}-{}-conda".format(dev_version, revision, system, arch))
