@@ -96,7 +96,7 @@ jobs:
         with:
           token: ${{ github.token }}
           tag: ${{ matrix.tag }}
-          assets: FreeCAD*macOS*
+          assets: FreeCAD*OSX*
           fail-if-no-assets: false
           fail-if-no-release: false 
 
