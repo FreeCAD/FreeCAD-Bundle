@@ -15,7 +15,7 @@ jobs:
     strategy:
       matrix:
         tag: ["0.19.3"]
-        branch: [releases/FreeCAD-0-19]
+        branch: ["0.19.3"]
 
     steps:
       - name: Run a multi-line script
