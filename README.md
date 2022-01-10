@@ -1,8 +1,7 @@
-# FreeCAD-Bundle
-
+# FreeCAD-Bundle 
 *(Formerly FreeCAD-AppImage)*
 
-Stand-alone repo to package Conda FreeCAD assets to portable packages.
+Weekly generated FreeCAD development builds for testing the latest features/bug fixes
 
-The ready-to-go FreeCAD assets will be posted [here](https://github.com/FreeCAD/FreeCAD/releases)
+Download bundles from [releases/tag/weekly-builds](https://github.com/FreeCAD/FreeCAD-Bundle/releases/tag/weekly-builds)
 
