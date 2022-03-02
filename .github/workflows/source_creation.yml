@@ -14,8 +14,8 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        tag: ["0.19.3"]
-        branch: ["0.19.3"]
+        tag: ["0.19.4"]
+        branch: ["0.19.4"]
 
     steps:
       - name: Run a multi-line script
