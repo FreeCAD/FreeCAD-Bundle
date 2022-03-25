@@ -1,3 +1,5 @@
+#!/bin/bash
+
 echo "create the environment"
 conda create \
     -p AppDir/usr \
