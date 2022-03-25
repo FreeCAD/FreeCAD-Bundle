@@ -1,6 +1,6 @@
 [Desktop Entry]
 Version=1.0
-Name=FreeCAD Conda
+Name=FreeCAD Weekly
 Exec=AppRun
 Icon=freecad_conda
 Type=Application
