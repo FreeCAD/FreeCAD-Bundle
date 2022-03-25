@@ -2,7 +2,7 @@
 Version=1.0
 Name=FreeCAD Weekly
 Exec=AppRun
-Icon=freecad_conda
+Icon=freecad_weekly
 Type=Application
 Categories=Engineering;
 Comment=Feature based Parametric Modeler
