@@ -90,7 +90,7 @@ jobs:
             DEPLOY_RELEASE: ${{ matrix.tag }}
             ADD_DOCS: ${{ matrix.docs }}
 
-      - if: matrix.os == 'macos-latest'
+      - if: (matrix.os == 'macos-latest' && github.ref == 'refs/heads/master')
         name: delete old mac assets
         uses: mknejp/delete-release-assets@v1
         with:
@@ -100,7 +100,7 @@ jobs:
           fail-if-no-assets: false
           fail-if-no-release: false 
 
-      - if: matrix.os == 'ubuntu-latest'
+      - if: (matrix.os == 'ubuntu-latest' && github.ref == 'refs/heads/master')
         name: delete old linux assets
         uses: mknejp/delete-release-assets@v1
         with:
@@ -110,7 +110,7 @@ jobs:
           fail-if-no-assets: false
           fail-if-no-release: false
 
-      - if: (matrix.os == 'windows-latest' && github.ref == 'refs/heads/main')
+      - if: (matrix.os == 'windows-latest' && github.ref == 'refs/heads/master')
         name: delete old win assets
         uses: mknejp/delete-release-assets@v1
         with:
@@ -120,7 +120,7 @@ jobs:
           fail-if-no-assets: false
           fail-if-no-release: false
 
-      - if: (matrix.os == 'ubuntu-latest' && github.ref == 'refs/heads/main')
+      - if: (matrix.os == 'ubuntu-latest' && github.ref == 'refs/heads/master')
         name: Upload binaries to release
         uses: svenstaro/upload-release-action@v2
         with:
@@ -130,7 +130,7 @@ jobs:
           overwrite: true
           file_glob: true
 
-      - if: (matrix.os == 'macos-latest' && github.ref == 'refs/heads/main')
+      - if: (matrix.os == 'macos-latest' && github.ref == 'refs/heads/master')
         name: Upload binaries to release
         uses: svenstaro/upload-release-action@v2
         with:
@@ -140,7 +140,7 @@ jobs:
           overwrite: true
           file_glob: true
           
-      - if: (matrix.os == 'windows-latest' && github.ref == 'refs/heads/main')
+      - if: (matrix.os == 'windows-latest' && github.ref == 'refs/heads/master')
         name: Upload binaries to release
         uses: svenstaro/upload-release-action@v2
         with:
