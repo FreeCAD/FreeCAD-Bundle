@@ -1,7 +1,7 @@
 # assume we have a working conda available
 conda create \
     -p APP/FreeCAD.app/Contents/Resources \
-    freecad occt=7.5 vtk=9 calculix blas=*=openblas gitpython \
+    freecad occt=7.5 vtk=9 python=3.9 calculix blas=*=openblas gitpython \
     numpy matplotlib-base scipy sympy pandas six \
     pyyaml jinja2 opencamlib ifcopenshell pythonocc-core \
     freecad.asm3 libredwg pycollada openglider \
