@@ -58,6 +58,10 @@ copy C:\Users\travis\build\FreeCAD\FreeCAD-AppImage\conda\modifications\ctx_mp_p
 %copy_dir%\bin\python.exe ..\scripts\get_freecad_version.py > tempver.txt
 set /p freecad_version_name=<tempver.txt
 
+echo ######################
+echo %freecad_version_name%
+echo ######################
+
 echo %freecad_version_name%
 cd %copy_dir%\..
 ren %copy_dir% %freecad_version_name%
