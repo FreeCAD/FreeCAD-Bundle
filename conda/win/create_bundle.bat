@@ -55,20 +55,16 @@ copy ssl-patch.py %copy_dir%\bin\Lib\ssl.py
 rename %copy_dir%\bin\Lib\site-packages\mpmath\ctx_mp_python.py ctx_mp_python-orig.py
 copy C:\Users\travis\build\FreeCAD\FreeCAD-AppImage\conda\modifications\ctx_mp_python.py %copy_dir%\bin\Lib\site-packages\mpmath\ctx_mp_python.py
 
-if "%DEPLOY_RELEASE%"=="weekly-builds" (
-%copy_dir%\bin\python.exe -c "import FreeCAD;print('weekly-builds-' + FreeCAD.Version()[2].split(' ')[0])" > tempver.txt
-) else (
-%copy_dir%\bin\python.exe -c "import FreeCAD;print((FreeCAD.Version()[0]) +'.' + (FreeCAD.Version()[1]) +'.' + (FreeCAD.Version()[2].split(' ')[0]))" > tempver.txt
-)
-set /p fcver=<tempver.txt
+%copy_dir%\bin\python.exe ..\scripts\get_freecad_version.py > tempver.txt
+set /p freecad_version_name=<tempver.txt
 
-echo %fcver%
+echo %freecad_version_name%
 cd %copy_dir%\..
-ren %copy_dir% FreeCAD_%fcver%-Win.x-x86_64
+ren %copy_dir% %freecad_version_name%
 dir
 
 REM if errorlevel1 exit 1
 
-"%ProgramFiles%\7-Zip\7z.exe" a -t7z -mmt=%NUMBER_OF_PROCESSORS% FreeCAD_%fcver%-Win.x-x86_64.7z FreeCAD_%fcver%-Win.x-x86_64\ -bb
-certutil -hashfile "FreeCAD_%fcver%-Win.x-x86_64.7z" SHA256 > "FreeCAD_%fcver%-Win.x-x86_64.7z"-SHA256.txt
-echo  %date%-%time% >>"FreeCAD_%fcver%-Win.x-x86_64.7z"-SHA256.txt
+"%ProgramFiles%\7-Zip\7z.exe" a -t7z -mmt=%NUMBER_OF_PROCESSORS% %freecad_version_name%.7z %freecad_version_name%\ -bb
+certutil -hashfile "%freecad_version_name%.7z" SHA256 > "%freecad_version_name%.7z"-SHA256.txt
+echo  %date%-%time% >>"%freecad_version_name%.7z"-SHA256.txt
