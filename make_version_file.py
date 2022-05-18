@@ -39,8 +39,8 @@ with open("src/Build/Version.h.cmake", "r") as f:
 	text = f.read()
 	text = text.replace("${PACKAGE_WCREF}", f"{rev_number} (Git)")
 	text = text.replace("${PACKAGE_WCDATE}", commit_date)
-	text.append('#define FCRepositoryHash   "%s"\n' % (commit_hash))
-        text.append('#define FCRepositoryBranch "%s"\n' % (branch_name))
+	text = text + '#define FCRepositoryHash   "%s"\n' % (commit_hash)
+	text = text + '#define FCRepositoryBranch "%s"\n' % (branch_name)
 	
 with open("src/Build/Version.h.cmake", "w") as f:
 	f.write(text)
