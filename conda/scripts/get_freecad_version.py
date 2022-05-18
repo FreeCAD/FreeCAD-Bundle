@@ -12,6 +12,11 @@ if system in platform_dict:
     system = platform_dict[system]
 
 arch = platform.processor()
+
+# doing this manually for windows
+if system == "Windows":
+    arch = "x86_64"
+
 python_verson = platform.python_version().split(".")
 python_verson = "py" + python_verson[0] + python_verson[1]
 date = str(datetime.datetime.now()).split(" ")[0]
