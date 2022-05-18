@@ -7,3 +7,8 @@
 4. run the github action script to create the compressed source files
 5. create PR for [conda-forge/freecad-feedstock](https://github.com/conda-forge/freecad-feedstock)
 6. once PR is merged change the bundle-scripts to use the conda-forge release packages
+
+
+# naming convention:
+
+FreeCAD_{{ release }}-{{ revision }}-{{ date }}-{{ system }}-{{ python-version }}.{{ extension }}

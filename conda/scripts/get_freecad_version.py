@@ -2,15 +2,19 @@ import sys
 import os
 import subprocess
 import platform
+import datetime
 
 platform_dict = {}
 platform_dict["macOS"] = "OSX"
 
-sys_n_arch = platform.platform()
-sys_n_arch = sys_n_arch.split("-")
-system, arch = sys_n_arch[0], sys_n_arch[2]
+system = platform.platform().split("-")[0]
 if system in platform_dict:
     system = platform_dict[system]
+
+arch = platform.processor()
+python_verson = platform.python_version().split(".")
+python_verson = "py" + python_verson[0] + python_verson[1]
+date = str(datetime.datetime.now()).split(" ")[0]
 
 version_info = subprocess.check_output("freecadcmd --version", shell=True)
 version_info = version_info.decode("utf-8").split(" ")
@@ -32,8 +36,4 @@ if system == "OSX":
 if "DEPLOY_RELEASE" in os.environ and os.environ["DEPLOY_RELEASE"] == "weekly-builds":
     dev_version = "weekly-builds"
 
-
-if system == "OSX":
-    print("FreeCAD_{}-{}-{}-{}-conda".format(dev_version, revision, system, arch))
-elif system == "Linux":
-    print("FreeCAD_{}-{}-{}-Conda_glibc2.12-x86_64".format(dev_version, revision, system))
+print("FreeCAD_{}-{}-{}-{}-{}-{}".format(dev_version, revision, date, system, arch, python_verson))

@@ -5,3 +5,4 @@ Weekly generated FreeCAD development builds for testing the latest features/bug 
 
 Download bundles from [releases/tag/weekly-builds](https://github.com/FreeCAD/FreeCAD-Bundle/releases/tag/weekly-builds)
 
+
