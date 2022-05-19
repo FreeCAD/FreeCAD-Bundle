@@ -55,7 +55,7 @@ copy ssl-patch.py %copy_dir%\bin\Lib\ssl.py
 rename %copy_dir%\bin\Lib\site-packages\mpmath\ctx_mp_python.py ctx_mp_python-orig.py
 copy C:\Users\travis\build\FreeCAD\FreeCAD-AppImage\conda\modifications\ctx_mp_python.py %copy_dir%\bin\Lib\site-packages\mpmath\ctx_mp_python.py
 
-%copy_dir%\bin\python.exe ..\scripts\get_freecad_version.py > tempver.txt
+conda run -p %conda_env% python ..\scripts\get_freecad_version.py > tempver.txt
 set /p freecad_version_name=<tempver.txt
 
 echo ######################
