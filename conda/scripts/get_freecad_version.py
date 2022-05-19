@@ -41,4 +41,6 @@ if system == "OSX":
 if "DEPLOY_RELEASE" in os.environ and os.environ["DEPLOY_RELEASE"] == "weekly-builds":
     dev_version = "weekly-builds"
 
-print("FreeCAD_{}-{}-{}-{}-{}-{}".format(dev_version, revision, date, system, arch, python_verson))
+package_manager = "conda"
+
+print("FreeCAD_{}-{}-{}-{}-{}-{}-{}".format(dev_version, revision, date, package_manager, system, arch, python_verson))
