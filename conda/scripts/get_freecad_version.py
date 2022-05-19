@@ -3,6 +3,8 @@ import os
 import subprocess
 import platform
 import datetime
+import freecad
+import FreeCAD
 
 platform_dict = {}
 platform_dict["macOS"] = "OSX"
@@ -21,11 +23,9 @@ python_verson = platform.python_version().split(".")
 python_verson = "py" + python_verson[0] + python_verson[1]
 date = str(datetime.datetime.now()).split(" ")[0]
 
-version_info = subprocess.check_output("freecadcmd --version", shell=True)
-version_info = version_info.decode("utf-8").split(" ")
-dev_version = version_info[1]
-revision = version_info[3]
-revision = revision.rstrip("\n")
+version_info = FreeCAD.getVersion()
+dev_version = version_info[0] + "." version_info[1]
+revision = version_info[2].split(" ")[0]
 
 if system == "OSX":
     import jinja2
