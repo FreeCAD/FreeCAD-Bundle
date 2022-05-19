@@ -2,7 +2,11 @@ import sys
 import os
 import subprocess
 import platform
-import datetime
+from datetime import datetime
+
+original_stdout = sys.stdout
+sys.stdout = open(os.devnull, 'w')
+
 import freecad
 import FreeCAD
 
@@ -21,9 +25,11 @@ if system == "Windows":
 
 python_verson = platform.python_version().split(".")
 python_verson = "py" + python_verson[0] + python_verson[1]
-date = str(datetime.datetime.now()).split(" ")[0]
+date = str(datetime.now()).split(" ")[0]
 
-version_info = FreeCAD.getVersion()
+sys.stdout.close()
+sys.stdout = original_stdout
+version_info = FreeCAD.Version()
 dev_version = version_info[0] + "." + version_info[1]
 revision = version_info[2].split(" ")[0]
 
