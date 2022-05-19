@@ -24,7 +24,7 @@ python_verson = "py" + python_verson[0] + python_verson[1]
 date = str(datetime.datetime.now()).split(" ")[0]
 
 version_info = FreeCAD.getVersion()
-dev_version = version_info[0] + "." version_info[1]
+dev_version = version_info[0] + "." + version_info[1]
 revision = version_info[2].split(" ")[0]
 
 if system == "OSX":
