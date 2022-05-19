@@ -116,7 +116,7 @@ jobs:
         with:
           token: ${{ github.token }}
           tag: ${{ matrix.tag }}
-          assets: FreeCAD*Win-Conda*
+          assets: FreeCAD*Win*
           fail-if-no-assets: false
           fail-if-no-release: false
 
