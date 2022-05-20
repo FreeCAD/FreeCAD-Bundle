@@ -16,7 +16,7 @@ call conda create ^
  -c conda-forge ^
  -y
  
-"%copy_dir%\bin\python.exe" "..\scripts\get_freecad_version.py" > tempver.t
+"%fc_env%\bin\python.exe" "..\scripts\get_freecad_version.py" > tempver.t
 set /p freecad_version_name=<tempver.txt
 
 echo **********************
