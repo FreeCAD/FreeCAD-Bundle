@@ -16,12 +16,7 @@ call conda create ^
  -c conda-forge ^
  -y
  
-"%conda_env%\bin\python.exe" "..\scripts\get_freecad_version.py" > tempver.t
-set /p freecad_version_name=<tempver.txt
 
-echo **********************
-echo %freecad_version_name%
-echo **********************
 
 REM Copy Conda's Python and (U)CRT to FreeCAD/bin
 robocopy %conda_env%\DLLs %copy_dir%\bin\DLLs /S /MT:%NUMBER_OF_PROCESSORS% > nul
@@ -62,9 +57,13 @@ copy ssl-patch.py %copy_dir%\bin\Lib\ssl.py
 rename %copy_dir%\bin\Lib\site-packages\mpmath\ctx_mp_python.py ctx_mp_python-orig.py
 copy C:\Users\travis\build\FreeCAD\FreeCAD-AppImage\conda\modifications\ctx_mp_python.py %copy_dir%\bin\Lib\site-packages\mpmath\ctx_mp_python.py
 
+"%copy_dir%\bin\python.exe" "..\scripts\get_freecad_version.py" > tempver.t
+set /p freecad_version_name=<tempver.txt
 
-
+echo **********************
 echo %freecad_version_name%
+echo **********************
+
 cd %copy_dir%\..
 ren %copy_dir% %freecad_version_name%
 dir
