@@ -64,7 +64,7 @@ if "%DEPLOY_RELEASE%"=="weekly-builds" (
 )
 set /p fcver=<tempver.txt
 
-set freecad_version_name=FreeCAD_%fcver%-Win-Conda_vc14.x-x86_64
+set freecad_version_name=FreeCAD_%fcver%-%date:~6,4%_%date:~3,2%_%date:~0,2%-Win-Conda-x86_64
 
 echo **********************
 echo %freecad_version_name%
