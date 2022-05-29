@@ -18,7 +18,7 @@ jobs:
       matrix:
         os: [windows-latest, macos-latest, ubuntu-latest]
         tag: ["0.20beta1"]
-        docs: ["1"]
+        docs: ["0"]
 
     steps:
       - if: matrix.os == 'windows-latest'
