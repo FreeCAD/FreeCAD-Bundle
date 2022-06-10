@@ -15,11 +15,12 @@ mamba create \
     -c conda-forge \
     -y
 
-version_name=$(mamba run -p APP/FreeCAD.app/Contents/Resources python ../scripts/get_freecad_version.py)
+mamba run -p AppDir/usr python ../scripts/get_freecad_version.py
+read -r version_name < bundle_name.txt
 
-echo "######################"
-echo ${version_name}
-echo "######################"
+echo -e "\################"
+echo -e "version_name:  ${version_name}"
+echo -e "################"
 
 mamba list -p APP/FreeCAD.app/Contents/Resources > APP/FreeCAD.app/Contents/packages.txt
 sed -i "1s/.*/\n\nLIST OF PACKAGES:/"  APP/FreeCAD.app/Contents/packages.txt
