@@ -60,13 +60,6 @@ jobs:
         run: |
           mamba install curl -y -c conda-forge;
 
-      - if: ${{ matrix.docs }}
-        name: get docs
-        run: curl -LO "https://github.com/FreeCAD/FreeCAD/releases/download/0.18/FreeCAD.0_18.Offline.Doc.7z"
-
-      - name: extract docs
-        run: 7z x FreeCAD.0_18.Offline.Doc.7z
-
       - if: matrix.os == 'macos-latest'
         name: create osx bundle
         run: "bash ./create_bundle.sh"
