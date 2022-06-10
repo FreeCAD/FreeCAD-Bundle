@@ -8,7 +8,7 @@ conda create \
   -p AppDir/usr \
   freecad occt=7.5 vtk=9 python=3.10 calculix blas=*=openblas gitpython \
   numpy matplotlib-base scipy sympy pandas six \
-  pyyaml opencamlib ifcopenshell pythonocc-core \
+  pyyaml opencamlib ifcopenshell \
   freecad.asm3 libredwg pycollada appimage-updater-bridge \
   lxml xlutils olefile requests openglider \
   blinker opencv qt.py nine docutils \
