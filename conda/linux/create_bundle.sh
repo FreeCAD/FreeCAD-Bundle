@@ -18,10 +18,10 @@ mamba create \
   -y
 
 echo -e "\nInstall freecad.appimage_updater"
-mamba run -p AppDir/usr pip install https://github.com/looooo/freecad.appimage_updater/archive/master.zip
+conda run -p AppDir/usr pip install https://github.com/looooo/freecad.appimage_updater/archive/master.zip
 
 echo -e "\nUninstall some packages not needed"
-mamba uninstall -p AppDir/usr libclang --force -y
+conda uninstall -p AppDir/usr libclang --force -y
 
 version_name=$(conda run -p AppDir/usr python ../scripts/get_freecad_version.py)
 echo -e "\################"
