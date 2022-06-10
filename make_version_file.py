@@ -19,12 +19,11 @@ for line in i.readlines():
     line = line.replace("${PACKAGE_WCURL}",gitInfo.url)
     content.append(line)
 
-content.append('// Git relevant stuff\n')
-content.append('#define FCRepositoryHash   "%s"\n' % (gitInfo.hash))
-content.append('#define FCRepositoryBranch "%s"\n' % (gitInfo.branch))
-o = open("src/Build/Version.h.cmake", "w")
-o.writelines(content)
-o.close()
+with open("src/Build/Version.h.cmake", "w") as o:
+	content.append('// Git relevant stuff\n')
+	content.append('#define FCRepositoryHash   "%s"\n' % (gitInfo.hash))
+	content.append('#define FCRepositoryBranch "%s"\n' % (gitInfo.branch))
+	o.writelines(content)
 
 with open(os.sys.argv[1], "w") as f:
 	f.write(f"rev_number: {gitInfo.rev}\n")
