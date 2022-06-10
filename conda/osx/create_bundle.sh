@@ -1,5 +1,5 @@
 # assume we have a working conda available
-conda create \
+mamba create \
     -p APP/FreeCAD.app/Contents/Resources \
     freecad occt=7.5 vtk=9 python=3.9 calculix blas=*=openblas gitpython \
     numpy matplotlib-base scipy sympy pandas six \
@@ -12,13 +12,13 @@ conda create \
     -c conda-forge \
     -y
 
-version_name=$(conda run -p APP/FreeCAD.app/Contents/Resources python ../scripts/get_freecad_version.py)
+version_name=$(mamba run -p APP/FreeCAD.app/Contents/Resources python ../scripts/get_freecad_version.py)
 
 echo "######################"
 echo ${version_name}
 echo "######################"
 
-conda list -p APP/FreeCAD.app/Contents/Resources > APP/FreeCAD.app/Contents/packages.txt
+mamba list -p APP/FreeCAD.app/Contents/Resources > APP/FreeCAD.app/Contents/packages.txt
 sed -i "1s/.*/\n\nLIST OF PACKAGES:/"  APP/FreeCAD.app/Contents/packages.txt
 
 # add a bundle Identifier
