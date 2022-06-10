@@ -53,12 +53,14 @@ jobs:
       - if: matrix.os != 'windows-latest'
         name: install conda dependencies for unix
         run: |
+          mamba env config vars set MAMBA_NO_BANNER=1
           mamba install p7zip sed curl -y -c conda-forge;
           mamba config --show channels;
 
       - if: matrix.os == 'windows-latest'
         name: install conda dependencies for windows
         run: |
+          mamba env config vars set MAMBA_NO_BANNER=1
           mamba install curl -y -c conda-forge;
 
       - if: matrix.os == 'macos-latest'
