@@ -83,7 +83,7 @@ jobs:
 
       - if: matrix.os == 'windows-latest'
         name: create windows bundle
-        shell: powershell
+        shell: cmd
         run: "call create_bundle.bat"
         working-directory: conda\win
         env:
