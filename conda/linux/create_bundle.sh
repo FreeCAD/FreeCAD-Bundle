@@ -1,11 +1,11 @@
 #!/bin/bash
 
 export MAMBA_NO_BANNER=1
-env_dir="AppDir/usr"
+conda_env="AppDir/usr"
 echo -e "\nCreate the environment"
 
 mamba create \
-  -p ${env_dir} \
+  -p ${conda_env} \
   freecad occt=7.5 vtk=9 python=3.10 calculix blas=*=openblas gitpython \
   numpy matplotlib-base scipy sympy pandas six \
   pyyaml opencamlib ifcopenshell \
@@ -18,7 +18,7 @@ mamba create \
   -y
 
 
-conda run -p ${env_dir} python ../scripts/get_freecad_version.py
+conda run -p ${conda_env} python ../scripts/get_freecad_version.py
 read -r version_name < bundle_name.txt
 
 echo -e "\################"
@@ -26,60 +26,60 @@ echo -e "version_name:  ${version_name}"
 echo -e "################"
 
 echo -e "\nInstall freecad.appimage_updater"
-mamba run -p AppDir/usr pip install https://github.com/looooo/freecad.appimage_updater/archive/master.zip
+mamba run -p ${conda_env} pip install https://github.com/looooo/freecad.appimage_updater/archive/master.zip
 
 echo -e "\nUninstall some packages not needed"
-mamba uninstall -p AppDir/usr libclang --force -y
+mamba uninstall -p ${conda_env} libclang --force -y
 
-mamba list -p AppDir/usr > AppDir/packages.txt
+mamba list -p ${conda_env} > AppDir/packages.txt
 sed -i "1s/.*/\n\nLIST OF PACKAGES:/" AppDir/packages.txt
 
 echo -e "\nDelete unnecessary stuff"
-rm -rf AppDir/usr/include
-find AppDir/usr -name \*.a -delete
-mv AppDir/usr/bin AppDir/usr/bin_tmp
-mkdir AppDir/usr/bin
-cp AppDir/usr/bin_tmp/freecad AppDir/usr/bin/
-cp AppDir/usr/bin_tmp/freecadcmd AppDir/usr/bin/
-cp AppDir/usr/bin_tmp/ccx AppDir/usr/bin/
-cp AppDir/usr/bin_tmp/python AppDir/usr/bin/
-cp AppDir/usr/bin_tmp/pip AppDir/usr/bin/
-cp AppDir/usr/bin_tmp/pyside2-rcc AppDir/usr/bin/
-cp AppDir/usr/bin_tmp/assistant AppDir/usr/bin/
-sed -i '1s|.*|#!/usr/bin/env python|' AppDir/usr/bin/pip
-rm -rf AppDir/usr/bin_tmp
+rm -rf ${conda_env}/include
+find ${conda_env} -name \*.a -delete
+mv ${conda_env}/bin ${conda_env}/bin_tmp
+mkdir ${conda_env}/bin
+cp ${conda_env}/bin_tmp/freecad ${conda_env}/bin/
+cp ${conda_env}/bin_tmp/freecadcmd ${conda_env}/bin/
+cp ${conda_env}/bin_tmp/ccx ${conda_env}/bin/
+cp ${conda_env}/bin_tmp/python ${conda_env}/bin/
+cp ${conda_env}/bin_tmp/pip ${conda_env}/bin/
+cp ${conda_env}/bin_tmp/pyside2-rcc ${conda_env}/bin/
+cp ${conda_env}/bin_tmp/assistant ${conda_env}/bin/
+sed -i '1s|.*|#!/usr/bin/env python|' ${conda_env}/bin/pip
+rm -rf ${conda_env}/bin_tmp
 
 echo -e "\nCopy qt.conf"
-cp qt.conf AppDir/usr/bin/
-cp qt.conf AppDir/usr/libexec/
+cp qt.conf ${conda_env}/bin/
+cp qt.conf ${conda_env}/libexec/
 
 echo -e "\nCopy Icon and Desktop file"
-mkdir -p AppDir/usr/share/icons/default/
-cp AppDir/freecad_weekly.png AppDir/usr/share/icons/default/freecad_weekly.png
-mkdir -p AppDir/usr/share/applications/
-cp AppDir/freecad_weekly.desktop AppDir/usr/share/applications/freecad_weekly.desktop
+mkdir -p ${conda_env}/share/icons/default/
+cp AppDir/freecad_weekly.png ${conda_env}/share/icons/default/freecad_weekly.png
+mkdir -p ${conda_env}/share/applications/
+cp AppDir/freecad_weekly.desktop ${conda_env}/share/applications/freecad_weekly.desktop
 
 # Remove __pycache__ folders and .pyc files
 find . -path "*/__pycache__/*" -delete
 # find . -name "*.pyc" -type f -delete
 
 # reduce size
-rm -rf AppDir/usr/conda-meta/
-rm -rf AppDir/usr/doc/global/
-rm -rf AppDir/usr/share/gtk-doc/
-rm -rf AppDir/usr/lib/cmake/
+rm -rf ${conda_env}/conda-meta/
+rm -rf ${conda_env}/doc/global/
+rm -rf ${conda_env}/share/gtk-doc/
+rm -rf ${conda_env}/lib/cmake/
 
 find . -name "*.h" -type f -delete
 find . -name "*.cmake" -type f -delete
 
 echo -e "\nAdd libnsl (Fedora 28 and up)"
-cp ../../libc6/lib/x86_64-linux-gnu/libnsl* AppDir/usr/lib/
+cp ../../libc6/lib/x86_64-linux-gnu/libnsl* ${conda_env}/lib/
 
 if [ ${ADD_DOCS} ]
 then
   echo -e "\nAdd documentation"
-  mkdir -p AppDir/usr/share/doc/FreeCAD
-  cp ../../doc/* AppDir/usr/share/doc/FreeCAD
+  mkdir -p ${conda_env}/share/doc/FreeCAD
+  cp ../../doc/* ${conda_env}/share/doc/FreeCAD
 fi
 
 if [ "$DEPLOY_RELEASE" = "weekly-builds" ]; then
