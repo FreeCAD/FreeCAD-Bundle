@@ -24,6 +24,7 @@ content.append('#define FCRepositoryHash   "%s"\n' % (gitInfo.hash))
 content.append('#define FCRepositoryBranch "%s"\n' % (gitInfo.branch))
 o = open("src/Build/Version.h.cmake", "w")
 o.writelines(content)
+o.close()
 
 with open(os.sys.argv[1], "w") as f:
 	f.write(f"rev_number: {gitInfo.rev}\n")
