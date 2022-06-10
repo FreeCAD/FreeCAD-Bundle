@@ -1,10 +1,10 @@
 # assume we have a working conda available
 
 export MAMBA_NO_BANNER=1
-env_dir="APP/FreeCAD.app/Contents/Resources"
+conda_env="APP/FreeCAD.app/Contents/Resources"
 
 mamba create \
-    -p ${env_dir} \
+    -p ${conda_env} \
     freecad occt=7.5 vtk=9 python=3.10 calculix blas=*=openblas gitpython \
     numpy matplotlib-base scipy sympy pandas six \
     pyyaml jinja2 opencamlib ifcopenshell \
@@ -23,37 +23,30 @@ echo -e "\################"
 echo -e "version_name:  ${version_name}"
 echo -e "################"
 
-mamba list -p APP/FreeCAD.app/Contents/Resources > APP/FreeCAD.app/Contents/packages.txt
+mamba list -p ${conda_env} > APP/FreeCAD.app/Contents/packages.txt
 sed -i "1s/.*/\n\nLIST OF PACKAGES:/"  APP/FreeCAD.app/Contents/packages.txt
 
 # add a bundle Identifier
 /usr/libexec/PlistBuddy -c "Set :CFBundleIdentifier 'org.freecadteam.freecad'" "APP/FreeCAD.app/Contents/Info.plist"
 
 # delete unnecessary stuff
-rm -rf APP/FreeCAD.app/Contents/Resources/include
-find APP/FreeCAD.app/Contents/Resources -name \*.a -delete
-mv APP/FreeCAD.app/Contents/Resources/bin APP/FreeCAD.app/Contents/Resources/bin_tmp
-mkdir APP/FreeCAD.app/Contents/Resources/bin
-cp APP/FreeCAD.app/Contents/Resources/bin_tmp/freecad APP/FreeCAD.app/Contents/Resources/bin/
-cp APP/FreeCAD.app/Contents/Resources/bin_tmp/freecadcmd APP/FreeCAD.app/Contents/Resources/bin
-cp APP/FreeCAD.app/Contents/Resources/bin_tmp/ccx APP/FreeCAD.app/Contents/Resources/bin/
-cp APP/FreeCAD.app/Contents/Resources/bin_tmp/python APP/FreeCAD.app/Contents/Resources/bin/
-cp APP/FreeCAD.app/Contents/Resources/bin_tmp/pip APP/FreeCAD.app/Contents/Resources/bin/
-cp APP/FreeCAD.app/Contents/Resources/bin_tmp/pyside2-rcc APP/FreeCAD.app/Contents/Resources/bin/
-cp APP/FreeCAD.app/Contents/Resources/bin_tmp/assistant APP/FreeCAD.app/Contents/Resources/bin/
-sed -i "" '1s|.*|#!/usr/bin/env python|' APP/FreeCAD.app/Contents/Resources/bin/pip
-rm -rf APP/FreeCAD.app/Contents/Resources/bin_tmp
+rm -rf ${conda_env}/include
+find ${conda_env} -name \*.a -delete
+mv ${conda_env}/bin ${conda_env}/bin_tmp
+mkdir ${conda_env}/bin
+cp ${conda_env}/bin_tmp/freecad ${conda_env}/bin/
+cp ${conda_env}/bin_tmp/freecadcmd ${conda_env}/bin
+cp ${conda_env}/bin_tmp/ccx ${conda_env}/bin/
+cp ${conda_env}/bin_tmp/python ${conda_env}/bin/
+cp ${conda_env}/bin_tmp/pip ${conda_env}/bin/
+cp ${conda_env}/bin_tmp/pyside2-rcc ${conda_env}/bin/
+cp ${conda_env}/bin_tmp/assistant ${conda_env}/bin/
+sed -i "" '1s|.*|#!/usr/bin/env python|' ${conda_env}/bin/pip
+rm -rf ${conda_env}/bin_tmp
 
 #copy qt.conf
-cp qt.conf APP/FreeCAD.app/Contents/Resources/bin/
-cp qt.conf APP/FreeCAD.app/Contents/Resources/libexec/
-
-# add documentation
-if [ ${ADD_DOCS} ]
-then
-    mkdir -p APP/FreeCAD.app/Contents/Resources/share/doc/FreeCAD
-    cp ../../doc/* APP/FreeCAD.app/Contents/Resources/share/doc/FreeCAD
-fi
+cp qt.conf ${conda_env}/bin/
+cp qt.conf ${conda_env}/libexec/
 
 # Remove __pycache__ folders and .pyc files
 find . -path "*/__pycache__/*" -delete
