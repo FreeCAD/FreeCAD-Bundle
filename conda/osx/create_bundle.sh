@@ -1,4 +1,7 @@
 # assume we have a working conda available
+
+export MAMBA_NO_BANNER=1
+
 mamba create \
     -p APP/FreeCAD.app/Contents/Resources \
     freecad occt=7.5 vtk=9 python=3.9 calculix blas=*=openblas gitpython \
