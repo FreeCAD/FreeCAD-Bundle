@@ -16,6 +16,13 @@ call mamba create ^
  -c conda-forge ^
  -y
  
+ 
+conda run -p %conda_env% ..\scripts\get_freecad_version.py
+set /p freecad_version_name= <bundle_name.txt
+
+echo **********************
+echo %freecad_version_name%
+echo **********************
 
 
 REM Copy Conda's Python and (U)CRT to FreeCAD/bin
@@ -57,12 +64,6 @@ copy ssl-patch.py %copy_dir%\bin\Lib\ssl.py
 rename %copy_dir%\bin\Lib\site-packages\mpmath\ctx_mp_python.py ctx_mp_python-orig.py
 copy C:\Users\travis\build\FreeCAD\FreeCAD-AppImage\conda\modifications\ctx_mp_python.py %copy_dir%\bin\Lib\site-packages\mpmath\ctx_mp_python.py
 
-%copy_dir%\bin\python.exe ..\scripts\get_freecad_version.py
-set -p freecad_version_name= <bundle_name.txt
-
-echo **********************
-echo %freecad_version_name%
-echo **********************
 
 cd %copy_dir%\..
 ren %copy_dir% %freecad_version_name%
