@@ -1,6 +1,9 @@
 #!/bin/bash
 
+export MAMBA_NO_BANNER=1
+
 echo -e "\nCreate the environment"
+
 mamba create \
   -p AppDir/usr \
   freecad occt=7.5 vtk=9 python=3.9 calculix blas=*=openblas gitpython \
