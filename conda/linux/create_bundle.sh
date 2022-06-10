@@ -1,11 +1,11 @@
 #!/bin/bash
 
 export MAMBA_NO_BANNER=1
-
+env_dir="AppDir/usr"
 echo -e "\nCreate the environment"
 
 mamba create \
-  -p AppDir/usr \
+  -p ${env_dir} \
   freecad occt=7.5 vtk=9 python=3.10 calculix blas=*=openblas gitpython \
   numpy matplotlib-base scipy sympy pandas six \
   pyyaml opencamlib ifcopenshell \
@@ -18,7 +18,7 @@ mamba create \
   -y
 
 
-conda run -p AppDir/usr python ../scripts/get_freecad_version.py
+conda run -p ${env_dir} python ../scripts/get_freecad_version.py
 read -r version_name < bundle_name.txt
 
 echo -e "\################"
