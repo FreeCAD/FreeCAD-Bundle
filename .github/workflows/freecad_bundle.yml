@@ -83,7 +83,7 @@ jobs:
 
       - if: matrix.os == 'windows-latest'
         name: create windows bundle
-        run: "call create_bundle.bat"
+        run: "create_bundle.bat"
         working-directory: conda\win
         env:
             DEPLOY_RELEASE: ${{ matrix.tag }}
