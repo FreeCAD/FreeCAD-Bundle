@@ -4,9 +4,9 @@ export MAMBA_NO_BANNER=1
 
 echo -e "\nCreate the environment"
 
-mamba create \
+conda create \
   -p AppDir/usr \
-  freecad occt=7.5 vtk=9 python=3.9 calculix blas=*=openblas gitpython \
+  freecad occt=7.5 vtk=9 python=3.10 calculix blas=*=openblas gitpython \
   numpy matplotlib-base scipy sympy pandas six \
   pyyaml opencamlib ifcopenshell pythonocc-core \
   freecad.asm3 libredwg pycollada appimage-updater-bridge \
@@ -18,12 +18,12 @@ mamba create \
   -y
 
 echo -e "\nInstall freecad.appimage_updater"
-mamba run -p AppDir/usr pip install https://github.com/looooo/freecad.appimage_updater/archive/master.zip
+conda run -p AppDir/usr pip install https://github.com/looooo/freecad.appimage_updater/archive/master.zip
 
 echo -e "\nUninstall some packages not needed"
-mamba uninstall -p AppDir/usr libclang --force -y
+conda uninstall -p AppDir/usr libclang --force -y
 
-version_name=$(mamba run -p AppDir/usr python ../scripts/get_freecad_version.py)
+version_name=$(conda run -p AppDir/usr python ../scripts/get_freecad_version.py)
 echo -e "\################"
 echo -e "version_name:  ${version_name}"
 echo -e "################"
