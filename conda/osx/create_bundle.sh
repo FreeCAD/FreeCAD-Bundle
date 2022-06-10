@@ -1,9 +1,10 @@
 # assume we have a working conda available
 
 export MAMBA_NO_BANNER=1
+env_dir="APP/FreeCAD.app/Contents/Resources"
 
 mamba create \
-    -p APP/FreeCAD.app/Contents/Resources \
+    -p ${env_dir} \
     freecad occt=7.5 vtk=9 python=3.10 calculix blas=*=openblas gitpython \
     numpy matplotlib-base scipy sympy pandas six \
     pyyaml jinja2 opencamlib ifcopenshell \
@@ -15,7 +16,7 @@ mamba create \
     -c conda-forge \
     -y
 
-mamba run -p AppDir/usr python ../scripts/get_freecad_version.py
+mamba run -p ${env_dir} python ../scripts/get_freecad_version.py
 read -r version_name < bundle_name.txt
 
 echo -e "\################"
