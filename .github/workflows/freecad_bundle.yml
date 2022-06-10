@@ -32,6 +32,7 @@ jobs:
         with:
           auto-update-conda: true
           use-mamba: true
+          miniforge-variant: Mambaforge
 
       - if: matrix.os == 'macos-latest'
         name: update mac
