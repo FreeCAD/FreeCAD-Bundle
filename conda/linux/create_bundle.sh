@@ -4,7 +4,7 @@ export MAMBA_NO_BANNER=1
 
 echo -e "\nCreate the environment"
 
-conda create \
+mamba create \
   -p AppDir/usr \
   freecad occt=7.5 vtk=9 python=3.10 calculix blas=*=openblas gitpython \
   numpy matplotlib-base scipy sympy pandas six \
@@ -18,17 +18,17 @@ conda create \
   -y
 
 echo -e "\nInstall freecad.appimage_updater"
-conda run -p AppDir/usr pip install https://github.com/looooo/freecad.appimage_updater/archive/master.zip
+mamba run -p AppDir/usr pip install https://github.com/looooo/freecad.appimage_updater/archive/master.zip
 
 echo -e "\nUninstall some packages not needed"
-conda uninstall -p AppDir/usr libclang --force -y
+mamba uninstall -p AppDir/usr libclang --force -y
 
 version_name=$(conda run -p AppDir/usr python ../scripts/get_freecad_version.py)
 echo -e "\################"
 echo -e "version_name:  ${version_name}"
 echo -e "################"
 
-conda list -p AppDir/usr > AppDir/packages.txt
+mamba list -p AppDir/usr > AppDir/packages.txt
 sed -i "1s/.*/\n\nLIST OF PACKAGES:/" AppDir/packages.txt
 
 echo -e "\nDelete unnecessary stuff"
