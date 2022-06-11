@@ -47,4 +47,3 @@ package_manager = "conda"
 bundle_name = "FreeCAD_{}-{}-{}-{}-{}-{}-{}".format(dev_version, revision, date, package_manager, system, arch, python_verson)
 with open("bundle_name.txt", "w") as bundle_name_file:
     bundle_name_file.write(bundle_name)
-print(bundle_name)
