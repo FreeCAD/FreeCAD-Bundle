@@ -4,19 +4,16 @@ export MAMBA_NO_BANNER=1
 conda_env="AppDir/usr"
 echo -e "\nCreate the environment"
 
+
 mamba create \
   -p ${conda_env} \
   freecad occt=7.5 vtk=9 python=3.10 calculix blas=*=openblas gitpython \
   numpy matplotlib-base scipy sympy pandas six \
-  pyyaml opencamlib ifcopenshell \
-  freecad.asm3 libredwg pycollada appimage-updater-bridge \
-  lxml xlutils olefile requests openglider \
-  blinker opencv qt.py nine docutils \
-  --copy \
-  -c freecad/label/dev \
-  -c conda-forge \
-  -y
-
+  pyyaml opencamlib ifcopenshell libredwg pycollada \
+  appimage-updater-bridge lxml xlutils olefile requests \
+  openglider blinker opencv qt.py nine docutils \
+  --copy -c freecad/label/dev -c conda-forge -y
+  
 
 mamba run -p ${conda_env} python ../scripts/get_freecad_version.py
 read -r version_name < bundle_name.txt

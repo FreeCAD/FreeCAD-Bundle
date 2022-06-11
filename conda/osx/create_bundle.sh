@@ -1,20 +1,19 @@
 # assume we have a working conda available
 
+
 export MAMBA_NO_BANNER=1
 conda_env="APP/FreeCAD.app/Contents/Resources"
+
 
 mamba create \
     -p ${conda_env} \
     freecad occt=7.5 vtk=9 python=3.10 calculix blas=*=openblas gitpython \
     numpy matplotlib-base scipy sympy pandas six \
-    pyyaml jinja2 opencamlib ifcopenshell \
-    freecad.asm3 libredwg pycollada openglider \
-    lxml xlutils olefile requests \
+    pyyaml jinja2 opencamlib ifcopenshell libredwg\
+    pycollada openglider lxml xlutils olefile requests \
     blinker opencv qt.py nine docutils \
-    --copy \
-    -c freecad/label/dev \
-    -c conda-forge \
-    -y
+    --copy -c freecad/label/dev -c conda-forge -y
+
 
 mamba run -p ${conda_env} python ../scripts/get_freecad_version.py
 read -r version_name < bundle_name.txt

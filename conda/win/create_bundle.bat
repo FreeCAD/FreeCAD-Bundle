@@ -8,8 +8,7 @@ call mamba create ^
  freecad python=3.8 occt=7.5 vtk=9 libredwg calculix gitpython gmsh ^
  numpy matplotlib-base scipy sympy pandas six ^
  pyyaml opencamlib ifcopenshell openglider ^
- freecad.asm3 libredwg pycollada ^
- lxml xlutils olefile requests ^
+ libredwg pycollada lxml xlutils olefile requests ^
  blinker opencv qt.py nine docutils ^
  --copy ^
  -c freecad/label/dev ^
