@@ -17,7 +17,7 @@ call mamba create ^
  -y
  
  
-conda run -p %conda_env% python ..\scripts\get_freecad_version.py
+%conda_env%\python ..\scripts\get_freecad_version.py
 set /p freecad_version_name= <bundle_name.txt
 
 echo **********************
