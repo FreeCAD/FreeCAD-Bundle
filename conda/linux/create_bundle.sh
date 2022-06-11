@@ -18,7 +18,7 @@ mamba create \
   -y
 
 
-conda run -p ${conda_env} python ../scripts/get_freecad_version.py
+mamba run -p ${conda_env} python ../scripts/get_freecad_version.py
 read -r version_name < bundle_name.txt
 
 echo -e "\################"
@@ -29,7 +29,7 @@ echo -e "\nInstall freecad.appimage_updater"
 mamba run -p ${conda_env} pip install https://github.com/looooo/freecad.appimage_updater/archive/master.zip
 
 echo -e "\nUninstall some packages not needed"
-mamba uninstall -p ${conda_env} libclang --force -y
+conda uninstall -p ${conda_env} libclang --force -y
 
 mamba list -p ${conda_env} > AppDir/packages.txt
 sed -i "1s/.*/\n\nLIST OF PACKAGES:/" AppDir/packages.txt
