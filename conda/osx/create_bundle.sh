@@ -16,7 +16,7 @@ mamba create \
     -c conda-forge \
     -y
 
-mamba run -p ${env_dir} python ../scripts/get_freecad_version.py
+mamba run -p ${conda_ev} python ../scripts/get_freecad_version.py
 read -r version_name < bundle_name.txt
 
 echo -e "\################"
