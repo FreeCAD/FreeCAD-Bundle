@@ -7,13 +7,8 @@ from datetime import datetime
 import freecad
 import FreeCAD
 
-platform_dict = {}
-platform_dict["macOS"] = "OSX"
 
 system = platform.platform().split("-")[0]
-if system in platform_dict:
-    system = platform_dict[system]
-
 arch = platform.processor()
 
 # doing this manually for windows
