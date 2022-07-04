@@ -25,9 +25,6 @@ echo -e "################"
 mamba list -p ${conda_env} > APP/FreeCAD.app/Contents/packages.txt
 sed -i "1s/.*/\n\nLIST OF PACKAGES:/"  APP/FreeCAD.app/Contents/packages.txt
 
-# add a bundle Identifier
-/usr/libexec/PlistBuddy -c "Set :CFBundleIdentifier 'org.freecadteam.freecad'" "APP/FreeCAD.app/Contents/Info.plist"
-
 # delete unnecessary stuff
 rm -rf ${conda_env}/include
 find ${conda_env} -name \*.a -delete
