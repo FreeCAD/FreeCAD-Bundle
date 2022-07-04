@@ -23,7 +23,7 @@ version_info = FreeCAD.Version()
 dev_version = version_info[0] + "." + version_info[1]
 revision = version_info[2].split(" ")[0]
 
-if system == "OSX":
+if system == "macOS":
     import jinja2
     osx_directory = os.path.join(os.path.dirname(__file__), "..", "osx")
     with open(os.path.join(osx_directory, "Info.plist.template")) as template_file:
