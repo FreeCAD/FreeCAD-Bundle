@@ -71,6 +71,14 @@ jobs:
             DEPLOY_RELEASE: ${{ matrix.tag }}
             ADD_DOCS: ${{ matrix.docs }}
 
+      - if: matrix.os == 'macos-latest'
+        name: create osx bundle
+        run: "bash ./create_bundle.sh"
+        working-directory: conda/osx-arm64
+        env:
+            DEPLOY_RELEASE: ${{ matrix.tag }}
+            ADD_DOCS: ${{ matrix.docs }}
+
       - if: matrix.os == 'ubuntu-latest'
         name: create linux bundle
         run: "bash ./create_bundle.sh"
@@ -94,7 +102,7 @@ jobs:
         with:
           token: ${{ github.token }}
           tag: ${{ matrix.tag }}
-          assets: FreeCAD*macOS-i386*
+          assets: FreeCAD*macOS*
           fail-if-no-assets: false
           fail-if-no-release: false 
 
