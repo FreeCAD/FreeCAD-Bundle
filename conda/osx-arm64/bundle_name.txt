@@ -1,0 +1,1 @@
+FreeCAD_0.21-29436-2022-07-10-conda-macOS-arm-py310
