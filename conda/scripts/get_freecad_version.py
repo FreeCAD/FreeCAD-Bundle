@@ -11,6 +11,10 @@ import FreeCAD
 system = platform.platform().split("-")[0]
 arch = platform.processor()
 
+if arch == "i386":
+    # no idea how to get proper architecture for mac"
+    arch = "x86_64"
+
 # doing this manually for windows
 if system == "Windows":
     arch = "x86_64"
