@@ -44,6 +44,11 @@ if "DEPLOY_RELEASE" in os.environ and os.environ["DEPLOY_RELEASE"] == "weekly-bu
 
 package_manager = "conda"
 
-bundle_name = "FreeCAD_{}-{}-{}-{}-{}-{}-{}".format(dev_version, revision, date, package_manager, system, arch, python_verson)
+if system == "Windows":
+    date = date.replace("-",".")
+    bundle_name = "FreeCAD_{}-{}.{}-{}-{}-{}-{}".format(dev_version, revision, date, package_manager, system, arch, python_verson)
+else:
+    bundle_name = "FreeCAD_{}-{}-{}-{}-{}-{}-{}".format(dev_version, revision, date, package_manager, system, arch, python_verson)
+
 with open("bundle_name.txt", "w") as bundle_name_file:
     bundle_name_file.write(bundle_name)
