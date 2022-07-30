@@ -9,7 +9,7 @@ mamba create \
   -p ${conda_env} \
   freecad=*.pre occt=7.6 vtk=9 python=3.10 calculix blas=*=openblas gitpython \
   numpy matplotlib-base scipy sympy pandas six \
-  pyyaml opencamlib ifcopenshell libredwg pycollada \
+  pyyaml opencamlib libredwg pycollada \
   appimage-updater-bridge lxml xlutils olefile requests \
   openglider blinker opencv qt.py nine docutils \
   --copy -c freecad/label/dev -c conda-forge -y
