@@ -72,7 +72,7 @@ jobs:
             ADD_DOCS: ${{ matrix.docs }}
 
       - if: matrix.os == 'macos-latest'
-        name: create osx bundle
+        name: create osx-arm64 bundle
         run: "bash ./create_bundle.sh"
         working-directory: conda/osx-arm64
         env:
