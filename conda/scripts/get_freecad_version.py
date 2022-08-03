@@ -30,7 +30,11 @@ revision = version_info[2].split(" ")[0]
 if system == "macOS":
     import jinja2
     print("create plist from template")
-    osx_directory = os.path.join(os.path.dirname(__file__), "..", "osx")
+    if arch != "arm":
+        osx_directory = "osx"
+    else:
+        osx_directory = "osx-arm64"
+    osx_directory = os.path.join(os.path.dirname(__file__), "..", osx_directory)
     with open(os.path.join(osx_directory, "Info.plist.template")) as template_file:
         template_str = template_file.read()
     template = jinja2.Template(template_str)
