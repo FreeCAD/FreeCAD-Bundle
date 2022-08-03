@@ -96,6 +96,15 @@ jobs:
             DEPLOY_RELEASE: ${{ matrix.tag }}
             ADD_DOCS: ${{ matrix.docs }}
 
+      - if: matrix.os == 'windows-latest'
+        name: create windows bundle (py38)
+        shell: cmd
+        run: "call create_bundle.bat"
+        working-directory: conda\win_py38
+        env:
+            DEPLOY_RELEASE: ${{ matrix.tag }}
+            ADD_DOCS: ${{ matrix.docs }}
+
       - if: (matrix.os == 'macos-latest' && github.event_name != 'pull_request')
         name: delete old mac assets
         uses: mknejp/delete-release-assets@v1
