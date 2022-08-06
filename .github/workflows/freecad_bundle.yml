@@ -71,14 +71,6 @@ jobs:
             DEPLOY_RELEASE: ${{ matrix.tag }}
             ADD_DOCS: ${{ matrix.docs }}
 
-      - if: matrix.os == 'macos-latest'
-        name: create osx-arm64 bundle
-        run: "bash ./create_bundle.sh"
-        working-directory: conda/osx-arm64
-        env:
-            DEPLOY_RELEASE: ${{ matrix.tag }}
-            ADD_DOCS: ${{ matrix.docs }}
-
       - if: matrix.os == 'ubuntu-latest'
         name: create linux bundle
         run: "bash ./create_bundle.sh"
@@ -95,6 +87,15 @@ jobs:
         env:
             DEPLOY_RELEASE: ${{ matrix.tag }}
             ADD_DOCS: ${{ matrix.docs }}
+            
+      - if: matrix.os == 'windows-latest'
+        name: create windows bundle (py38)
+        shell: cmd
+        run: "call create_bundle.bat"
+        working-directory: conda\win_py38
+        env:
+            DEPLOY_RELEASE: ${{ matrix.tag }}
+            ADD_DOCS: ${{ matrix.docs }}
 
       - if: (matrix.os == 'macos-latest' && github.event_name != 'pull_request')
         name: delete old mac assets
@@ -102,7 +103,7 @@ jobs:
         with:
           token: ${{ github.token }}
           tag: ${{ matrix.tag }}
-          assets: FreeCAD*macOS*
+          assets: FreeCAD*macOS-x86_64*
           fail-if-no-assets: false
           fail-if-no-release: false 
 
@@ -112,7 +113,7 @@ jobs:
         with:
           token: ${{ github.token }}
           tag: ${{ matrix.tag }}
-          assets: FreeCAD*Linux*
+          assets: FreeCAD*Linux-x86_64*
           fail-if-no-assets: false
           fail-if-no-release: false
 
