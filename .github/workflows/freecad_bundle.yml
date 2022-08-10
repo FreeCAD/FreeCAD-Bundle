@@ -18,14 +18,14 @@ jobs:
       fail-fast: false
       matrix:
         os: [windows-latest, macos-latest, ubuntu-latest]
-        python: [3.8, 3.10]
+        python: [38, 310]
         tag: ["weekly-builds"]
         docs: ["0"]
         exclude:
           - os: macos-latest
-            python: 3.8
+            python: 38
           - os: ubuntu-latest
-            python: 3.8
+            python: 38
           
 
     steps:
@@ -90,7 +90,7 @@ jobs:
         name: create windows bundle
         shell: cmd
         run: "call create_bundle.bat"
-        working-directory: conda\win-${{ matrix.python }}
+        working-directory: conda\win_py${{ matrix.python }}
         env:
             DEPLOY_RELEASE: ${{ matrix.tag }}
             ADD_DOCS: ${{ matrix.docs }}
