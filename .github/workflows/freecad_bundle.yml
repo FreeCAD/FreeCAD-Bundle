@@ -21,11 +21,11 @@ jobs:
         python: [3.8, 3.10]
         tag: ["weekly-builds"]
         docs: ["0"]
-        include:
+        exclude:
           - os: macos-latest
-            python: 3.10
+            python: 3.8
           - os: ubuntu-latest
-            python: 3.10
+            python: 3.8
           
 
     steps:
