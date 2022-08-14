@@ -14,8 +14,8 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        tag: ["weekly-builds"]
-        branch: ["master"]
+        tag: ["0.20.1"]
+        branch: ["0.20.1"]
 
     steps:
       - name: Run a multi-line script
