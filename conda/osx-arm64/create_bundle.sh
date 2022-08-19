@@ -1,5 +1,7 @@
 # assume we have a working conda available
 
+# remove this line for the release
+export DEPLOY_RELEASE=weekly-builds
 
 export CONDA_SUBDIR=osx-arm64
 export MAMBA_NO_BANNER=1
