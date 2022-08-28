@@ -8,6 +8,7 @@ import freecad
 import FreeCAD
 
 
+package_manager = "conda"
 system = platform.platform().split("-")[0]
 arch = platform.processor()
 
@@ -46,8 +47,14 @@ if system == "macOS":
 if "DEPLOY_RELEASE" in os.environ and os.environ["DEPLOY_RELEASE"] == "weekly-builds":
     dev_version = "weekly-builds"
 
-package_manager = "conda"
 
-bundle_name = "FreeCAD_{}-{}-{}-{}-{}-{}-{}".format(dev_version, revision, date, package_manager, system, arch, python_verson)
+if "DEPLOY_RELEASE" in os.environ and os.environ["DEPLOY_RELEASE"] == "weekly-builds":
+    dev_version = "weekly-builds"
+    revision_separator = "-"
+else:
+    revision_seperator = "."
+
+
+bundle_name = f"FreeCAD_{dev_version}{revision_seperator}{revision}-{date}-{package_manager}-{system}-{arch}-{python_verson}"
 with open("bundle_name.txt", "w") as bundle_name_file:
     bundle_name_file.write(bundle_name)
