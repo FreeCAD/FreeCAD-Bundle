@@ -52,9 +52,9 @@ if "DEPLOY_RELEASE" in os.environ and os.environ["DEPLOY_RELEASE"] == "weekly-bu
     dev_version = "weekly-builds"
     revision_separator = "-"
 else:
-    revision_seperator = "."
+    revision_separator = "."
 
 
-bundle_name = f"FreeCAD_{dev_version}{revision_seperator}{revision}-{date}-{package_manager}-{system}-{arch}-{python_verson}"
+bundle_name = f"FreeCAD_{dev_version}{revision_separator}{revision}-{date}-{package_manager}-{system}-{arch}-{python_verson}"
 with open("bundle_name.txt", "w") as bundle_name_file:
     bundle_name_file.write(bundle_name)
