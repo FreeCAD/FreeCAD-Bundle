@@ -11,7 +11,7 @@
 	<key>CFBundleIconFile</key>
 	<string>freecad.icns</string>
 	<key>CFBundleIdentifier</key>
-	<string></string>
+	<string>org.freecadweb.FreeCAD</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleLongVersionString</key>
