@@ -31,7 +31,7 @@
 	<key>NSHumanReadableCopyright</key>
 	<string></string>
 	<key>NSPrincipalClass</key>
-   	<string>NSApplication</string>	
+	<string>NSApplication</string>	
 	<key>NSHighResolutionCapable</key>
 	<string>True</string>
 	<key>CFBundleDocumentTypes</key>
@@ -47,6 +47,26 @@
 			<string>freecad-doc.icns</string>
 			<key>LSIsAppleDefaultForType</key>
 			<true/>
+		</dict>
+	</array>
+	<key>UTExportedTypeDeclarations</key>
+	<array>
+		<dict>
+			<key>UTTypeConformsTo</key>
+			<array>
+				<string>public.data</string>
+			</array>
+			<key>UTTypeDescription</key>
+			<string>FreeCAD Document</string>
+			<key>UTTypeIdentifier</key>
+			<string>org.freecad.fcstd</string>
+			<key>UTTypeTagSpecification</key>
+			<dict>
+				<key>public.filename-extension</key>
+				<array>
+					<string>FCStd</string>
+				</array>
+			</dict>
 		</dict>
 	</array>
 </dict>
