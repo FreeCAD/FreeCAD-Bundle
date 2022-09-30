@@ -25,6 +25,9 @@ echo -e "################"
 mamba list -p ${conda_env} > APP/FreeCAD.app/Contents/packages.txt
 sed -i "1s/.*/\n\nLIST OF PACKAGES:/"  APP/FreeCAD.app/Contents/packages.txt
 
+# copy the QuickLook plugin into its final location
+mv ${conda_env}/Library ${conda_env}/../Library
+
 # delete unnecessary stuff
 rm -rf ${conda_env}/include
 find ${conda_env} -name \*.a -delete
