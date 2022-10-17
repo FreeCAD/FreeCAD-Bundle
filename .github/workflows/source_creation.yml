@@ -14,8 +14,8 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        tag: ["weekly-builds"]
-        branch: ["master"]
+        tag: ["topo-naming"]
+        branch: ["development/toponaming"]
 
     steps:
       - name: Run a multi-line script
