@@ -7,7 +7,7 @@ echo -e "\nCreate the environment"
 
 mamba create \
   -p ${conda_env} \
-  freecad=*.pre occt=7.6 vtk=9 python=3.10 calculix blas=*=openblas gitpython \
+  freecadtoponaming occt=7.6 vtk=9 python=3.10 calculix blas=*=openblas gitpython \
   numpy matplotlib-base scipy sympy pandas six \
   pyyaml opencamlib libredwg pycollada ifcopenshell \
   appimage-updater-bridge lxml xlutils olefile requests \
