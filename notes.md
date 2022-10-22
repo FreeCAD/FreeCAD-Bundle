@@ -1,5 +1,5 @@
 # release:
-1. create branch based on master `release_0.x.y`
+1. create branch based on master `release_0.x.y` (branch should not match the tag-name)
 2. make changes to github action files
   * source creation must use the related release tag!
   * the bundle scripts must upload to the right release
