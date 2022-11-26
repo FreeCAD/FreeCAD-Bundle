@@ -10,7 +10,7 @@ mamba create \
     freecad=*.pre occt=7.6 vtk=9 python=3.10 calculix blas=*=openblas gitpython \
     numpy matplotlib-base scipy sympy pandas six \
     pyyaml jinja2 opencamlib libredwg ifcopenshell \
-    pycollada openglider lxml xlutils olefile requests \
+    pycollada lxml xlutils olefile requests \
     blinker opencv qt.py nine docutils \
     --copy -c freecad/label/dev -c conda-forge -y
 
