@@ -25,8 +25,8 @@ python_verson = "py" + python_verson[0] + python_verson[1]
 date = str(datetime.now()).split(" ")[0]
 
 version_info = FreeCAD.Version()
-dev_version = version_info[0] + "." + version_info[1]
-revision = version_info[2].split(" ")[0]
+dev_version = version_info[0] + "." + version_info[1] + "." + version_info[2]
+revision = version_info[3].split(" ")[0]
 
 if system == "macOS":
     import jinja2
@@ -48,7 +48,8 @@ if "DEPLOY_RELEASE" in os.environ and os.environ["DEPLOY_RELEASE"] == "weekly-bu
     dev_version = "weekly-builds"
     revision_separator = "-"
 else:
-    revision_separator = "."
+    revision_separator = ""
+    revision = ""
 
 
 bundle_name = f"FreeCAD_{dev_version}{revision_separator}{revision}-{date}-{package_manager}-{system}-{arch}-{python_verson}"
