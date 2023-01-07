@@ -12,3 +12,9 @@
 # naming convention:
 
 FreeCAD_{{ release }}-{{ revision }}-{{ date }}-{{ system }}-{{ python-version }}.{{ extension }}
+
+# manually uploading release
+
+```
+gh release upload <tag> <file>
+```
