@@ -11,7 +11,7 @@ mamba create \
   numpy matplotlib-base scipy sympy pandas six \
   pyyaml opencamlib libredwg pycollada ifcopenshell \
   appimage-updater-bridge lxml xlutils olefile requests \
-  blinker opencv qt.py nine docutils \
+  blinker opencv qt.py nine docutils fmt \
   --copy -c freecad/label/dev -c conda-forge -y
   
 
