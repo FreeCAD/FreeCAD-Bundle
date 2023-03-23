@@ -3,18 +3,26 @@ set copy_dir="FreeCAD_Conda_Build"
 
 mkdir %copy_dir%
 
-call conda create ^
+call mamba create ^
  -p %conda_env% ^
- freecad python=3.8 occt=7.5 vtk=9 libredwg calculix gitpython gmsh ^
+ freecad=*.pre python=3.10 occt=7.6 vtk=9 libredwg calculix gitpython gmsh ^
  numpy matplotlib-base scipy sympy pandas six ^
- pyyaml opencamlib ifcopenshell openglider ^
- freecad.asm3 libredwg pycollada  pythonocc-core ^
- lxml xlutils olefile requests ^
+ pyyaml opencamlib ifcopenshell ^
+ libredwg pycollada lxml xlutils olefile requests ^
  blinker opencv qt.py nine docutils ^
  --copy ^
  -c freecad/label/dev ^
  -c conda-forge ^
  -y
+ 
+ 
+%conda_env%\python ..\scripts\get_freecad_version.py
+set /p freecad_version_name= <bundle_name.txt
+
+echo **********************
+echo %freecad_version_name%
+echo **********************
+
 
 REM Copy Conda's Python and (U)CRT to FreeCAD/bin
 robocopy %conda_env%\DLLs %copy_dir%\bin\DLLs /S /MT:%NUMBER_OF_PROCESSORS% > nul
@@ -55,20 +63,13 @@ copy ssl-patch.py %copy_dir%\bin\Lib\ssl.py
 rename %copy_dir%\bin\Lib\site-packages\mpmath\ctx_mp_python.py ctx_mp_python-orig.py
 copy C:\Users\travis\build\FreeCAD\FreeCAD-AppImage\conda\modifications\ctx_mp_python.py %copy_dir%\bin\Lib\site-packages\mpmath\ctx_mp_python.py
 
-if "%DEPLOY_RELEASE%"=="weekly-builds" (
-%copy_dir%\bin\python.exe -c "import FreeCAD;print('weekly-builds-' + FreeCAD.Version()[2].split(' ')[0])" > tempver.txt
-) else (
-%copy_dir%\bin\python.exe -c "import FreeCAD;print((FreeCAD.Version()[0]) +'.' + (FreeCAD.Version()[1]) +'.' + (FreeCAD.Version()[2].split(' ')[0]))" > tempver.txt
-)
-set /p fcver=<tempver.txt
 
-echo %fcver%
 cd %copy_dir%\..
-ren %copy_dir% FreeCAD_%fcver%-Win-Conda_vc14.x-x86_64
+ren %copy_dir% %freecad_version_name%
 dir
 
 REM if errorlevel1 exit 1
 
-"%ProgramFiles%\7-Zip\7z.exe" a -t7z -mmt=%NUMBER_OF_PROCESSORS% FreeCAD_%fcver%-Win-Conda_vc14.x-x86_64.7z FreeCAD_%fcver%-Win-Conda_vc14.x-x86_64\ -bb
-certutil -hashfile "FreeCAD_%fcver%-Win-Conda_vc14.x-x86_64.7z" SHA256 > "FreeCAD_%fcver%-Win-Conda_vc14.x-x86_64.7z"-SHA256.txt
-echo  %date%-%time% >>"FreeCAD_%fcver%-Win-Conda_vc14.x-x86_64.7z"-SHA256.txt
+"%ProgramFiles%\7-Zip\7z.exe" a -t7z -mmt=%NUMBER_OF_PROCESSORS% %freecad_version_name%.7z %freecad_version_name%\ -bb
+certutil -hashfile "%freecad_version_name%.7z" SHA256 > "%freecad_version_name%.7z"-SHA256.txt
+echo  %date%-%time% >>"%freecad_version_name%.7z"-SHA256.txt

@@ -1,15 +1,18 @@
 # assume we have a working conda available
 
+# remove this line for the release
+export DEPLOY_RELEASE=weekly-builds
 
+export CONDA_SUBDIR=osx-arm64
 export MAMBA_NO_BANNER=1
 conda_env="APP/FreeCAD.app/Contents/Resources"
 
 
 mamba create \
     -p ${conda_env} \
-    freecad=*.pre occt=7.6 vtk=9 python=3.10 calculix blas=*=openblas gitpython \
+    freecad=*.pre occt=7.6 vtk=9 python=3.10 blas=*=openblas gitpython \
     numpy matplotlib-base scipy sympy pandas six \
-    pyyaml jinja2 opencamlib libredwg ifcopenshell \
+    pyyaml jinja2 opencamlib calculix ifcopenshell \
     pycollada lxml xlutils olefile requests \
     blinker opencv qt.py nine docutils \
     --copy -c freecad/label/dev -c conda-forge -y
@@ -50,6 +53,9 @@ cp qt.conf ${conda_env}/libexec/
 # Remove __pycache__ folders and .pyc files
 find . -path "*/__pycache__/*" -delete
 find . -name "*.pyc" -type f -delete
+
+# qtwebengine fix
+ln -s ./APP/FreeCAD.app/Contents/Resources/resources ./APP/FreeCAD.app/Contents/Resources/Resources
 
 # create the dmg
 hdiutil create -volname "${version_name}" -srcfolder ./APP -ov -format UDZO "${version_name}.dmg"

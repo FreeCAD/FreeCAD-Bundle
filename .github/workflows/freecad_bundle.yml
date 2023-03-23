@@ -1,4 +1,4 @@
-name: FreeCAD bundeling
+name: freecad_bundle
 on:
   schedule:
    - cron: "0 12 * * 0/4"
@@ -14,11 +14,19 @@ jobs:
   build-bundles:
     runs-on: ${{ matrix.os }}
     strategy:
-      max-parallel: 3
+      max-parallel: 4
+      fail-fast: false
       matrix:
         os: [windows-latest, macos-latest, ubuntu-latest]
+        python: [py38, py310]
         tag: ["weekly-builds"]
         docs: ["0"]
+        exclude:
+          - os: macos-latest
+            python: py38
+          - os: ubuntu-latest
+            python: py38
+          
 
     steps:
       - if: matrix.os == 'windows-latest'
@@ -31,6 +39,8 @@ jobs:
       - uses: conda-incubator/setup-miniconda@v2
         with:
           auto-update-conda: true
+          use-mamba: true
+          miniforge-variant: Mambaforge
 
       - if: matrix.os == 'macos-latest'
         name: update mac
@@ -40,7 +50,7 @@ jobs:
       - if: matrix.os == 'ubuntu-latest'
         name: update linux
         run: |
-          sudo apt-get update -qq && sudo apt-get install -y desktop-file-utils jq zsync;
+          sudo apt-get update -qq && sudo apt-get install -y desktop-file-utils jq zsync libfuse2;
           apt-get download libc6;
           dpkg -x libc6*.deb libc6;
           curl -LO https://raw.githubusercontent.com/AppImage/AppImages/master/pkg2appimage;
@@ -50,20 +60,15 @@ jobs:
       - if: matrix.os != 'windows-latest'
         name: install conda dependencies for unix
         run: |
-          conda install p7zip sed curl -y -c conda-forge;
-          conda config --show channels;
+          mamba env config vars set MAMBA_NO_BANNER=1
+          mamba install p7zip sed curl -y -c conda-forge;
+          mamba config --show channels;
 
       - if: matrix.os == 'windows-latest'
         name: install conda dependencies for windows
         run: |
-          conda install curl -y -c conda-forge;
-
-      - if: ${{ matrix.docs }}
-        name: get docs
-        run: curl -LO "https://github.com/FreeCAD/FreeCAD/releases/download/0.18/FreeCAD.0_18.Offline.Doc.7z"
-
-      - name: extract docs
-        run: 7z x FreeCAD.0_18.Offline.Doc.7z
+          mamba env config vars set MAMBA_NO_BANNER=1
+          mamba install curl -y -c conda-forge;
 
       - if: matrix.os == 'macos-latest'
         name: create osx bundle
@@ -83,44 +88,44 @@ jobs:
 
       - if: matrix.os == 'windows-latest'
         name: create windows bundle
-        run: "call create_bundle.bat"
         shell: cmd
-        working-directory: conda\win
+        run: "call create_bundle.bat"
+        working-directory: conda\win_${{ matrix.python }}
         env:
             DEPLOY_RELEASE: ${{ matrix.tag }}
             ADD_DOCS: ${{ matrix.docs }}
 
-      - if: (matrix.os == 'macos-latest' && github.ref == 'refs/heads/master')
+      - if: (matrix.os == 'macos-latest' && github.event_name != 'pull_request')
         name: delete old mac assets
         uses: mknejp/delete-release-assets@v1
         with:
           token: ${{ github.token }}
           tag: ${{ matrix.tag }}
-          assets: FreeCAD*OSX*
+          assets: FreeCAD*macOS-x86_64*
           fail-if-no-assets: false
           fail-if-no-release: false 
 
-      - if: (matrix.os == 'ubuntu-latest' && github.ref == 'refs/heads/master')
+      - if: (matrix.os == 'ubuntu-latest' && github.event_name != 'pull_request')
         name: delete old linux assets
         uses: mknejp/delete-release-assets@v1
         with:
           token: ${{ github.token }}
           tag: ${{ matrix.tag }}
-          assets: FreeCAD*Linux*
+          assets: FreeCAD*Linux-x86_64*
           fail-if-no-assets: false
           fail-if-no-release: false
 
-      - if: (matrix.os == 'windows-latest' && github.ref == 'refs/heads/master')
+      - if: (matrix.os == 'windows-latest' && github.event_name != 'pull_request')
         name: delete old win assets
         uses: mknejp/delete-release-assets@v1
         with:
           token: ${{ github.token }}
           tag: ${{ matrix.tag }}
-          assets: FreeCAD*Win-Conda*
+          assets: FreeCAD*Win*${{ matrix.python }}*
           fail-if-no-assets: false
           fail-if-no-release: false
 
-      - if: (matrix.os == 'ubuntu-latest' && github.ref == 'refs/heads/master')
+      - if: (matrix.os == 'ubuntu-latest' && github.event_name != 'pull_request')
         name: Upload binaries to release
         uses: svenstaro/upload-release-action@v2
         with:
@@ -130,7 +135,7 @@ jobs:
           overwrite: true
           file_glob: true
 
-      - if: (matrix.os == 'macos-latest' && github.ref == 'refs/heads/master')
+      - if: (matrix.os == 'macos-latest' && github.event_name != 'pull_request')
         name: Upload binaries to release
         uses: svenstaro/upload-release-action@v2
         with:
@@ -140,12 +145,12 @@ jobs:
           overwrite: true
           file_glob: true
           
-      - if: (matrix.os == 'windows-latest' && github.ref == 'refs/heads/master')
+      - if: (matrix.os == 'windows-latest' && github.event_name != 'pull_request')
         name: Upload binaries to release
         uses: svenstaro/upload-release-action@v2
         with:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
-          file: conda\win\FreeCAD*
+          file: conda/win_${{ matrix.python }}/FreeCAD*
           tag: ${{ matrix.tag }}
           overwrite: true
           file_glob: true
