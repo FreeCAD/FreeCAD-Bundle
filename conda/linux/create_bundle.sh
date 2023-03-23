@@ -13,7 +13,7 @@ mamba create \
   appimage-updater-bridge lxml xlutils olefile requests \
   blinker opencv qt.py nine docutils fmt \
   --copy -c freecad/label/dev -c conda-forge -y
-  
+
 
 mamba run -p ${conda_env} python ../scripts/get_freecad_version.py
 read -r version_name < bundle_name.txt
@@ -51,10 +51,12 @@ cp qt.conf ${conda_env}/bin/
 cp qt.conf ${conda_env}/libexec/
 
 echo -e "\nCopy Icon and Desktop file"
-mkdir -p ${conda_env}/share/icons/default/
-cp AppDir/freecad_weekly.png ${conda_env}/share/icons/default/freecad_weekly.png
+mkdir -p ${conda_env}/share/icons/hicolor/scalable/apps/
+cp AppDir/freecad_weekly.svg ${conda_env}/share/icons/hicolor/scalable/apps/
+mkdir -p ${conda_env}/share/icons/hicolor/64x64/apps/
+cp AppDir/freecad_weekly.png ${conda_env}/share/icons/hicolor/64x64/apps/
 mkdir -p ${conda_env}/share/applications/
-cp AppDir/freecad_weekly.desktop ${conda_env}/share/applications/freecad_weekly.desktop
+cp AppDir/freecad_weekly.desktop ${conda_env}/share/applications/
 
 # Remove __pycache__ folders and .pyc files
 find . -path "*/__pycache__/*" -delete
