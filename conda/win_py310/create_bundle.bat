@@ -62,7 +62,9 @@ rename %copy_dir%\bin\Lib\ssl.py ssl-orig.py
 copy ssl-patch.py %copy_dir%\bin\Lib\ssl.py
 rename %copy_dir%\bin\Lib\site-packages\mpmath\ctx_mp_python.py ctx_mp_python-orig.py
 copy C:\Users\travis\build\FreeCAD\FreeCAD-AppImage\conda\modifications\ctx_mp_python.py %copy_dir%\bin\Lib\site-packages\mpmath\ctx_mp_python.py
-
+cd %copy_dir%\translations
+mkdir qtwebengine_locales
+copy qtweb*.qm %copy_dir%\translations\qtwebengine_locales
 
 cd %copy_dir%\..
 ren %copy_dir% %freecad_version_name%
