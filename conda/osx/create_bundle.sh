@@ -51,6 +51,9 @@ cp qt.conf ${conda_env}/libexec/
 find . -path "*/__pycache__/*" -delete
 find . -name "*.pyc" -type f -delete
 
+# qtwebengine fix
+ln -s ./APP/FreeCAD.app/Contents/Resources/resources ./APP/FreeCAD.app/Contents/Resources/Resources
+
 # create the dmg
 hdiutil create -volname "${version_name}" -srcfolder ./APP -ov -format UDZO "${version_name}.dmg"
 
