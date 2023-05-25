@@ -7,12 +7,12 @@ echo -e "\nCreate the environment"
 
 mamba create \
   -p ${conda_env} \
-  freecad=*.pre occt vtk python=3.11 calculix blas=*=openblas gitpython \
+  freecad=*.pre occt=7.6 vtk python=3.10 calculix blas=*=openblas \
   numpy matplotlib-base scipy sympy pandas six \
   pyyaml opencamlib pycollada ifcopenshell \
   appimage-updater-bridge lxml xlutils olefile requests \
   blinker opencv qt.py nine docutils fmt=9.1.0 \
-  --copy -c conda-forge/label/freecad_rc -c conda-forge -y
+  --copy -c freecad/label/dev -c conda-forge -y
 
 
 mamba run -p ${conda_env} python ../scripts/get_freecad_version.py
