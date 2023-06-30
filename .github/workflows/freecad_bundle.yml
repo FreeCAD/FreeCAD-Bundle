@@ -18,14 +18,14 @@ jobs:
       fail-fast: false
       matrix:
         os: [windows-latest, macos-latest, ubuntu-latest]
-        python: [py38, py310]
+        #python: [py38, py310]
         tag: ["weekly-builds"]
         docs: ["0"]
-        exclude:
-          - os: macos-latest
-            python: py38
-          - os: ubuntu-latest
-            python: py38
+        # exclude:
+        #   - os: macos-latest
+        #     python: py38
+        #   - os: ubuntu-latest
+        #     python: py38
           
 
     steps:
@@ -90,7 +90,7 @@ jobs:
         name: create windows bundle
         shell: cmd
         run: "call create_bundle.bat"
-        working-directory: conda\win_${{ matrix.python }}
+        working-directory: conda\win
         env:
             DEPLOY_RELEASE: ${{ matrix.tag }}
             ADD_DOCS: ${{ matrix.docs }}
@@ -121,7 +121,7 @@ jobs:
         with:
           token: ${{ github.token }}
           tag: ${{ matrix.tag }}
-          assets: FreeCAD*Win*${{ matrix.python }}*
+          assets: FreeCAD*Win*
           fail-if-no-assets: false
           fail-if-no-release: false
 
@@ -150,7 +150,7 @@ jobs:
         uses: svenstaro/upload-release-action@v2
         with:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
-          file: conda/win_${{ matrix.python }}/FreeCAD*
+          file: conda/win/FreeCAD*
           tag: ${{ matrix.tag }}
           overwrite: true
           file_glob: true
