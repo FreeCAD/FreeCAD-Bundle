@@ -42,10 +42,10 @@ jobs:
           use-mamba: true
           miniforge-variant: Mambaforge
 
-      - if: matrix.os == 'macos-latest'
-        name: update mac
-        run: |
-          brew update;
+      # - if: matrix.os == 'macos-latest'
+      #   name: update mac
+      #   run: |
+      #     brew update;
 
       - if: matrix.os == 'ubuntu-latest'
         name: update linux
