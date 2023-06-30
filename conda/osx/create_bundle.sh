@@ -7,12 +7,12 @@ conda_env="APP/FreeCAD.app/Contents/Resources"
 
 mamba create \
     -p ${conda_env} \
-    freecad=*.pre occt vtk python=3.11 calculix blas=*=openblas gitpython \
+    freecad=*.pre occt vtk python=3.10 calculix blas=*=openblas \
     numpy matplotlib-base scipy sympy pandas six \
     pyyaml jinja2 opencamlib ifcopenshell \
     pycollada lxml xlutils olefile requests \
-    blinker opencv qt.py nine docutils fmt=9.1.0 \
-    --copy -c conda-forge/label/freecad_rc -c conda-forge -y
+    blinker opencv qt.py nine docutils \
+    --copy -c adrianinsaval/label/dev -c freecad -c conda-forge -y
 
 
 mamba run -p ${conda_env} python ../scripts/get_freecad_version.py

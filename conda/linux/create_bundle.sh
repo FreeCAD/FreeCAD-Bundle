@@ -1,19 +1,23 @@
 #!/bin/bash
 
 export MAMBA_NO_BANNER=1
+if [[ -z "$ARCH" ]]; then
+  # Get the architecture of the system
+  export ARCH=$(uname -m)
+fi
 conda_env="AppDir/usr"
 echo -e "\nCreate the environment"
 
+packages="freecad=*.pre occt vtk python=3.10 blas=*=openblas numpy \
+          matplotlib-base scipy sympy pandas six pyyaml pycollada lxml \
+          xlutils olefile requests blinker opencv qt.py nine docutils" 
+if [[ "$ARCH" -eq "x86_64" ]]; then
+  packages=${packages} + " calculix opencamlib ifcopenshell appimage-updater-bridge"
+fi
 
-mamba create \
-  -p ${conda_env} \
-  freecad=*.pre occt=7.6 vtk python=3.10 calculix blas=*=openblas \
-  numpy matplotlib-base scipy sympy pandas six \
-  pyyaml opencamlib pycollada ifcopenshell \
-  appimage-updater-bridge lxml xlutils olefile requests \
-  blinker opencv qt.py nine docutils fmt=9.1.0 \
-  --copy -c freecad/label/dev -c conda-forge -y
-
+mamba create -p ${conda_env} ${packages} \
+  --copy -c adrianinsaval/label/dev \
+  -c freecad -c conda-forge -y
 
 mamba run -p ${conda_env} python ../scripts/get_freecad_version.py
 read -r version_name < bundle_name.txt
@@ -72,7 +76,7 @@ find . -name "*.h" -type f -delete
 find . -name "*.cmake" -type f -delete
 
 echo -e "\nAdd libnsl (Fedora 28 and up)"
-cp ../../libc6/lib/x86_64-linux-gnu/libnsl* ${conda_env}/lib/
+cp ../../libc6/lib/$ARCH-linux-gnu/libnsl* ${conda_env}/lib/
 
 if [ "$DEPLOY_RELEASE" = "weekly-builds" ]; then
   export tag="weekly-builds"
@@ -82,7 +86,7 @@ fi
 
 echo -e "\nCreate the appimage"
 chmod a+x ./AppDir/AppRun
-ARCH=x86_64 ../../appimagetool-x86_64.AppImage \
+../../appimagetool-$(uname -m).AppImage \
   -u "gh-releases-zsync|FreeCAD|FreeCAD-Appimage|$tag|FreeCAD*.AppImage.zsync" \
   AppDir  ${version_name}.AppImage
 
