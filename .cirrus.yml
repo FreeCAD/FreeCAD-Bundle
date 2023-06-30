@@ -48,8 +48,8 @@ linux_task:
       apt-get download libc6;
       dpkg -x libc6*.deb libc6;
       curl -LO https://raw.githubusercontent.com/AppImage/AppImages/master/pkg2appimage;
-      curl -LO https://github.com/AppImage/AppImageKit/releases/download/continuous/appimagetool-$ARCH.AppImage;
-      chmod a+x appimagetool-$ARCH.AppImage;
+      curl -LO https://github.com/AppImage/AppImageKit/releases/download/continuous/appimagetool-$(uname -m).AppImage;
+      chmod a+x appimagetool-$(uname -m).AppImage;
       curl -L -O "https://github.com/conda-forge/miniforge/releases/latest/download/Mambaforge-$(uname)-$(uname -m).sh"
       bash Mambaforge-$(uname)-$(uname -m).sh -b -p "${HOME}/conda"
       source "${HOME}/conda/etc/profile.d/conda.sh"
