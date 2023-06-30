@@ -1,0 +1,63 @@
+macos_task:
+    # Basic metadata:
+    name: dmg-bundle
+
+    # The build machine:
+    macos_instance:
+      image: ghcr.io/cirruslabs/macos-monterey-base:latest
+
+    # Environment variables:
+    env:
+      DEPLOY_RELEASE: weekly-builds
+      GH_TOKEN: ENCRYPTED[7fbf843c0bed21e86628738b37ce90b62971e2f0462add19f872e22177a8e093ed2f32a9a11e0e876c4634dbcb233a33]
+
+    # Instructions:
+    bundle_script: |
+      curl -L -O "https://github.com/conda-forge/miniforge/releases/latest/download/Mambaforge-$(uname)-$(uname -m).sh"
+      bash Mambaforge-$(uname)-$(uname -m).sh -b -p "${HOME}/conda"
+      source "${HOME}/conda/etc/profile.d/conda.sh"
+      conda activate
+      cd conda/osx-arm64
+      bash ./create_bundle.sh
+      mamba install gh
+      gh repo set-default $CIRRUS_REPO_FULL_NAME
+      gh release upload "$DEPLOY_RELEASE" FreeCAD*
+
+    # dmg_artifacts:
+    #   path: conda/osx-arm64/FreeCAD*
+
+linux_task:
+    # Basic metadata:
+    name: appimage-bundle
+
+    # The build machine:
+    arm_container:
+      image: ubuntu:latest
+
+    # Environment variables:
+    env:
+      DEPLOY_RELEASE: weekly-builds
+      GH_TOKEN: ENCRYPTED[7fbf843c0bed21e86628738b37ce90b62971e2f0462add19f872e22177a8e093ed2f32a9a11e0e876c4634dbcb233a33]
+
+    # Instructions:
+    bundle_script: |
+      cd conda/linux
+      apt update
+      apt upgrade -y
+      apt install curl -y
+      apt-get download libc6;
+      dpkg -x libc6*.deb libc6;
+      curl -LO https://raw.githubusercontent.com/AppImage/AppImages/master/pkg2appimage;
+      curl -LO https://github.com/AppImage/AppImageKit/releases/download/continuous/appimagetool-$ARCH.AppImage;
+      chmod a+x appimagetool-$ARCH.AppImage;
+      curl -L -O "https://github.com/conda-forge/miniforge/releases/latest/download/Mambaforge-$(uname)-$(uname -m).sh"
+      bash Mambaforge-$(uname)-$(uname -m).sh -b -p "${HOME}/conda"
+      source "${HOME}/conda/etc/profile.d/conda.sh"
+      conda activate
+      bash ./create_bundle.sh
+      mamba install gh
+      gh repo set-default $CIRRUS_REPO_FULL_NAME
+      gh release upload "$DEPLOY_RELEASE" FreeCAD*
+
+    # appimage_artifacts:
+    #   path: conda/linux/FreeCAD*
