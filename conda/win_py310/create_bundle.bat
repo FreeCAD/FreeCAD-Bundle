@@ -62,8 +62,6 @@ robocopy %conda_env%\Library\Mod %copy_dir%\Mod /S /XD __pycache__ /MT:%NUMBER_O
 REM Apply Patches
 rename %copy_dir%\bin\Lib\ssl.py ssl-orig.py
 copy ssl-patch.py %copy_dir%\bin\Lib\ssl.py
-rename %copy_dir%\bin\Lib\site-packages\mpmath\ctx_mp_python.py ctx_mp_python-orig.py
-copy C:\Users\travis\build\FreeCAD\FreeCAD-AppImage\conda\modifications\ctx_mp_python.py %copy_dir%\bin\Lib\site-packages\mpmath\ctx_mp_python.py
 
 cd %copy_dir%\..
 ren %copy_dir% %freecad_version_name%

@@ -1,1 +1,0 @@
-FreeCAD_weekly-builds-conda-macOS-arm-py310

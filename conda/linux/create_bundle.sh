@@ -29,7 +29,7 @@ echo -e "\nUninstall some packages not needed"
 conda uninstall -p ${conda_env} libclang --force -y
 
 mamba list -p ${conda_env} > AppDir/packages.txt
-sed -i "1s/.*/\n\nLIST OF PACKAGES:/" AppDir/packages.txt
+sed -i "1s/.*/\nLIST OF PACKAGES:/" AppDir/packages.txt
 
 echo -e "\nDelete unnecessary stuff"
 rm -rf ${conda_env}/include
@@ -60,7 +60,7 @@ cp AppDir/freecad_weekly.desktop ${conda_env}/share/applications/
 
 # Remove __pycache__ folders and .pyc files
 find . -path "*/__pycache__/*" -delete
-# find . -name "*.pyc" -type f -delete
+find . -name "*.pyc" -type f -delete
 
 # reduce size
 rm -rf ${conda_env}/conda-meta/
@@ -73,13 +73,6 @@ find . -name "*.cmake" -type f -delete
 
 echo -e "\nAdd libnsl (Fedora 28 and up)"
 cp ../../libc6/lib/x86_64-linux-gnu/libnsl* ${conda_env}/lib/
-
-if [ ${ADD_DOCS} ]
-then
-  echo -e "\nAdd documentation"
-  mkdir -p ${conda_env}/share/doc/FreeCAD
-  cp ../../doc/* ${conda_env}/share/doc/FreeCAD
-fi
 
 if [ "$DEPLOY_RELEASE" = "weekly-builds" ]; then
   export tag="weekly-builds"
