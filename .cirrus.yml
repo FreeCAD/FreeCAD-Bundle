@@ -41,7 +41,6 @@ linux_task:
 
     # Instructions:
     bundle_script: |
-      cd conda/linux
       apt update
       apt upgrade -y
       apt install curl -y
@@ -54,6 +53,7 @@ linux_task:
       bash Mambaforge-$(uname)-$(uname -m).sh -b -p "${HOME}/conda"
       source "${HOME}/conda/etc/profile.d/conda.sh"
       conda activate
+      cd conda/linux
       bash ./create_bundle.sh
       mamba install gh
       gh repo set-default $CIRRUS_REPO_FULL_NAME
