@@ -31,8 +31,11 @@ linux_task:
     name: appimage-bundle
 
     # The build machine:
-    arm_container:
-      image: ubuntu:latest
+    compute_engine_instance:
+      image_project: cirrus-images
+      image: family/docker-builder-arm64
+      platform: linux
+      architecture: arm64
 
     # Environment variables:
     env:
@@ -43,15 +46,16 @@ linux_task:
     bundle_script: |
       apt update
       apt upgrade -y
-      apt install curl -y
+      apt install curl fuse -y
       apt-get download libc6;
       dpkg -x libc6*.deb libc6;
       curl -LO https://raw.githubusercontent.com/AppImage/AppImages/master/pkg2appimage;
       curl -LO https://github.com/AppImage/AppImageKit/releases/download/continuous/appimagetool-$(uname -m).AppImage;
       chmod a+x appimagetool-$(uname -m).AppImage;
       curl -L -O "https://github.com/conda-forge/miniforge/releases/latest/download/Mambaforge-$(uname)-$(uname -m).sh"
-      bash Mambaforge-$(uname)-$(uname -m).sh -b -p "${HOME}/conda"
-      source "${HOME}/conda/etc/profile.d/conda.sh"
+      export HOME='/home/cirrus-ci-build'
+      bash Mambaforge-$(uname)-$(uname -m).sh -b -p "${HOME}/mambaforge"
+      source "${HOME}/mambaforge/etc/profile.d/conda.sh"
       conda activate
       cd conda/linux
       bash ./create_bundle.sh
