@@ -9,7 +9,7 @@ macos_task:
     # Environment variables:
     env:
       DEPLOY_RELEASE: weekly-builds
-      GH_TOKEN: ENCRYPTED[7fbf843c0bed21e86628738b37ce90b62971e2f0462add19f872e22177a8e093ed2f32a9a11e0e876c4634dbcb233a33]
+      GH_TOKEN: ENCRYPTED[7a45c1bfc23b47bdf2bf67d0e5936e16314c88d0ecc3932c44e7c14df46b763362815f2522305c5c42ce09f35a219b1c]
 
     # Instructions:
     bundle_script: |
@@ -40,7 +40,7 @@ linux_task:
     # Environment variables:
     env:
       DEPLOY_RELEASE: weekly-builds
-      GH_TOKEN: ENCRYPTED[7fbf843c0bed21e86628738b37ce90b62971e2f0462add19f872e22177a8e093ed2f32a9a11e0e876c4634dbcb233a33]
+      GH_TOKEN: ENCRYPTED[7a45c1bfc23b47bdf2bf67d0e5936e16314c88d0ecc3932c44e7c14df46b763362815f2522305c5c42ce09f35a219b1c]
 
     # Instructions:
     bundle_script: |
