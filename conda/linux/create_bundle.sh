@@ -8,7 +8,7 @@ fi
 conda_env="AppDir/usr"
 echo -e "\nCreate the environment"
 
-packages="freecad=*.pre occt vtk python=3.10 blas=*=openblas numpy \
+packages="freecad=0.21rc1a occt vtk python=3.10 blas=*=openblas numpy \
           matplotlib-base scipy sympy pandas six pyyaml pycollada lxml \
           xlutils olefile requests blinker opencv qt.py nine docutils" 
 if [[ "$ARCH" = "x86_64" ]]; then

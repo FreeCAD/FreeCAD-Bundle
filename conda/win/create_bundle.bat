@@ -5,7 +5,7 @@ mkdir %copy_dir%
 
 call mamba create ^
  -p %conda_env% ^
- freecad=*.pre python=3.10 occt vtk libredwg calculix gmsh ^
+ freecad=0.21rc1a python=3.10 occt vtk libredwg calculix gmsh ^
  numpy matplotlib-base scipy sympy pandas six ^
  pyyaml opencamlib ifcopenshell ^
  libredwg pycollada lxml xlutils olefile requests ^
