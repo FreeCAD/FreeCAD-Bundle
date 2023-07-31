@@ -45,8 +45,6 @@ linux_task:
 
     # Instructions:
     bundle_script: |
-      apt update
-      apt upgrade -y
       apt install curl fuse -y
       apt-get download libc6;
       dpkg -x libc6*.deb libc6;
