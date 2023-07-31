@@ -17,14 +17,14 @@ macos_task:
       bash Mambaforge-$(uname)-$(uname -m).sh -b -p "${HOME}/conda"
       source "${HOME}/conda/etc/profile.d/conda.sh"
       conda activate
-      cd conda/osx-arm64
+      cd conda/osx
       bash ./create_bundle.sh
       mamba install gh
       gh repo set-default $CIRRUS_REPO_FULL_NAME
       gh release upload "$DEPLOY_RELEASE" FreeCAD*
 
     # dmg_artifacts:
-    #   path: conda/osx-arm64/FreeCAD*
+    #   path: conda/osx/FreeCAD*
 
 linux_task:
     # Basic metadata:
