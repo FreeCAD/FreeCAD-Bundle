@@ -41,6 +41,7 @@ linux_task:
     env:
       DEPLOY_RELEASE: weekly-builds
       GH_TOKEN: ENCRYPTED[7a45c1bfc23b47bdf2bf67d0e5936e16314c88d0ecc3932c44e7c14df46b763362815f2522305c5c42ce09f35a219b1c]
+      DEBIAN_FRONTEND: noninteractive
 
     # Instructions:
     bundle_script: |
