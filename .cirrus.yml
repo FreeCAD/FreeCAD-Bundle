@@ -1,3 +1,7 @@
+env:
+    DEPLOY_RELEASE: weekly-builds
+    GH_TOKEN: ENCRYPTED[7a45c1bfc23b47bdf2bf67d0e5936e16314c88d0ecc3932c44e7c14df46b763362815f2522305c5c42ce09f35a219b1c]
+
 macos_task:
     # Basic metadata:
     name: dmg-bundle
@@ -5,11 +9,6 @@ macos_task:
     # The build machine:
     macos_instance:
       image: ghcr.io/cirruslabs/macos-monterey-base:latest
-
-    # Environment variables:
-    env:
-      DEPLOY_RELEASE: 0.21.0
-      GH_TOKEN: ENCRYPTED[7a45c1bfc23b47bdf2bf67d0e5936e16314c88d0ecc3932c44e7c14df46b763362815f2522305c5c42ce09f35a219b1c]
 
     # Instructions:
     bundle_script: |
@@ -39,8 +38,6 @@ linux_task:
 
     # Environment variables:
     env:
-      DEPLOY_RELEASE: 0.21.0
-      GH_TOKEN: ENCRYPTED[7a45c1bfc23b47bdf2bf67d0e5936e16314c88d0ecc3932c44e7c14df46b763362815f2522305c5c42ce09f35a219b1c]
       DEBIAN_FRONTEND: noninteractive
 
     # Instructions:
