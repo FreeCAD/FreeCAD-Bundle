@@ -16,7 +16,7 @@ if [[ "$ARCH" = "x86_64" ]]; then
 fi
 
 mamba create -p ${conda_env} ${packages} \
-  --copy -c freecad -c conda-forge -y
+  --copy -c freecad/label/stable -c conda-forge -y
 
 mamba run -p ${conda_env} python ../scripts/get_freecad_version.py
 read -r version_name < bundle_name.txt
