@@ -19,7 +19,7 @@ jobs:
       matrix:
         os: [windows-latest, macos-latest, ubuntu-latest]
         #python: [py38, py310]
-        tag: ["0.21rc1a"]
+        tag: ["0.21.0"]
         docs: ["0"]
         # exclude:
         #   - os: macos-latest
