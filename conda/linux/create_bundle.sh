@@ -55,7 +55,7 @@ cp qt.conf ${conda_env}/libexec/
 
 echo -e "\nCopying Icon and Desktop file"
 cp ${conda_env}/share/applications/org.freecadweb.FreeCAD.desktop AppDir/
-sed -i 's/Exec=FreeCAD %F/Exec=AppRun %F/g' AppDir/org.freecadweb.FreeCAD.desktop
+sed -i 's/Exec=FreeCAD/Exec=AppRun/g' AppDir/org.freecadweb.FreeCAD.desktop
 if [ "$DEPLOY_RELEASE" = "weekly-builds" ]; then
   cp freecad_weekly.svg ${conda_env}/share/icons/hicolor/scalable/apps/org.freecadweb.FreeCAD.svg
   sed -i 's/=FreeCAD/=FreeCAD Weekly/g' AppDir/org.freecadweb.FreeCAD.desktop
