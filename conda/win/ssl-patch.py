@@ -89,7 +89,7 @@ ALERT_DESCRIPTION_BAD_CERTIFICATE_STATUS_RESPONSE
 ALERT_DESCRIPTION_BAD_CERTIFICATE_HASH_VALUE
 ALERT_DESCRIPTION_UNKNOWN_PSK_IDENTITY
 """
-# Workaround see https://forum.freecadweb.org/viewtopic.php?f=42&t=47095
+# Workaround see https://forum.freecad.org/viewtopic.php?f=42&t=47095
 CERTS_IGNORE = ["MUP Republike Srbije"]
 
 import sys
