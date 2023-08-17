@@ -54,13 +54,13 @@ cp qt.conf ${conda_env}/bin/
 cp qt.conf ${conda_env}/libexec/
 
 echo -e "\nCopying Icon and Desktop file"
-cp ${conda_env}/share/applications/org.freecadweb.FreeCAD.desktop AppDir/
-sed -i 's/Exec=FreeCAD/Exec=AppRun/g' AppDir/org.freecadweb.FreeCAD.desktop
+cp ${conda_env}/share/applications/org.freecad.FreeCAD.desktop AppDir/
+sed -i 's/Exec=FreeCAD/Exec=AppRun/g' AppDir/org.freecad.FreeCAD.desktop
 if [ "$DEPLOY_RELEASE" = "weekly-builds" ]; then
-  cp freecad_weekly.svg ${conda_env}/share/icons/hicolor/scalable/apps/org.freecadweb.FreeCAD.svg
-  sed -i 's/=FreeCAD/=FreeCAD Weekly/g' AppDir/org.freecadweb.FreeCAD.desktop
+  cp freecad_weekly.svg ${conda_env}/share/icons/hicolor/scalable/apps/org.freecad.FreeCAD.svg
+  sed -i 's/=FreeCAD/=FreeCAD Weekly/g' AppDir/org.freecad.FreeCAD.desktop
 fi
-cp ${conda_env}/share/icons/hicolor/scalable/apps/org.freecadweb.FreeCAD.svg AppDir/
+cp ${conda_env}/share/icons/hicolor/scalable/apps/org.freecad.FreeCAD.svg AppDir/
 
 
 # Remove __pycache__ folders and .pyc files
