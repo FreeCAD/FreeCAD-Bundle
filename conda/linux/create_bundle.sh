@@ -8,7 +8,7 @@ fi
 conda_env="AppDir/usr"
 echo -e "\nCreate the environment"
 
-packages="freecad=*.pre occt vtk python=3.10 blas=*=openblas numpy \
+packages="freecad=0.21.1 occt vtk python=3.10 blas=*=openblas numpy \
           matplotlib-base scipy sympy pandas six pyyaml pycollada lxml \
           xlutils olefile requests blinker opencv qt.py nine docutils" 
 if [[ "$ARCH" = "x86_64" ]]; then
@@ -16,7 +16,7 @@ if [[ "$ARCH" = "x86_64" ]]; then
 fi
 
 mamba create -p ${conda_env} ${packages} \
-  --copy -c freecad/label/dev -c conda-forge -y
+  --copy -c freecad -c conda-forge -y
 
 mamba run -p ${conda_env} python ../scripts/get_freecad_version.py
 read -r version_name < bundle_name.txt

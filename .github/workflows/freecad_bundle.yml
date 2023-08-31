@@ -19,7 +19,7 @@ jobs:
       matrix:
         os: [windows-latest, macos-latest, ubuntu-latest]
         #python: [py38, py310]
-        tag: ["weekly-builds"]
+        tag: ["0.21.1"]
         docs: ["0"]
         # exclude:
         #   - os: macos-latest
