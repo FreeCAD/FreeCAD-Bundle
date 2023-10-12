@@ -15,7 +15,7 @@ jobs:
     strategy:
       matrix:
         tag: ["weekly-builds"]
-        branch: ["master"]
+        branch: ["main"]
 
     steps:
       - name: Run a multi-line script
