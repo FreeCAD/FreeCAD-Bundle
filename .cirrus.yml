@@ -1,6 +1,7 @@
 env:
     DEPLOY_RELEASE: weekly-builds
     GH_TOKEN: ENCRYPTED[7a45c1bfc23b47bdf2bf67d0e5936e16314c88d0ecc3932c44e7c14df46b763362815f2522305c5c42ce09f35a219b1c]
+    TARGET_REPO: $CIRRUS_REPO_FULL_NAME
 
 macos_task:
     # Basic metadata:
@@ -10,20 +11,33 @@ macos_task:
     macos_instance:
       image: ghcr.io/cirruslabs/macos-monterey-base:latest
 
+    # Environment variables:
+    env:
+      ASSET_PATTERN: FreeCAD_.*macOS-arm64
+
     # Instructions:
     bundle_script: |
       curl -L -O "https://github.com/conda-forge/miniforge/releases/latest/download/Mambaforge-$(uname)-$(uname -m).sh"
-      bash Mambaforge-$(uname)-$(uname -m).sh -b -p "${HOME}/conda"
-      source "${HOME}/conda/etc/profile.d/conda.sh"
+      bash Mambaforge-$(uname)-$(uname -m).sh -b -p "${HOME}/mambaforge"
+      source "${HOME}/mambaforge/etc/profile.d/conda.sh"
       conda activate
       cd conda/osx
       bash ./create_bundle.sh
       mamba install gh
-      gh repo set-default $CIRRUS_REPO_FULL_NAME
-      gh release upload "$DEPLOY_RELEASE" FreeCAD*
+      # store list of existing assets before upload
+      # exclude files with the same name as new ones
+      version_name=$(cat bundle_name.txt)
+      OLD_ASSETS=$(gh release view -R "$TARGET_REPO" "$DEPLOY_RELEASE" --json assets \
+        --jq ".assets[].name" | grep "$ASSET_PATTERN" | grep -vF $version_name || true; )
+      # upload new assets
+      find . -type f -name "FreeCAD_*" -exec gh release upload --clobber -R "$TARGET_REPO" "$DEPLOY_RELEASE" {} \;
+      # remove old assets if upload was successful
+      if [ -n "$OLD_ASSETS" ]; then
+        while IFS= read -r asset; do
+          gh release delete-asset -y -R "$TARGET_REPO" "$DEPLOY_RELEASE" "$asset"
+        done <<< "$OLD_ASSETS"
+      fi
 
-    # dmg_artifacts:
-    #   path: conda/osx/FreeCAD*
 
 linux_task:
     # Basic metadata:
@@ -39,6 +53,7 @@ linux_task:
     # Environment variables:
     env:
       DEBIAN_FRONTEND: noninteractive
+      ASSET_PATTERN: FreeCAD_.*Linux-aarch64
 
     # Instructions:
     bundle_script: |
@@ -57,8 +72,17 @@ linux_task:
       cd conda/linux
       bash ./create_bundle.sh
       mamba install gh
-      gh repo set-default $CIRRUS_REPO_FULL_NAME
-      gh release upload "$DEPLOY_RELEASE" FreeCAD*
+      # store list of existing assets before upload
+      # exclude files with the same name as new ones
+      version_name=$(cat bundle_name.txt)
+      OLD_ASSETS=$(gh release view -R "$TARGET_REPO" "$DEPLOY_RELEASE" --json assets \
+        --jq ".assets[].name" | grep "$ASSET_PATTERN" | grep -vF $version_name || true; )
+      # upload new assets
+      find . -type f -name "FreeCAD_*" -exec gh release upload --clobber -R "$TARGET_REPO" "$DEPLOY_RELEASE" {} \;
+      # remove old assets if upload was successful
+      if [ -n "$OLD_ASSETS" ]; then
+        while IFS= read -r asset; do
+          gh release delete-asset -y -R "$TARGET_REPO" "$DEPLOY_RELEASE" "$asset"
+        done <<< "$OLD_ASSETS"
+      fi
 
-    # appimage_artifacts:
-    #   path: conda/linux/FreeCAD*

@@ -19,14 +19,23 @@ jobs:
       matrix:
         os: [windows-latest, macos-latest, ubuntu-latest]
         tag: ["weekly-builds"]
-          
+        include:
+          - os: windows-latest
+            bundle_dir: conda/win
+            asset_pattern: FreeCAD_.*Windows-x86_64
+          - os: macos-latest
+            bundle_dir: conda/osx
+            asset_pattern: FreeCAD_.*macOS-x86_64
+          - os: ubuntu-latest
+            bundle_dir: conda/linux
+            asset_pattern: FreeCAD_.*Linux-x86_64
 
     steps:
       - if: matrix.os == 'windows-latest'
         name: msys2
         uses: msys2/setup-msys2@v2
 
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
         name: Checkout
 
       - uses: conda-incubator/setup-miniconda@v2
@@ -34,11 +43,6 @@ jobs:
           auto-update-conda: true
           use-mamba: true
           miniforge-variant: Mambaforge
-
-      # - if: matrix.os == 'macos-latest'
-      #   name: update mac
-      #   run: |
-      #     brew update;
 
       - if: matrix.os == 'ubuntu-latest'
         name: update linux
@@ -63,17 +67,10 @@ jobs:
           mamba env config vars set MAMBA_NO_BANNER=1
           mamba install curl -y -c conda-forge;
 
-      - if: matrix.os == 'macos-latest'
-        name: create osx bundle
+      - if: matrix.os != 'windows-latest'
+        name: create unix bundle
         run: "bash ./create_bundle.sh"
-        working-directory: conda/osx
-        env:
-            DEPLOY_RELEASE: ${{ matrix.tag }}
-
-      - if: matrix.os == 'ubuntu-latest'
-        name: create linux bundle
-        run: "bash ./create_bundle.sh"
-        working-directory: conda/linux
+        working-directory: ${{ matrix.bundle_dir}}
         env:
             DEPLOY_RELEASE: ${{ matrix.tag }}
 
@@ -81,66 +78,30 @@ jobs:
         name: create windows bundle
         shell: cmd
         run: "call create_bundle.bat"
-        working-directory: conda\win
+        working-directory: ${{ matrix.bundle_dir}}
         env:
             DEPLOY_RELEASE: ${{ matrix.tag }}
 
-      - if: (matrix.os == 'macos-latest' && github.event_name != 'pull_request')
-        name: delete old mac assets
-        uses: mknejp/delete-release-assets@v1
-        with:
-          token: ${{ github.token }}
-          tag: ${{ matrix.tag }}
-          assets: FreeCAD*macOS-x86_64*
-          fail-if-no-assets: false
-          fail-if-no-release: false 
-
-      - if: (matrix.os == 'ubuntu-latest' && github.event_name != 'pull_request')
-        name: delete old linux assets
-        uses: mknejp/delete-release-assets@v1
-        with:
-          token: ${{ github.token }}
-          tag: ${{ matrix.tag }}
-          assets: FreeCAD*Linux-x86_64*
-          fail-if-no-assets: false
-          fail-if-no-release: false
-
-      - if: (matrix.os == 'windows-latest' && github.event_name != 'pull_request')
-        name: delete old win assets
-        uses: mknejp/delete-release-assets@v1
-        with:
-          token: ${{ github.token }}
-          tag: ${{ matrix.tag }}
-          assets: FreeCAD*Win*
-          fail-if-no-assets: false
-          fail-if-no-release: false
-
-      - if: (matrix.os == 'ubuntu-latest' && github.event_name != 'pull_request')
-        name: Upload binaries to release
-        uses: svenstaro/upload-release-action@v2
-        with:
-          repo_token: ${{ secrets.GITHUB_TOKEN }}
-          file: conda/linux/FreeCAD*
-          tag: ${{ matrix.tag }}
-          overwrite: true
-          file_glob: true
-
-      - if: (matrix.os == 'macos-latest' && github.event_name != 'pull_request')
-        name: Upload binaries to release
-        uses: svenstaro/upload-release-action@v2
-        with:
-          repo_token: ${{ secrets.GITHUB_TOKEN }}
-          file: conda/osx/FreeCAD*
-          tag: ${{ matrix.tag }}
-          overwrite: true
-          file_glob: true
-          
-      - if: (matrix.os == 'windows-latest' && github.event_name != 'pull_request')
-        name: Upload binaries to release
-        uses: svenstaro/upload-release-action@v2
-        with:
-          repo_token: ${{ secrets.GITHUB_TOKEN }}
-          file: conda/win/FreeCAD*
-          tag: ${{ matrix.tag }}
-          overwrite: true
-          file_glob: true
+      - if: (github.event_name != 'pull_request')
+        name: Upload binaries to release and remove old ones
+        working-directory: ${{ matrix.bundle_dir }}
+        env:
+          TARGET_REPO: ${{ github.repository }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          DEPLOY_RELEASE: ${{ matrix.tag }}
+          ASSET_PATTERN: ${{ matrix.asset_pattern }}
+        shell: bash
+        run: |
+          # store list of existing assets before upload
+          # exclude files with the same name as new ones
+          version_name=$(cat bundle_name.txt)
+          OLD_ASSETS=$(gh release view -R "$TARGET_REPO" "$DEPLOY_RELEASE" --json assets \
+            --jq ".assets[].name" | grep "$ASSET_PATTERN" | grep -vF $version_name || true; )
+          # upload new assets
+          find . -type f -name "FreeCAD_*" -exec gh release upload --clobber -R "$TARGET_REPO" "$DEPLOY_RELEASE" {} \;
+          # remove old assets if upload was successful
+          if [ -n "$OLD_ASSETS" ]; then
+            while IFS= read -r asset; do
+              gh release delete-asset -y -R "$TARGET_REPO" "$DEPLOY_RELEASE" "$asset"
+            done <<< "$OLD_ASSETS"
+          fi
