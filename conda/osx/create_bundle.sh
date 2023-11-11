@@ -39,7 +39,8 @@ cp ${conda_env}/bin_tmp/ccx ${conda_env}/bin/
 cp ${conda_env}/bin_tmp/python ${conda_env}/bin/
 cp ${conda_env}/bin_tmp/pip ${conda_env}/bin/
 cp ${conda_env}/bin_tmp/pyside2-rcc ${conda_env}/bin/
-cp ${conda_env}/bin_tmp/assistant ${conda_env}/bin/
+cp ${conda_env}/bin_tmp/gmsh ${conda_env}/bin/
+cp ${conda_env}/bin_tmp/dot ${conda_env}/bin/
 sed -i "" '1s|.*|#!/usr/bin/env python|' ${conda_env}/bin/pip
 rm -rf ${conda_env}/bin_tmp
 
