@@ -26,7 +26,7 @@ if [ "$DOC" = 1 ]; then
 fi
 
 # SSL
-# https://forum.freecad.org/viewtopic.php?f=4&t=34873&start=20#p327416
+# https://forum.freecadweb.org/viewtopic.php?f=4&t=34873&start=20#p327416
 export SSL_CERT_FILE=$PREFIX/ssl/cacert.pem
 # https://github.com/FreeCAD/FreeCAD-AppImage/pull/20
 export GIT_SSL_CAINFO=$HERE/usr/ssl/cacert.pem
