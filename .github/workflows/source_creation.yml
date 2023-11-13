@@ -21,12 +21,18 @@ jobs:
       - name: Run a multi-line script
         run: |
           git clone https://github.com/FreeCAD/FreeCAD
+          git submodule update --init
           touch freecad_version.txt
           wget https://raw.githubusercontent.com/FreeCAD/FreeCAD-Bundle/${GITHUB_REF##*/}/make_version_file.py
           cd FreeCAD
           git checkout ${{ matrix.branch }}
           python ../make_version_file.py ../freecad_version.txt
-          git archive HEAD -o ../freecad_source.tar.gz
+          git archive HEAD -o ../freecad_source.tar
+          git submodule foreach --recursive \
+            "git archive HEAD --prefix=\$path/ -o \$sha1.tar && \
+             tar -A -f \$toplevel/../freecad_source.tar \$sha1.tar && \
+             rm \$sha1.tar"
+          gzip ../freecad_source.tar
           
       - name: Upload binaries to release
         uses: svenstaro/upload-release-action@v2
