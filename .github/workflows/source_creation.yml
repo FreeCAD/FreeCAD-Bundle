@@ -21,11 +21,11 @@ jobs:
       - name: Run a multi-line script
         run: |
           git clone https://github.com/FreeCAD/FreeCAD
-          git submodule update --init
           touch freecad_version.txt
           wget https://raw.githubusercontent.com/FreeCAD/FreeCAD-Bundle/${GITHUB_REF##*/}/make_version_file.py
           cd FreeCAD
           git checkout ${{ matrix.branch }}
+          git submodule update --init
           python ../make_version_file.py ../freecad_version.txt
           git archive HEAD -o ../freecad_source.tar
           git submodule foreach --recursive \
