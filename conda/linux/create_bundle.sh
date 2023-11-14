@@ -10,9 +10,10 @@ echo -e "\nCreate the environment"
 
 packages="freecad=0.21.2 occt vtk python=3.10 blas=*=openblas numpy \
           matplotlib-base scipy sympy pandas six pyyaml pycollada lxml \
-          xlutils olefile requests blinker opencv qt.py nine docutils" 
+          xlutils olefile requests blinker opencv qt.py nine docutils \
+          opencamlib calculix"
 if [[ "$ARCH" = "x86_64" ]]; then
-  packages=${packages}" calculix opencamlib ifcopenshell appimage-updater-bridge"
+  packages=${packages}" ifcopenshell appimage-updater-bridge"
 fi
 
 mamba create -p ${conda_env} ${packages} \
