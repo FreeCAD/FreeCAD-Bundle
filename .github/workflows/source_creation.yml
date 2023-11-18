@@ -20,7 +20,7 @@ jobs:
     steps:
       - name: Run a multi-line script
         run: |
-          git clone https://github.com/FreeCAD/FreeCAD
+          git clone --recurse-submodules https://github.com/FreeCAD/FreeCAD
           touch freecad_version.txt
           wget https://raw.githubusercontent.com/FreeCAD/FreeCAD-Bundle/${GITHUB_REF##*/}/make_version_file.py
           cd FreeCAD
