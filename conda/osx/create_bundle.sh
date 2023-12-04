@@ -55,6 +55,10 @@ find . -name "*.pyc" -type f -delete
 # qtwebengine fix
 mv ./APP/FreeCAD.app/Contents/Resources/resources ./APP/FreeCAD.app/Contents/Resources/Resources
 
+# fix problematic rpaths for signing
+# see https://github.com/FreeCAD/FreeCAD/issues/10144#issuecomment-1836686775
+mamba run -p ${conda_env} python ../scripts/fix_rpaths.py ${conda_env}/lib
+
 # create the dmg
 hdiutil create -volname "${version_name}" -srcfolder ./APP -ov -format UDZO "${version_name}.dmg"
 
