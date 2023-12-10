@@ -28,6 +28,7 @@ def get_lc_paths(output):
 
 def remove_rpath(file_path, rpath):
     subprocess.run(['install_name_tool', '-delete_rpath', rpath, file_path])
+    subprocess.run(['codesign', '--force', '--sign', '-', file_path])
     print(f'\nRemoved rpath {rpath} from {file_path}')
 
 def scan_directory(directory, recursive=False):
