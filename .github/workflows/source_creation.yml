@@ -33,6 +33,21 @@ jobs:
              tar -A -f \$toplevel/../freecad_source.tar \$sha1.tar && \
              rm \$sha1.tar"
           gzip ../freecad_source.tar
+
+      - name: Upload source to salsa repo
+        run: |          
+          git clone https://salsa.debian.org/adrianinsaval/freecad.git --branch versioned-src/dummy --single-branch salsa
+          cd salsa
+          git checkout -B versioned-src/${{ matrix.branch }} versioned-src/dummy
+          tar -xzf ../freecad_source.tar.gz
+          mv .gitignore ../gitignore
+          git add .
+          mv ../gitignore .gitignore
+          git add .gitignore
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git config user.name 'github-actions[bot]'
+          git commit -m "Add upstream source"
+          git push --force --repo=https://github-actions:${{ secrets.SALSA_TOKEN }}@salsa.debian.org/adrianinsaval/freecad.git
           
       - name: Upload binaries to release
         uses: svenstaro/upload-release-action@v2

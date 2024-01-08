@@ -32,7 +32,7 @@ with open(os.sys.argv[1], "w") as f:
 	f.write(f"commit_hash: {gitInfo.hash}\n")
 	f.write(f"remote_url: {gitInfo.url}\n")
 
-p = subprocess.Popen(["git", "-c", "user.name='ghaction'", "-c", "user.email='gh@action.org'",
+p = subprocess.Popen(["git", "-c", "user.name='github-actions[bot]'", "-c", "user.email='41898282+github-actions[bot]@users.noreply.github.com'",
 		       "commit", "-a", "-m", "add git information"], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
 
 out, err = p.communicate()
