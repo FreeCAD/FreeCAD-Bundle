@@ -7,7 +7,7 @@ call mamba create ^
  -p %conda_env% ^
  freecad=*.pre python=3.10 occt vtk calculix gmsh ^
  numpy matplotlib-base scipy sympy pandas six ^
- pyyaml opencamlib ifcopenshell ^
+ pyyaml opencamlib ifcopenshell lark ^
  pycollada lxml xlutils olefile requests ^
  blinker opencv qt.py nine docutils ^
  --copy ^
