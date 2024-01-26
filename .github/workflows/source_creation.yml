@@ -23,10 +23,15 @@ jobs:
           git clone https://github.com/FreeCAD/FreeCAD
           touch freecad_version.txt
           wget https://raw.githubusercontent.com/FreeCAD/FreeCAD-Bundle/${GITHUB_REF##*/}/make_version_file.py
+          wget https://raw.githubusercontent.com/FreeCAD/FreeCAD-Bundle/${GITHUB_REF##*/}/disable_git_info.patch
           cd FreeCAD
           git checkout ${{ matrix.branch }}
           git submodule update --init
           python ../make_version_file.py ../freecad_version.txt
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git config user.name 'github-actions[bot]'
+          git apply ../disable_git_info.patch
+          git commit -a -m "Disable git info write to Version.h"
           git archive HEAD -o ../freecad_source.tar
           git submodule foreach --recursive \
             "git archive HEAD --prefix=\$path/ -o \$sha1.tar && \
@@ -40,10 +45,7 @@ jobs:
           cd salsa
           git checkout -B versioned-src/${{ matrix.branch }} versioned-src/dummy
           tar -xzf ../freecad_source.tar.gz
-          mv .gitignore ../gitignore
           git add .
-          mv ../gitignore .gitignore
-          git add .gitignore
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
           git config user.name 'github-actions[bot]'
           git commit -m "Add upstream source"
