@@ -24,6 +24,10 @@ echo %freecad_version_name%
 echo **********************
 
 
+REM remove arm binaries that fails to extract unless using latest 7zip
+for /r %conda_env% %%i in (*arm*.exe) do @echo "%%i will be removed"
+for /r %conda_env% %%i in (*arm*.exe) do @del "%%i"
+
 REM Copy Conda's Python and (U)CRT to FreeCAD/bin
 robocopy %conda_env%\DLLs %copy_dir%\bin\DLLs /S /MT:%NUMBER_OF_PROCESSORS% > nul
 robocopy %conda_env%\Lib %copy_dir%\bin\Lib /XD __pycache__ /S /MT:%NUMBER_OF_PROCESSORS% > nul
