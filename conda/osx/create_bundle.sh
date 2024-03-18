@@ -7,7 +7,7 @@ conda_env="APP/FreeCAD.app/Contents/Resources"
 
 mamba create \
     -p ${conda_env} \
-    freecad=*.pre occt vtk python=3.10 calculix blas=*=openblas \
+    freecad=*.pre occt vtk python=3.11 calculix blas=*=openblas \
     numpy matplotlib-base scipy sympy pandas six \
     pyyaml jinja2 opencamlib ifcopenshell lark \
     pycollada lxml xlutils olefile requests \
