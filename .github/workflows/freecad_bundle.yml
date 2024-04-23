@@ -17,15 +17,18 @@ jobs:
       max-parallel: 4
       fail-fast: false
       matrix:
-        os: [windows-latest, macos-latest, ubuntu-latest]
+        os: [windows-latest, macos-latest, macos-13, ubuntu-latest]
         tag: ["weekly-builds"]
         include:
           - os: windows-latest
             bundle_dir: conda/win
             asset_pattern: FreeCAD_.*Windows-x86_64
-          - os: macos-latest
+          - os: macos-13
             bundle_dir: conda/osx
             asset_pattern: FreeCAD_.*macOS-x86_64
+          - os: macos-latest
+            bundle_dir: conda/osx
+            asset_pattern: FreeCAD_.*macOS-arm64
           - os: ubuntu-latest
             bundle_dir: conda/linux
             asset_pattern: FreeCAD_.*Linux-x86_64
