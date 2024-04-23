@@ -9,7 +9,7 @@ call mamba create ^
  numpy matplotlib-base scipy sympy pandas six ^
  pyyaml opencamlib ifcopenshell lark ^
  pycollada lxml xlutils olefile requests ^
- blinker opencv qt.py nine docutils ^
+ blinker opencv nine docutils ^
  --copy ^
  -c freecad/label/dev ^
  -c conda-forge ^
@@ -42,11 +42,8 @@ robocopy %conda_env%\Library\bin %copy_dir%\bin\ gmsh.exe /MT:%NUMBER_OF_PROCESS
 robocopy %conda_env%\Library\mingw-w64\bin * %copy_dir%\bin\ /MT:%NUMBER_OF_PROCESSORS% > nul
 REM Copy Conda's QT5/plugins to FreeCAD/bin
 robocopy %conda_env%\Library\plugins %copy_dir%\bin\ /S /MT:%NUMBER_OF_PROCESSORS% > nul
-robocopy %conda_env%\Library\bin\ QtWebEngineProces* %copy_dir%\bin\ /MT:%NUMBER_OF_PROCESSORS% > nul
 robocopy %conda_env%\Library\resources %copy_dir%\resources /MT:%NUMBER_OF_PROCESSORS% > nul
 robocopy %conda_env%\Library\translations %copy_dir%\translations /MT:%NUMBER_OF_PROCESSORS% > nul
-mkdir %copy_dir%\translations\qtwebengine_locales
-copy %copy_dir%\translations\qtweb*.qm %copy_dir%\translations\qtwebengine_locales > nul
 echo [Paths] > %copy_dir%\bin\qt.conf
 echo Prefix =.. >> "%copy_dir%\bin\qt.conf"
 REM get all the dependency .dlls
@@ -69,6 +66,6 @@ dir
 
 REM if errorlevel1 exit 1
 
-"%ProgramFiles%\7-Zip\7z.exe" a -t7z -mmt=%NUMBER_OF_PROCESSORS% %freecad_version_name%.7z %freecad_version_name%\ -bb
+"%ProgramFiles%\7-Zip\7z.exe" a -t7z -mx9 -mmt=%NUMBER_OF_PROCESSORS% %freecad_version_name%.7z %freecad_version_name%\ -bb
 certutil -hashfile "%freecad_version_name%.7z" SHA256 > "%freecad_version_name%.7z"-SHA256.txt
 echo  %date%-%time% >>"%freecad_version_name%.7z"-SHA256.txt

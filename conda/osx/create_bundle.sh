@@ -11,7 +11,7 @@ mamba create \
     numpy matplotlib-base scipy sympy pandas six \
     pyyaml jinja2 opencamlib ifcopenshell lark \
     pycollada lxml xlutils olefile requests \
-    blinker opencv qt.py nine docutils \
+    blinker opencv nine docutils \
     --copy -c freecad/label/dev -c conda-forge -y
 
 
@@ -51,9 +51,6 @@ cp qt.conf ${conda_env}/libexec/
 # Remove __pycache__ folders and .pyc files
 find . -path "*/__pycache__/*" -delete
 find . -name "*.pyc" -type f -delete
-
-# qtwebengine fix
-mv ./APP/FreeCAD.app/Contents/Resources/resources ./APP/FreeCAD.app/Contents/Resources/Resources
 
 # fix problematic rpaths and reexport_dylibs for signing
 # see https://github.com/FreeCAD/FreeCAD/issues/10144#issuecomment-1836686775

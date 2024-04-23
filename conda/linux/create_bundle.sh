@@ -10,7 +10,7 @@ echo -e "\nCreate the environment"
 
 packages="freecad=*.pre occt vtk python=3.11 blas=*=openblas numpy \
           matplotlib-base scipy sympy pandas six pyyaml pycollada lxml \
-          xlutils olefile requests blinker opencv qt.py nine docutils \
+          xlutils olefile requests blinker opencv nine docutils \
           opencamlib calculix ifcopenshell lark appimage-updater-bridge"
 #if [[ "$ARCH" = "x86_64" ]]; then
 #  packages=${packages}" ifcopenshell appimage-updater-bridge"
