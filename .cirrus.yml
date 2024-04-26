@@ -13,6 +13,8 @@ linux_task:
     env:
       DEBIAN_FRONTEND: noninteractive
       ASSET_PATTERN: FreeCAD_.*Linux-aarch64
+      DEPLOY_RELEASE: weekly-builds
+      TARGET_REPO: $CIRRUS_REPO_FULL_NAME
 
     # Instructions:
     bundle_script: |
