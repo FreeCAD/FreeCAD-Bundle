@@ -49,7 +49,7 @@ else:
     revision = ""
 
 
-bundle_name = f"FreeCAD_{dev_version}{revision_separator}{revision}-{date}-{package_manager}-{system}-{arch}-{python_version}"
+bundle_name = f"FreeCAD_{dev_version}{revision_separator}{revision}-{package_manager}-{system}-{arch}-{python_version}"
 
 with open("bundle_name.txt", "w") as bundle_name_file:
     bundle_name_file.write(bundle_name)
