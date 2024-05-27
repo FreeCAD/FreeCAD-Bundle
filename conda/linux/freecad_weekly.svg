@@ -1,13 +1,49 @@
-<svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
-<g clip-path="url(#clip0_200_1121)">
-<path fill-rule="evenodd" clip-rule="evenodd" d="M20 8H52V16L44 24V16H20V48H28L20 56H12V16L20 8Z" fill="#FF585D"/>
-<path d="M20 40L12 48V16L20 8H44L36 16H20V40Z" fill="#CB333B"/>
-<path fill-rule="evenodd" clip-rule="evenodd" d="M52 16L44.0005 24.0005H28.0005V30.0001H36V38.0006H28.0005V48L20 56.0005H28.1008C28.7073 56.0005 29.2445 55.61 29.4319 55.0331L30.8799 50.5766C31.0184 50.1504 31.3529 49.8169 31.7791 49.6784L32.8922 49.3167C33.3184 49.1782 33.7853 49.2517 34.1479 49.5151L37.9379 52.2695C38.4285 52.626 39.0936 52.626 39.5843 52.2695L42.9815 49.8004C43.4722 49.4439 43.6774 48.8125 43.49 48.2356L42.042 43.7791C41.9035 43.3529 41.978 42.8859 42.2415 42.5234L42.9298 41.5766C43.1932 41.2141 43.6134 40.9989 44.0615 40.9989L48.7475 40.9999C49.3541 40.9999 49.8913 40.6084 50.0787 40.0315L51.3768 36.038C51.5642 35.4611 51.359 34.8287 50.8683 34.4722L47.0773 31.7178C46.7148 31.4544 46.5006 31.0343 46.5006 30.5861V29.4152C46.5007 28.967 46.7147 28.5458 47.0773 28.2824L51.4233 25.125C51.7858 24.8616 52 24.4404 52 23.9922V16Z" fill="#418FDE"/>
-<path fill-rule="evenodd" clip-rule="evenodd" d="M20 16H44V24H28L28 30.0001H36L36 38H28L28 48H20V16Z" fill="white"/>
-</g>
-<defs>
-<clipPath id="clip0_200_1121">
-<rect width="40" height="48" fill="white" transform="translate(12 8)"/>
-</clipPath>
-</defs>
-</svg>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="48"
+   height="48"
+   viewBox="0 0 48 48"
+   version="1.1"
+   id="svg1"
+   xml:space="preserve"
+   sodipodi:docname="freecad.svg"
+   inkscape:version="1.3.2 (091e20e, 2023-11-25)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:dc="http://purl.org/dc/elements/1.1/"><sodipodi:namedview
+     id="namedview1"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:zoom="11.416667"
+     inkscape:cx="24"
+     inkscape:cy="23.956204"
+     inkscape:window-width="1392"
+     inkscape:window-height="1212"
+     inkscape:window-x="2240"
+     inkscape:window-y="25"
+     inkscape:window-maximized="0"
+     inkscape:current-layer="g1" /><title
+     id="title11">FreeCAD</title><defs
+     id="defs1" /><g
+     id="g1"
+     transform="matrix(2,0,0,2,0.11243557,0)"><path
+       id="path8"
+       style="fill:#418fde;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:2.64567;stroke-linecap:square"
+       d="m 6.0004228,0 -4,4 v 20 h 8.0498052 c 0.303259,-1e-6 0.572308,-0.194978 0.666015,-0.483398 l 0.723633,-2.228516 c 0.06925,-0.213087 0.236125,-0.379987 0.449219,-0.449219 l 0.55664,-0.180664 c 0.213108,-0.06926 0.446641,-0.03307 0.62793,0.09863 l 1.895508,1.37793 c 0.245331,0.178231 0.577909,0.178228 0.823242,0 l 1.698242,-1.234375 c 0.245363,-0.178242 0.347622,-0.494774 0.253906,-0.783203 l -0.723632,-2.22754 c -0.06926,-0.213108 -0.0321,-0.446638 0.09961,-0.627929 l 0.344727,-0.473633 c 0.131696,-0.181276 0.341365,-0.289049 0.565429,-0.289063 L 20.37347,16.5 c 0.303277,10e-6 0.57231,-0.195938 0.666015,-0.484375 l 0.648438,-1.99707 c 0.0937,-0.288413 -0.0086,-0.604959 -0.253906,-0.783203 L 19.538509,11.858398 C 19.357226,11.72669 19.250418,11.517046 19.250423,11.292969 v -0.585938 c 1.9e-5,-0.224072 0.106795,-0.434715 0.288086,-0.566406 L 21.71136,8.5625 C 21.892638,8.4307938 22.000422,8.2201656 22.000423,7.9960938 V 0 Z m 0,4 h 8.0000002 4 v 4 h -8 v 3 h 4 v 4 h -4 v 5 H 6.0004228 v -4 z"
+       sodipodi:nodetypes="cccccccccccccccccccccccccccccccccccccccccc" /><path
+       d="M 5.9999997,19.999743 H 10.000258 V 15.000065 H 14 V 10.999806 H 10.000258 V 8.0000004 h 8 V 3.9997423 H 5.9999997 Z"
+       style="fill:#fefefe;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:2.64567;stroke-linecap:square"
+       id="path9" /></g><metadata
+     id="metadata11"><rdf:RDF><cc:Work
+         rdf:about=""><dc:title>FreeCAD</dc:title></cc:Work></rdf:RDF></metadata></svg>
