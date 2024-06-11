@@ -18,12 +18,12 @@ jobs:
         branch: ["main"]
 
     steps:
-      - name: Run a multi-line script
+      - name: create source package with submodules and version info
         run: |
           git clone https://github.com/FreeCAD/FreeCAD
           touch freecad_version.txt
-          wget https://raw.githubusercontent.com/FreeCAD/FreeCAD-Bundle/${GITHUB_REF##*/}/make_version_file.py
-          wget https://raw.githubusercontent.com/FreeCAD/FreeCAD-Bundle/${GITHUB_REF##*/}/disable_git_info.patch
+          wget https://raw.githubusercontent.com/${GITHUB_REPOSITORY}/${GITHUB_REF##*/}/make_version_file.py
+          wget https://raw.githubusercontent.com/${GITHUB_REPOSITORY}/${GITHUB_REF##*/}/disable_git_info.patch
           cd FreeCAD
           git checkout ${{ matrix.branch }}
           git submodule update --init
@@ -38,6 +38,15 @@ jobs:
              tar -A -f \$toplevel/../freecad_source.tar \$sha1.tar && \
              rm \$sha1.tar"
           gzip ../freecad_source.tar
+          
+      - name: Upload source package to release
+        uses: svenstaro/upload-release-action@v2
+        with:
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          file: freecad*
+          tag: ${{ matrix.tag }}
+          overwrite: true
+          file_glob: true
 
       - name: Upload source to salsa repo
         run: |          
@@ -50,12 +59,3 @@ jobs:
           git config user.name 'github-actions[bot]'
           git commit -m "Add upstream source"
           git push --force --repo=https://github-actions:${{ secrets.SALSA_TOKEN }}@salsa.debian.org/adrianinsaval/freecad.git
-          
-      - name: Upload binaries to release
-        uses: svenstaro/upload-release-action@v2
-        with:
-          repo_token: ${{ secrets.GITHUB_TOKEN }}
-          file: freecad*
-          tag: ${{ matrix.tag }}
-          overwrite: true
-          file_glob: true
