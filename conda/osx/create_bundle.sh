@@ -58,7 +58,8 @@ find . -name "*.pyc" -type f -delete
 mamba run -p ${conda_env} python ../scripts/fix_macos_lib_paths.py ${conda_env}/lib
 
 # create the dmg
-hdiutil create -volname "${version_name}" -srcfolder ./APP -ov -format UDZO "${version_name}.dmg"
+pip3 install "dmgbuild[badge_icons]>=1.6.0,<1.7.0"
+dmgbuild -s dmg_settings.py "FreeCAD" "${version_name}.dmg"
 
 # create hash
 shasum -a 256 ${version_name}.dmg > ${version_name}.dmg-SHA256.txt
