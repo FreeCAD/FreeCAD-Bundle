@@ -58,7 +58,7 @@ find . -name "*.pyc" -type f -delete
 mamba run -p ${conda_env} python ../scripts/fix_macos_lib_paths.py ${conda_env}/lib
 
 # create the dmg
-pip3 install "dmgbuild[badge_icons]>=1.6.0,<1.7.0"
+pip3 install --break-system-packages "dmgbuild[badge_icons]>=1.6.0,<1.7.0"
 dmgbuild -s dmg_settings.py "FreeCAD" "${version_name}.dmg"
 
 # create hash
