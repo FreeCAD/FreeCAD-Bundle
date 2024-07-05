@@ -39,6 +39,8 @@ REM Copy gmsh and calculix
 robocopy %conda_env%\Library\bin %copy_dir%\bin\ assistant.exe /MT:%NUMBER_OF_PROCESSORS% > nul
 robocopy %conda_env%\Library\bin %copy_dir%\bin\ ccx.exe /MT:%NUMBER_OF_PROCESSORS% > nul
 robocopy %conda_env%\Library\bin %copy_dir%\bin\ gmsh.exe /MT:%NUMBER_OF_PROCESSORS% > nul
+robocopy %conda_env%\Library\bin %copy_dir%\bin\ dot.exe /MT:%NUMBER_OF_PROCESSORS% > nul
+robocopy %conda_env%\Library\bin %copy_dir%\bin\ unflatten.exe /MT:%NUMBER_OF_PROCESSORS% > nul
 robocopy %conda_env%\Library\mingw-w64\bin * %copy_dir%\bin\ /MT:%NUMBER_OF_PROCESSORS% > nul
 REM Copy Conda's QT5/plugins to FreeCAD/bin
 robocopy %conda_env%\Library\plugins %copy_dir%\bin\ /S /MT:%NUMBER_OF_PROCESSORS% > nul
