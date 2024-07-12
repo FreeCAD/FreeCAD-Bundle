@@ -23,7 +23,7 @@ echo -e "version_name:  ${version_name}"
 echo -e "################"
 
 mamba list -p ${conda_env} > APP/FreeCAD.app/Contents/packages.txt
-sed -i "" "1s/.*/\nLIST OF PACKAGES:/"  APP/FreeCAD.app/Contents/packages.txt
+sed -i "1s/.*/\nLIST OF PACKAGES:/"  APP/FreeCAD.app/Contents/packages.txt
 
 # copy the QuickLook plugin into its final location
 mv ${conda_env}/Library ${conda_env}/../Library
