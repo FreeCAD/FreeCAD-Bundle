@@ -59,7 +59,7 @@ jobs:
 
       - if: matrix.os == 'ubuntu-latest'
         name: import GPG key
-        run: echo ${GPG_KEY} | base64 --decode | gpg --batch --import
+        run: echo -n ${GPG_KEY} | base64 --decode | gpg --batch --import
         env:
           GPG_KEY: ${{ secrets.GPG_KEY }}
 
