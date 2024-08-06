@@ -19,11 +19,10 @@ linux_task:
     # Instructions:
     bundle_script: |
       echo -e ${GPG_KEY} | gpg --batch --import
-      apt.get update
-      apt-get install curl fuse -y
+      apt-get update
+      apt-get install curl fuse desktop-file-utils -y
       apt-get download libc6;
       dpkg -x libc6*.deb libc6;
-      curl -LO https://raw.githubusercontent.com/AppImage/AppImages/master/pkg2appimage;
       curl -LO https://github.com/AppImage/appimagetool/releases/download/continuous/appimagetool-$(uname -m).AppImage;
       chmod a+x appimagetool-$(uname -m).AppImage;
       curl -L -O "https://github.com/conda-forge/miniforge/releases/latest/download/Mambaforge-$(uname)-$(uname -m).sh"
