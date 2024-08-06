@@ -20,7 +20,7 @@ linux_task:
     bundle_script: |
       echo -e ${GPG_KEY} | gpg --batch --import
       apt-get update
-      apt-get install curl fuse desktop-file-utils -y
+      apt-get install -y desktop-file-utils zsync libfuse2 curl
       apt-get download libc6;
       dpkg -x libc6*.deb libc6;
       curl -LO https://github.com/AppImage/appimagetool/releases/download/continuous/appimagetool-$(uname -m).AppImage;
