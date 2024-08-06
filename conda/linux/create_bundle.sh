@@ -91,6 +91,8 @@ fi
 chmod a+x ./AppDir/AppRun
 ../../appimagetool-$(uname -m).AppImage \
   -u "gh-releases-zsync|FreeCAD|FreeCAD-Bundle|$tag|FreeCAD*$ARCH*.AppImage.zsync" \
+  -s --sign-key ${GPG_KEY_ID} \
+  --sign-args "--batch --pinentry-mode loopback --passphrase ${GPG_KEY_PASSPHRASE}" \
   AppDir  ${version_name}.AppImage
 
 echo -e "\nCreate hash"

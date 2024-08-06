@@ -57,6 +57,12 @@ jobs:
           curl -LO https://github.com/AppImage/AppImageKit/releases/download/continuous/appimagetool-x86_64.AppImage;
           chmod a+x appimagetool-x86_64.AppImage;
 
+      - if: matrix.os == 'ubuntu-latest'
+        name: import GPG key
+        run: echo ${GPG_KEY} | base64 --decode | gpg --batch --import
+        env:
+          GPG_KEY: ${{ secrets.GPG_KEY }}
+
       - if: matrix.os != 'windows-latest'
         name: install conda dependencies for unix
         run: |
@@ -75,6 +81,8 @@ jobs:
         working-directory: ${{ matrix.bundle_dir}}
         env:
             DEPLOY_RELEASE: ${{ matrix.tag }}
+            GPG_KEY_ID: ${{ secrets.GPG_KEY_ID }}
+            GPG_KEY_PASSPHRASE: ${{ secrets.GPG_KEY_PASSPHRASE }
 
       - if: matrix.os == 'windows-latest'
         name: create windows bundle
