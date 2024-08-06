@@ -85,9 +85,6 @@ else
 fi
 
 echo -e "\nCreate the appimage"
-if [ "$ARCH" = "aarch64" ]; then
-  export ARCH=arm_aarch64
-fi
 export GPG_TTY=$(tty)
 chmod a+x ./AppDir/AppRun
 ../../appimagetool-$(uname -m).AppImage \
