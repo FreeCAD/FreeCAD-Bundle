@@ -81,7 +81,7 @@ jobs:
         env:
             DEPLOY_RELEASE: ${{ matrix.tag }}
             GPG_KEY_ID: ${{ secrets.GPG_KEY_ID }}
-            APPIMAGETOOL_SIGN_PASSPH: ${{ secrets.APPIMAGETOOL_SIGN_PASSPH }}
+            APPIMAGETOOL_SIGN_PASSPHRASE: ${{ secrets.APPIMAGETOOL_SIGN_PASSPHRASE }}
 
       - if: matrix.os == 'windows-latest'
         name: create windows bundle
