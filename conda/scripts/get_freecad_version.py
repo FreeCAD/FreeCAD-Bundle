@@ -15,6 +15,12 @@ arch = platform.machine()
 if arch == "AMD64":
     arch = "x86_64"
 
+if system == "macOS":
+    if arch == "x86_64":
+        mac_arch_str = "i386"
+    elif arch == "arm64":
+        mac_arch_str = "arm64"
+
 if "ARCH" in os.environ:
     if os.environ["ARCH"] != "":
         arch = os.environ["ARCH"]
@@ -37,7 +43,8 @@ if system == "macOS":
         template_str = template_file.read()
     template = jinja2.Template(template_str)
     rendered_str = template.render(FREECAD_VERSION="{}-{}".format(dev_version, revision), 
-                                   APPLICATION_MENU_NAME="FreeCAD-{}-{}".format(dev_version, revision))
+                                   APPLICATION_MENU_NAME="FreeCAD-{}-{}".format(dev_version, revision),
+                                   ARCHITECTURE=mac_arch_str )
     with open(os.path.join(osx_directory, "APP", "FreeCAD.app", "Contents", "Info.plist"), "w") as rendered_file:
         rendered_file.write(rendered_str)
 
