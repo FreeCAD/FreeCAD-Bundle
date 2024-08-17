@@ -1,32 +1,35 @@
 # assume we have a working conda available
 
-
 export MAMBA_NO_BANNER=1
 conda_env="APP/FreeCAD.app/Contents/Resources"
 
-
-mamba create \
-    -p ${conda_env} \
-    freecad=*.pre occt vtk python=3.11 calculix blas=*=openblas \
-    numpy matplotlib-base scipy sympy pandas six \
-    pyyaml jinja2 opencamlib ifcopenshell lark \
-    pycollada lxml xlutils olefile requests \
-    blinker opencv nine docutils \
-    --copy -c freecad/label/dev -c conda-forge -y
-
-
-mamba run -p ${conda_env} python ../scripts/get_freecad_version.py
-read -r version_name < bundle_name.txt
-
-echo -e "\################"
-echo -e "version_name:  ${version_name}"
-echo -e "################"
-
-mamba list -p ${conda_env} > APP/FreeCAD.app/Contents/packages.txt
-sed -i "" "1s/.*/\nLIST OF PACKAGES:/"  APP/FreeCAD.app/Contents/packages.txt
-
-# copy the QuickLook plugin into its final location
-mv ${conda_env}/Library ${conda_env}/../Library
+mamba create -y --copy -c freecad/label/dev -c conda-forge -p ${conda_env} \
+    python=3.11 \
+    freecad=*.pre \
+    blas=*=openblas \
+    blinker \
+    calculix \
+    docutils \
+    ifcopenshell \
+    jinja2 \
+    lark \
+    lxml \
+    matplotlib-base \
+    nine \
+    numpy \
+    occt \
+    olefile \
+    opencamlib \
+    opencv \
+    pandas \
+    pycollada \
+    pyyaml \
+    requests \
+    scipy \
+    six \
+    sympy \
+    vtk \
+    xlutils
 
 # delete unnecessary stuff
 rm -rf ${conda_env}/include
@@ -57,6 +60,26 @@ find . -name "*.pyc" -type f -delete
 # see https://github.com/FreeCAD/FreeCAD/issues/10144#issuecomment-1836686775
 # and https://github.com/FreeCAD/FreeCAD-Bundle/pull/203
 mamba run -p ${conda_env} python ../scripts/fix_macos_lib_paths.py ${conda_env}/lib
+
+# build and install the launcher
+cmake -B build -G Ninja launcher
+cmake --build build
+cp build/FreeCAD APP/FreeCAD.app/Contents/MacOS/FreeCAD
+
+conda_env="APP/FreeCAD.app/Contents/Resources"
+
+mamba run -p ${conda_env} python ../scripts/get_freecad_version.py
+read -r version_name < bundle_name.txt
+
+echo -e "\################"
+echo -e "version_name:  ${version_name}"
+echo -e "################"
+
+mamba list -p ${conda_env} > APP/FreeCAD.app/Contents/packages.txt
+sed -i "" "1s/.*/\nLIST OF PACKAGES:/"  APP/FreeCAD.app/Contents/packages.txt
+
+# copy the plugin into its final location
+mv ${conda_env}/Library ${conda_env}/../Library
 
 # create the dmg
 pip3 install --break-system-packages "dmgbuild[badge_icons]>=1.6.0,<1.7.0"
