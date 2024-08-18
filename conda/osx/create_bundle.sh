@@ -66,8 +66,6 @@ cmake -B build launcher
 cmake --build build
 cp build/FreeCAD APP/FreeCAD.app/Contents/MacOS/FreeCAD
 
-conda_env="APP/FreeCAD.app/Contents/Resources"
-
 mamba run -p ${conda_env} python ../scripts/get_freecad_version.py
 read -r version_name < bundle_name.txt
 

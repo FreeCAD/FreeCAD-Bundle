@@ -9,7 +9,7 @@
 int main(int argc, char *argv[], char *const *envp) {
     char *cwd = dirname(realpath(argv[0], NULL));
 
-    std::string FreeCAD = std::string(cwd) + "/../Resources/bin/FreeCAD";
+    std::string FreeCAD = std::string(cwd) + "/../Resources/bin/freecad";
 
     std::map<std::string, std::string> env;
     for(int i = 0; envp[i] != NULL; ++i) {
