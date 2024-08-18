@@ -62,7 +62,7 @@ find . -name "*.pyc" -type f -delete
 mamba run -p ${conda_env} python ../scripts/fix_macos_lib_paths.py ${conda_env}/lib
 
 # build and install the launcher
-cmake -B build -G Ninja launcher
+cmake -B build launcher
 cmake --build build
 cp build/FreeCAD APP/FreeCAD.app/Contents/MacOS/FreeCAD
 
