@@ -18,7 +18,9 @@ linux_task:
 
     # Instructions:
     bundle_script: |
-      echo -e ${GPG_KEY} | gpg --batch --import
+      if [ -z $CIRRUS_PR ]; then
+        echo -e ${GPG_KEY} | gpg --batch --import
+      fi
       apt-get update
       apt-get install -y desktop-file-utils appstream zsync libfuse2 curl
       apt-get download libc6;
