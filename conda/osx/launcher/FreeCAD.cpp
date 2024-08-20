@@ -1,4 +1,5 @@
 #include <cstdlib>
+#include <cstring>
 #include <iostream>
 #include <map>
 #include <vector>
@@ -9,7 +10,7 @@
 int main(int argc, char *argv[], char *const *envp) {
     char *cwd = dirname(realpath(argv[0], NULL));
 
-    std::string FreeCAD = std::string(cwd) + "/../Resources/bin/freecad";
+    std::string FreeCAD = realpath((std::string(cwd) + "/../Resources/bin/freecad").c_str(), NULL);
 
     std::map<std::string, std::string> env;
     for(int i = 0; envp[i] != NULL; ++i) {
@@ -20,27 +21,55 @@ int main(int argc, char *argv[], char *const *envp) {
         env[var] = value;
     }
 
-    env["PREFIX"]               = std::string(cwd) + "/Resources";
-    env["LD_LIBRARY_PATH"]      = env["PREFIX"] + "/lib";
-    env["PYTHONHOME"]           = env["PREFIX"];
+    std::string prefix = realpath((std::string(cwd) + "/../Resources").c_str(), NULL);
+    env["PREFIX"]               = prefix;
+    env["LD_LIBRARY_PATH"]      = prefix + "/lib";
+    env["PYTHONPATH"]           = prefix;
+    env["PYTHONHOME"]           = prefix;
     env["FONTCONFIG_FILE"]      = "/etc/fonts/fonts.conf";
     env["FONTCONFIG_PATH"]      = "/etc/fonts";
-    env["LANG"]                 = "UTF-8";                              // https://forum.freecad.org/viewtopic.php?f=22&t=42644
-    env["SSL_CERT_FILE"]        = env["PREFIX"] + "/ssl/cacert.pem";    // https://forum.freecad.org/viewtopic.php?f=3&t=42825
-    env["GIT_SSL_CAINFO"]       = env["PREFIX"] + "/ssl/cacert.pem";
+    env["LANG"]                 = "UTF-8";                       // https://forum.freecad.org/viewtopic.php?f=22&t=42644
+    env["SSL_CERT_FILE"]        = prefix + "/ssl/cacert.pem";    // https://forum.freecad.org/viewtopic.php?f=3&t=42825
+    env["GIT_SSL_CAINFO"]       = prefix + "/ssl/cacert.pem";
     env["QT_MAC_WANTS_LAYER"]   = "1";
 
     char **new_env = new char*[env.size() + 1];
     int i = 0;
     for (const auto& [var, value] : env) {
         auto line = var + '=' + value;
-        new_env[i] = new char[line.length()];
-        strncpy(new_env[i], line.c_str(), line.length());
+        size_t len = line.length() + 1;
+        new_env[i] = new char[len];
+        memset(new_env[i], 0, len);
+        strncpy(new_env[i], line.c_str(), len);
         i++;
     }
     new_env[i] = NULL;
 
-    std::cout << "Running: " << FreeCAD << std::endl;
+    i = 0;
+    while(new_env[i] != NULL) {
+        std::cout << new_env[i] << std::endl;
+        i++;
+    }
 
-    return execve(FreeCAD.c_str(), argv, new_env);
+    std::cout << "Running: " << FreeCAD << std::endl;
+    i = 0;
+    while(argv[i] != NULL) {
+        i++;
+    }
+
+    char **new_argv = new char*[i + 1];
+    new_argv[0] = new char[FreeCAD.length() + 1];
+    memset(new_argv[0], 0, FreeCAD.length() + 1);
+    strncpy(new_argv[0], FreeCAD.c_str(), FreeCAD.length());
+
+    i = 1;
+    while(argv[i] != NULL) {
+        new_argv[i] = new char[strlen(argv[i])+1];
+        memset(new_argv[i], 0, strlen(argv[i])+1);
+        strncpy(new_argv[i], argv[i], strlen(argv[i]));
+        i++;
+    }
+    new_argv[i] = NULL;
+
+    return execve(FreeCAD.c_str(), new_argv, new_env);
 }
