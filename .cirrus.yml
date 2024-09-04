@@ -27,10 +27,10 @@ linux_task:
       dpkg -x libc6*.deb libc6;
       curl -LO https://github.com/AppImage/appimagetool/releases/download/continuous/appimagetool-$(uname -m).AppImage;
       chmod a+x appimagetool-$(uname -m).AppImage;
-      curl -L -O "https://github.com/conda-forge/miniforge/releases/latest/download/Mambaforge-$(uname)-$(uname -m).sh"
+      curl -L -O "https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-$(uname)-$(uname -m).sh"
       export HOME='/home/cirrus-ci-build'
-      bash Mambaforge-$(uname)-$(uname -m).sh -b -p "${HOME}/mambaforge"
-      source "${HOME}/mambaforge/etc/profile.d/conda.sh"
+      bash Miniforge3-$(uname)-$(uname -m).sh -b -p "${HOME}/miniforge3"
+      source "${HOME}/miniforge3/etc/profile.d/conda.sh"
       conda activate
       cd conda/linux
       bash ./create_bundle.sh
