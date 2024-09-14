@@ -8,7 +8,7 @@ This is strictly an OS/Distro related packaging repository. Weekly generated Fre
 
 ### Alternative Installations
 * **Snap**[^3] Package (Linux based package povides stable and nightly versions for testing)   
-* **Flatpak**[^4] Package (Linux based package only provide stable releases ATM)
+* **Flatpak**[^4] Package (Linux based package only provides stable releases ATM)
 
 [^1]: This repository was formerly named *FreeCAD-AppImage*
 [^2]: https://github.com/FreeCAD/FreeCAD/issues
