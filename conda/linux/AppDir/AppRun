@@ -1,7 +1,7 @@
 #!/bin/bash
 HERE="$(dirname "$(readlink -f "${0}")")"
 export PREFIX=${HERE}/usr
-export LD_LIBRARY_PATH=${HERE}/usr/lib${LD_LIBRARY_PATH:+':'}$LD_LIBRARY_PATH
+# export LD_LIBRARY_PATH=${HERE}/usr/lib${LD_LIBRARY_PATH:+':'}$LD_LIBRARY_PATH
 export PYTHONHOME=${HERE}/usr
 export PATH_TO_FREECAD_LIBDIR=${HERE}/usr/lib
 # export QT_QPA_PLATFORM_PLUGIN_PATH=${HERE}/usr/plugins
