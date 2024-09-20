@@ -5,7 +5,7 @@ conda_env="APP/FreeCAD.app/Contents/Resources"
 
 mamba create -y --copy -c freecad/label/dev -c conda-forge -p ${conda_env} \
     python=3.11 \
-    freecad=*.pre \
+    freecad=*dev \
     blas=*=openblas \
     blinker \
     calculix \
