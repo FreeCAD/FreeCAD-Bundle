@@ -5,7 +5,7 @@ mkdir %copy_dir%
 
 call mamba create ^
  -p %conda_env% ^
- freecad=1.0rc1 python=3.11 occt vtk calculix gmsh ^
+ freecad=1.0rc2 python=3.11 occt vtk calculix gmsh ^
  numpy matplotlib-base scipy sympy pandas six ^
  pyyaml opencamlib ifcopenshell lark ^
  pycollada lxml xlutils olefile requests ^
@@ -24,7 +24,7 @@ echo %freecad_version_name%
 echo **********************
 
 
-REM remove arm binaries that fails to extract unless using latest 7zip
+REM remove arm binaries that fail to extract unless using latest 7zip
 for /r %conda_env% %%i in (*arm*.exe) do @echo "%%i will be removed"
 for /r %conda_env% %%i in (*arm*.exe) do @del "%%i"
 
@@ -35,8 +35,7 @@ robocopy %conda_env%\Scripts %copy_dir%\bin\Scripts /S /MT:%NUMBER_OF_PROCESSORS
 robocopy %conda_env%\ python*.* %copy_dir%\bin\ /XF *.pdb /MT:%NUMBER_OF_PROCESSORS% > nul
 robocopy %conda_env%\ msvc*.* %copy_dir%\bin\ /XF *.pdb /MT:%NUMBER_OF_PROCESSORS% > nul
 robocopy %conda_env%\ ucrt*.* %copy_dir%\bin\ /XF *.pdb /MT:%NUMBER_OF_PROCESSORS% > nul
-REM Copy gmsh and calculix
-robocopy %conda_env%\Library\bin %copy_dir%\bin\ assistant.exe /MT:%NUMBER_OF_PROCESSORS% > nul
+REM Copy meaningful executables
 robocopy %conda_env%\Library\bin %copy_dir%\bin\ ccx.exe /MT:%NUMBER_OF_PROCESSORS% > nul
 robocopy %conda_env%\Library\bin %copy_dir%\bin\ gmsh.exe /MT:%NUMBER_OF_PROCESSORS% > nul
 robocopy %conda_env%\Library\bin %copy_dir%\bin\ dot.exe /MT:%NUMBER_OF_PROCESSORS% > nul

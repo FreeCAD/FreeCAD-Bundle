@@ -13,7 +13,7 @@ linux_task:
     env:
       DEBIAN_FRONTEND: noninteractive
       ASSET_PATTERN: FreeCAD_.*Linux-aarch64
-      DEPLOY_RELEASE: 1.0rc1
+      DEPLOY_RELEASE: 1.0rc2
       TARGET_REPO: $CIRRUS_REPO_FULL_NAME
 
     # Instructions:
