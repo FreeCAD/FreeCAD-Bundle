@@ -64,6 +64,7 @@ mamba run -p ${conda_env} python ../scripts/fix_macos_lib_paths.py ${conda_env}/
 # build and install the launcher
 cmake -B build launcher
 cmake --build build
+mkdir -p APP/FreeCAD.app/Contents/MacOS
 cp build/FreeCAD APP/FreeCAD.app/Contents/MacOS/FreeCAD
 
 mamba run -p ${conda_env} python ../scripts/get_freecad_version.py
