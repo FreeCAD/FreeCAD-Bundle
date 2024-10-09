@@ -7,7 +7,7 @@ This is strictly an OS/Distro related packaging repository. Weekly generated Fre
 ## 📢 Download weekly bundles from [releases/tag/weekly-builds](https://github.com/FreeCAD/FreeCAD-Bundle/releases/tag/weekly-builds)
 
 ### Alternative Installations
-* **Snap**[^3] Package (Linux based package povides stable and nightly versions for testing)   
+* **Snap**[^3] Package (Linux based package provides stable and nightly versions for testing)   
 * **Flatpak**[^4] Package (Linux based package only provides stable releases ATM)
 
 [^1]: This repository was formerly named *FreeCAD-AppImage*
