@@ -21,10 +21,9 @@ linux_task:
       if [ -z $CIRRUS_PR ]; then
         echo -e ${GPG_KEY} | gpg --batch --import
       fi
-      apt-get update
+      apt-get update -qq
+      apt-get upgrade -y
       apt-get install -y desktop-file-utils appstream zsync libfuse2 curl
-      apt-get download libc6;
-      dpkg -x libc6*.deb libc6;
       curl -LO https://github.com/AppImage/appimagetool/releases/download/continuous/appimagetool-$(uname -m).AppImage;
       chmod a+x appimagetool-$(uname -m).AppImage;
       curl -L -O "https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-$(uname)-$(uname -m).sh"
