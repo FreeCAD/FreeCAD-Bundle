@@ -11,33 +11,34 @@ echo -e "\nCreate the environment"
 mamba create --copy -y -p ${conda_env} \
   -c freecad/label/dev \
   -c conda-forge \
-  noqt6 \
   freecad=*dev \
-  occt \
-  vtk \
   python=3.11 \
+  noqt6 \
+  appimage-updater-bridge \
   blas=*=openblas \
-  numpy \
-  matplotlib-base \
-  scipy \
-  sympy \
-  pandas \
-  six \
-  pyyaml \
-  pycollada \
-  lxml \
-  xlutils \
-  olefile \
-  requests \
   blinker \
-  opencv \
-  nine \
-  docutils \
-  opencamlib \
   calculix \
+  docutils \
   ifcopenshell \
   lark \
-  appimage-updater-bridge
+  lxml \
+  matplotlib-base \
+  nine \
+  numpy \
+  occt \
+  olefile \
+  opencamlib \
+  opencv \
+  pandas \
+  pycollada \
+  pyyaml \
+  qt-wayland \
+  requests \
+  scipy \
+  six \
+  sympy \
+  vtk \
+  xlutils
 
 mamba run -p ${conda_env} python ../scripts/get_freecad_version.py
 read -r version_name < bundle_name.txt
