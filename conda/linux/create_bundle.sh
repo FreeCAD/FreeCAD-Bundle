@@ -32,7 +32,6 @@ mamba create --copy -y -p ${conda_env} \
   pandas \
   pycollada \
   pyyaml \
-  qt-wayland \
   requests \
   scipy \
   six \
