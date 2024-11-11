@@ -25,7 +25,7 @@ python_version = "py" + python_version[0] + python_version[1]
 date = str(datetime.now()).split(" ")[0]
 
 version_info = FreeCAD.Version()
-build_version_suffix = FreeCAD.ConfigDump()["BuildVersionSuffix"]
+build_version_suffix = FreeCAD.ConfigGet("BuildVersionSuffix")
 dev_version = version_info[0] + "." + version_info[1] + "." + version_info[2] + build_version_suffix
 revision = version_info[3].split(" ")[0]
 
