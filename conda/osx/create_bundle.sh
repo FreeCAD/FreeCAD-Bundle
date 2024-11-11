@@ -6,6 +6,7 @@ conda_env="APP/FreeCAD.app/Contents/Resources"
 mamba create -y --copy -c freecad/label/dev -c conda-forge -p ${conda_env} \
     python=3.11 \
     freecad=1.0rc2 \
+    noqt6 \
     blas=*=openblas \
     blinker \
     calculix \
@@ -64,6 +65,7 @@ mamba run -p ${conda_env} python ../scripts/fix_macos_lib_paths.py ${conda_env}/
 # build and install the launcher
 cmake -B build launcher
 cmake --build build
+mkdir -p APP/FreeCAD.app/Contents/MacOS
 cp build/FreeCAD APP/FreeCAD.app/Contents/MacOS/FreeCAD
 
 mamba run -p ${conda_env} python ../scripts/get_freecad_version.py

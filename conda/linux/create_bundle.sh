@@ -8,16 +8,36 @@ fi
 conda_env="AppDir/usr"
 echo -e "\nCreate the environment"
 
-packages="freecad=1.0rc2 occt vtk python=3.11 blas=*=openblas numpy \
-          matplotlib-base scipy sympy pandas six pyyaml pycollada lxml \
-          xlutils olefile requests blinker opencv nine docutils \
-          opencamlib calculix ifcopenshell lark appimage-updater-bridge"
-#if [[ "$ARCH" = "x86_64" ]]; then
-#  packages=${packages}" ifcopenshell appimage-updater-bridge"
-#fi
-
-mamba create -p ${conda_env} ${packages} \
-  --copy -c freecad/label/dev -c conda-forge -y
+mamba create --copy -y -p ${conda_env} \
+  -c freecad/label/dev \
+  -c conda-forge \
+  freecad=1.0rc2 \
+  python=3.11 \
+  noqt6 \
+  appimage-updater-bridge \
+  blas=*=openblas \
+  blinker \
+  calculix \
+  docutils \
+  ifcopenshell \
+  lark \
+  lxml \
+  matplotlib-base \
+  nine \
+  numpy \
+  occt \
+  olefile \
+  opencamlib \
+  opencv \
+  pandas \
+  pycollada \
+  pyyaml \
+  requests \
+  scipy \
+  six \
+  sympy \
+  vtk \
+  xlutils
 
 mamba run -p ${conda_env} python ../scripts/get_freecad_version.py
 read -r version_name < bundle_name.txt
@@ -28,9 +48,6 @@ echo -e "################"
 
 echo -e "\nInstall freecad.appimage_updater"
 mamba run -p ${conda_env} pip install https://github.com/looooo/freecad.appimage_updater/archive/master.zip
-
-echo -e "\nUninstall some packages not needed"
-conda uninstall -p ${conda_env} libclang --force -y
 
 mamba list -p ${conda_env} > AppDir/packages.txt
 sed -i "1s/.*/\nLIST OF PACKAGES:/" AppDir/packages.txt
@@ -75,9 +92,6 @@ rm -rf ${conda_env}/lib/cmake/
 find . -name "*.h" -type f -delete
 find . -name "*.cmake" -type f -delete
 
-echo -e "\nAdd libnsl (Fedora 28 and up)"
-cp ../../libc6/lib/$ARCH-linux-gnu/libnsl* ${conda_env}/lib/
-
 if [ "$DEPLOY_RELEASE" = "weekly-builds" ]; then
   export tag="weekly-builds"
 else
@@ -88,6 +102,7 @@ echo -e "\nCreate the appimage"
 export GPG_TTY=$(tty)
 chmod a+x ./AppDir/AppRun
 ../../appimagetool-$(uname -m).AppImage \
+  --comp zstd --mksquashfs-opt -Xcompression-level --mksquashfs-opt 22 \
   -u "gh-releases-zsync|FreeCAD|FreeCAD-Bundle|$tag|FreeCAD*$ARCH*.AppImage.zsync" \
   -s --sign-key ${GPG_KEY_ID} AppDir ${version_name}.AppImage
 

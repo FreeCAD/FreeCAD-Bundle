@@ -50,10 +50,8 @@ jobs:
       - if: matrix.os == 'ubuntu-latest'
         name: update linux
         run: |
-          sudo apt-get update -qq && sudo apt-get install -y desktop-file-utils appstream zsync libfuse2 curl;
-          apt-get download libc6;
-          dpkg -x libc6*.deb libc6;
-          curl -LO https://github.com/AppImage/AppImageKit/releases/download/continuous/appimagetool-x86_64.AppImage;
+          sudo apt-get update -qq && sudo apt-get install -y desktop-file-utils appstream zsync curl;
+          curl -LO https://github.com/AppImage/appimagetool/releases/download/continuous/appimagetool-x86_64.AppImage;
           chmod a+x appimagetool-x86_64.AppImage;
 
       - if: matrix.os == 'ubuntu-latest' && github.event_name != 'pull_request'

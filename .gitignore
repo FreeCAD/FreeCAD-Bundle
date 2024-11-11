@@ -1,0 +1,7 @@
+conda/linux/AppDir/usr
+conda/linux/AppDir/*.desktop
+conda/linux/AppDir/*.svg
+**packages.txt
+**.AppImage
+**-SHA256.txt
+**bundle_name.txt

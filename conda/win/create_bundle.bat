@@ -5,11 +5,31 @@ mkdir %copy_dir%
 
 call mamba create ^
  -p %conda_env% ^
- freecad=1.0rc2 python=3.11 occt vtk calculix gmsh ^
- numpy matplotlib-base scipy sympy pandas six ^
- pyyaml opencamlib ifcopenshell lark ^
- pycollada lxml xlutils olefile requests ^
- blinker opencv nine docutils ^
+ freecad=1.0rc2 ^
+ python=3.11 ^
+ noqt6 ^
+ blinker ^
+ calculix ^
+ docutils ^
+ gmsh ^
+ ifcopenshell ^
+ lark ^ ^
+ lxml ^
+ matplotlib-base ^
+ nine ^
+ numpy ^
+ occt ^
+ olefile ^
+ opencamlib ^
+ pandas ^
+ pycollada ^
+ pyyaml ^
+ requests ^
+ scipy ^
+ six ^
+ sympy ^
+ vtk ^
+ xlutils ^
  --copy ^
  -c freecad/label/dev ^
  -c conda-forge ^
