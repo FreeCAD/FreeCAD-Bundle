@@ -18,7 +18,7 @@ jobs:
       fail-fast: false
       matrix:
         os: [windows-latest, macos-latest, macos-13, ubuntu-latest]
-        tag: ["1.0rc2"]
+        tag: ["1.0rc3"]
         include:
           - os: windows-latest
             bundle_dir: conda/win
