@@ -95,7 +95,7 @@ find . -name "*.cmake" -type f -delete
 if [ "$DEPLOY_RELEASE" = "weekly-builds" ]; then
   export tag="weekly-builds"
 else
-  export tag="latest"
+  export tag="1.0rc3" # TODO: revert for actual release to "latest"
 fi
 
 echo -e "\nCreate the appimage"
