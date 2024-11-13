@@ -11,7 +11,7 @@ echo -e "\nCreate the environment"
 mamba create --copy -y -p ${conda_env} \
   -c freecad/label/dev \
   -c conda-forge \
-  freecad=1.0rc3 \
+  freecad=1.0rc4 \
   python=3.11 \
   noqt6 \
   appimage-updater-bridge \
@@ -95,7 +95,7 @@ find . -name "*.cmake" -type f -delete
 if [ "$DEPLOY_RELEASE" = "weekly-builds" ]; then
   export tag="weekly-builds"
 else
-  export tag="1.0rc3" # TODO: revert for actual release to "latest"
+  export tag="1.0rc4" # TODO: revert for actual release to "latest"
 fi
 
 echo -e "\nCreate the appimage"
