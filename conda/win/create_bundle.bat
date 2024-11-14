@@ -23,6 +23,7 @@ call mamba create ^
  opencamlib ^
  pandas ^
  pycollada ^
+ pythonocc-core ^
  pyyaml ^
  requests ^
  scipy ^
