@@ -5,7 +5,7 @@ mkdir %copy_dir%
 
 call mamba create ^
  -p %conda_env% ^
- freecad=1.0rc4 ^
+ freecad=1.0.0 ^
  python=3.11 ^
  noqt6 ^
  blinker ^
@@ -31,7 +31,7 @@ call mamba create ^
  vtk ^
  xlutils ^
  --copy ^
- -c freecad/label/dev ^
+ -c freecad ^
  -c conda-forge ^
  -y
  
