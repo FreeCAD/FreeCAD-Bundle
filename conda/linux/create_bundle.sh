@@ -98,17 +98,12 @@ else
   export tag="latest"
 fi
 
-# TODO: remove custom runtime once https://github.com/AppImage/type2-runtime/pull/37 is merged
-# or some other fix is made for https://github.com/AppImage/type2-runtime/issues/15
-wget "https://github.com/adrianinsaval/type2-runtime/releases/download/patched/runtime-${ARCH}"
-
 echo -e "\nCreate the appimage"
 export GPG_TTY=$(tty)
 chmod a+x ./AppDir/AppRun
 ../../appimagetool-$(uname -m).AppImage \
   --comp zstd --mksquashfs-opt -Xcompression-level --mksquashfs-opt 22 \
   -u "gh-releases-zsync|FreeCAD|FreeCAD-Bundle|$tag|FreeCAD*$ARCH*.AppImage.zsync" \
-  --runtime-file runtime-${ARCH} \
   -s --sign-key ${GPG_KEY_ID} AppDir ${version_name}.AppImage
 
 echo -e "\nCreate hash"
