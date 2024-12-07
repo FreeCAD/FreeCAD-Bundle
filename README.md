@@ -2,7 +2,9 @@
 
 ## ATTENTION: THIS IS *NOT* THE FREECAD BUGTRACKER[^2]
 
-This is strictly an OS/Distro related packaging repository. Weekly generated FreeCAD development builds for testing the latest features/bug fixes. Please only open packaging or building FreeCAD related issues here.
+> [!CAUTION]
+> This is strictly an OS/Distro related packaging repository. Weekly generated FreeCAD development builds for testing the latest features/bug fixes. Please only open *packaging or building* related issues here.
+**Do not open general issues about FreeCAD in this repository, but instead in: https://github.com/FreeCAD/FreeCAD**
 
 ## 📢 Download weekly bundles from [releases/tag/weekly-builds](https://github.com/FreeCAD/FreeCAD-Bundle/releases/tag/weekly-builds)
 
