@@ -1,6 +1,5 @@
 # assume we have a working conda available
 
-export MAMBA_NO_BANNER=1
 conda_env="APP/FreeCAD.app/Contents/Resources"
 
 mamba create -y --copy -c freecad/label/dev -c conda-forge -p ${conda_env} \

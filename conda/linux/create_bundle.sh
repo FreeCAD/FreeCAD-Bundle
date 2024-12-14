@@ -1,6 +1,5 @@
 #!/bin/bash
 
-export MAMBA_NO_BANNER=1
 if [[ -z "$ARCH" ]]; then
   # Get the architecture of the system
   export ARCH=$(uname -m)
