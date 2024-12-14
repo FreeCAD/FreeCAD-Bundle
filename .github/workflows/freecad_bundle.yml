@@ -46,6 +46,7 @@ jobs:
           auto-update-conda: true
           use-mamba: true
           miniforge-variant: Miniforge3
+          conda-remove-defaults: "true"
 
       - if: matrix.os == 'ubuntu-latest'
         name: update linux

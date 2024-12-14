@@ -10,7 +10,7 @@ echo -e "\nCreate the environment"
 mamba create --copy -y -p ${conda_env} \
   -c freecad/label/dev \
   -c conda-forge \
-  freecad=*dev \
+  freecad[*dev] \
   python=3.11 \
   noqt6 \
   appimage-updater-bridge \

@@ -1,11 +1,11 @@
-set conda_env="fc_env"
+set conda_env=".\FreeCAD_env"
 set copy_dir="FreeCAD_Conda_Build"
 
 mkdir %copy_dir%
 
 call mamba create ^
  -p %conda_env% ^
- freecad=*dev ^
+ freecad[*dev] ^
  python=3.11 ^
  noqt6 ^
  blinker ^
