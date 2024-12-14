@@ -1,7 +1,11 @@
 conda/linux/AppDir/usr
 conda/linux/AppDir/*.desktop
 conda/linux/AppDir/*.svg
-**packages.txt
+conda/osx/APP
+conda/win/FreeCAD_*
 **.AppImage
+**.dmg
+**.7z
 **-SHA256.txt
+**packages.txt
 **bundle_name.txt

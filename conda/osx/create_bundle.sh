@@ -2,6 +2,8 @@
 
 conda_env="APP/FreeCAD.app/Contents/Resources"
 
+mkdir -p $(dirname ${conda_env})
+
 mamba create -y --copy -c freecad -c conda-forge -p ${conda_env} \
     python=3.11 \
     freecad=1.0.0 \
@@ -47,6 +49,9 @@ cp ${conda_env}/bin_tmp/dot ${conda_env}/bin/
 cp ${conda_env}/bin_tmp/unflatten ${conda_env}/bin/
 sed -i "" '1s|.*|#!/usr/bin/env python|' ${conda_env}/bin/pip
 rm -rf ${conda_env}/bin_tmp
+
+#copy resources
+cp resources/* ${conda_env}
 
 #copy qt.conf
 cp qt.conf ${conda_env}/bin/

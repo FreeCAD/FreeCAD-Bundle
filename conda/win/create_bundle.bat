@@ -1,4 +1,4 @@
-set conda_env="fc_env"
+set conda_env=".\FreeCAD_env"
 set copy_dir="FreeCAD_Conda_Build"
 
 mkdir %copy_dir%
