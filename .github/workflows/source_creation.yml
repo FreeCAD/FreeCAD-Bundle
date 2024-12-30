@@ -38,6 +38,7 @@ jobs:
              tar -A -f \$toplevel/../freecad_source.tar \$sha1.tar && \
              rm \$sha1.tar"
           gzip ../freecad_source.tar
+          sha256sum ../freecad_source.tar > freecad_source_sha256sum.txt
           
       - name: Upload source package to release
         uses: svenstaro/upload-release-action@v2
