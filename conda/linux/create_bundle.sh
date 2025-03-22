@@ -91,8 +91,8 @@ rm -rf ${conda_env}/lib/cmake/
 find . -name "*.h" -type f -delete
 find . -name "*.cmake" -type f -delete
 
-if [ "$DEPLOY_RELEASE" = "weekly-builds" ]; then
-  export tag="weekly-builds"
+if [ "$DEPLOY_RELEASE" = "devel-qt5" ]; then
+  export tag="devel-qt5"
 else
   export tag="latest"
 fi
