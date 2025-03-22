@@ -17,7 +17,7 @@ jobs:
       max-parallel: 4
       fail-fast: false
       matrix:
-        os: [windows-latest, macos-latest, macos-13, ubuntu-latest]
+        os: [windows-latest, macos-latest, macos-13, ubuntu-latest, ubuntu-22.04-arm]
         tag: ["1.0.0"]
         include:
           - os: windows-latest
@@ -32,6 +32,9 @@ jobs:
           - os: ubuntu-latest
             bundle_dir: conda/linux
             asset_pattern: FreeCAD_.*Linux-x86_64
+          - os: ubuntu-22.04-arm
+            bundle_dir: conda/linux
+            asset_pattern: FreeCAD_.*Linux-aarch64
 
     steps:
       - if: matrix.os == 'windows-latest'
@@ -48,14 +51,14 @@ jobs:
           miniforge-variant: Miniforge3
           conda-remove-defaults: "true"
 
-      - if: matrix.os == 'ubuntu-latest'
+      - if: matrix.os == 'ubuntu-latest' || matrix.os == 'ubuntu-22.04-arm'
         name: update linux
         run: |
           sudo apt-get update -qq && sudo apt-get install -y desktop-file-utils appstream zsync curl;
-          curl -LO https://github.com/AppImage/appimagetool/releases/download/continuous/appimagetool-x86_64.AppImage;
-          chmod a+x appimagetool-x86_64.AppImage;
+          curl -LO https://github.com/AppImage/appimagetool/releases/download/continuous/appimagetool-$(uname -m).AppImage;
+          chmod a+x appimagetool-$(uname -m).AppImage;
 
-      - if: matrix.os == 'ubuntu-latest' && github.event_name != 'pull_request'
+      - if: matrix.os == 'ubuntu-latest' || matrix.os == 'ubuntu-22.04-arm' && github.event_name != 'pull_request'
         name: import GPG key
         run: echo -e $GPG_KEY | gpg --batch --import
         env:
