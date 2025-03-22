@@ -32,7 +32,7 @@ call mamba create ^
  vtk ^
  xlutils ^
  --copy ^
- -c freecad/label/dev ^
+ -c freecad/label/dev-qt5 ^
  -c conda-forge ^
  -y
  

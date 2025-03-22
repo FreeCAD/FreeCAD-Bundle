@@ -8,7 +8,7 @@ conda_env="AppDir/usr"
 echo -e "\nCreate the environment"
 
 mamba create --copy -y -p ${conda_env} \
-  -c freecad/label/dev \
+  -c freecad/label/dev-qt5 \
   -c conda-forge \
   freecad[*dev] \
   python=3.11 \

@@ -4,7 +4,9 @@ conda_env="APP/FreeCAD.app/Contents/Resources"
 
 mkdir -p $(dirname ${conda_env})
 
-mamba create -y --copy -c freecad/label/dev -c conda-forge -p ${conda_env} \
+mamba create -y --copy -p ${conda_env} \
+  -c freecad/label/dev-qt5 \
+  -c conda-forge \
     python=3.11 \
     freecad[*dev] \
     noqt6 \
