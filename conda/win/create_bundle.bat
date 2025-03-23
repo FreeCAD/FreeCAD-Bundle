@@ -3,40 +3,36 @@ set copy_dir="FreeCAD_Conda_Build"
 
 mkdir %copy_dir%
 
-call mamba create ^
- -p %conda_env% ^
- freecad[*dev] ^
- python=3.11 ^
- noqt6 ^
- blinker ^
- calculix ^
- docutils ^
- gmsh ^
- ifcopenshell ^
- lark ^ ^
- lxml ^
- matplotlib-base ^
- nine ^
- numpy ^
- occt ^
- olefile ^
- opencamlib ^
- pandas ^
- pycollada ^
- pythonocc-core ^
- pyyaml ^
- requests ^
- scipy ^
- six ^
- sympy ^
- vtk ^
- xlutils ^
- --copy ^
- -c freecad/label/dev ^
- -c conda-forge ^
- -y
- 
- 
+call mamba create --copy -y -p %conda_env% ^
+  -c freecad/label/dev ^
+  -c conda-forge ^
+  freecad[*dev] ^
+  python=3.11 ^
+  noqt6 ^
+  blinker ^
+  calculix ^
+  docutils ^
+  gmsh ^
+  ifcopenshell ^
+  lark ^ ^
+  lxml ^
+  matplotlib-base ^
+  nine ^
+  numpy ^
+  occt ^
+  olefile ^
+  opencamlib ^
+  pandas ^
+  pycollada ^
+  pythonocc-core ^
+  pyyaml ^
+  requests ^
+  scipy ^
+  sympy ^
+  vtk ^
+  xlutils ^
+  -y
+  
 %conda_env%\python ..\scripts\get_freecad_version.py
 set /p freecad_version_name= <bundle_name.txt
 

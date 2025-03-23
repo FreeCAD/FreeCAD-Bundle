@@ -7,7 +7,7 @@ fi
 conda_env="AppDir/usr"
 echo -e "\nCreate the environment"
 
-mamba create --copy -y -p ${conda_env} \
+mamba create --copy -p ${conda_env} \
   -c freecad/label/dev \
   -c conda-forge \
   freecad[*dev] \
@@ -33,10 +33,10 @@ mamba create --copy -y -p ${conda_env} \
   pyyaml \
   requests \
   scipy \
-  six \
   sympy \
   vtk \
-  xlutils
+  xlutils \
+  -y
 
 mamba run -p ${conda_env} python ../scripts/get_freecad_version.py
 read -r version_name < bundle_name.txt

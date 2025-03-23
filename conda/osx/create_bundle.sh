@@ -4,35 +4,37 @@ conda_env="APP/FreeCAD.app/Contents/Resources"
 
 mkdir -p $(dirname ${conda_env})
 
-mamba create -y --copy -c freecad/label/dev -c conda-forge -p ${conda_env} \
-    python=3.11 \
-    freecad[*dev] \
-    noqt6 \
-    blas=*=openblas \
-    blinker \
-    calculix \
-    docutils \
-    ifcopenshell \
-    jinja2 \
-    lark \
-    lxml \
-    matplotlib-base \
-    nine \
-    numpy \
-    occt \
-    olefile \
-    opencamlib \
-    opencv \
-    pandas \
-    pycollada \
-    pythonocc-core \
-    pyyaml \
-    requests \
-    scipy \
-    six \
-    sympy \
-    vtk \
-    xlutils
+mamba create --copy -p ${conda_env} \
+  -c freecad/label/dev \
+  -c conda-forge \
+  python=3.11 \
+  freecad[*dev] \
+  noqt6 \
+  blas=*=openblas \
+  blinker \
+  calculix \
+  docutils \
+  ifcopenshell \
+  jinja2 \
+  lark \
+  lxml \
+  matplotlib-base \
+  nine \
+  numpy \
+  occt \
+  olefile \
+  opencamlib \
+  opencv \
+  pandas \
+  pycollada \
+  pythonocc-core \
+  pyyaml \
+  requests \
+  scipy \
+  sympy \
+  vtk \
+  xlutils \
+  -y
 
 # delete unnecessary stuff
 rm -rf ${conda_env}/include
