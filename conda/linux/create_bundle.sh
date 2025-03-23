@@ -60,16 +60,21 @@ cp ${conda_env}/bin_tmp/freecadcmd ${conda_env}/bin/
 cp ${conda_env}/bin_tmp/ccx ${conda_env}/bin/
 cp ${conda_env}/bin_tmp/python ${conda_env}/bin/
 cp ${conda_env}/bin_tmp/pip ${conda_env}/bin/
-cp ${conda_env}/bin_tmp/pyside2-rcc ${conda_env}/bin/
+if [ -f ${conda_env}/bin_tmp/pyside6-rcc ]
+then
+    cp ${conda_env}/bin_tmp/pyside6-rcc ${conda_env}/bin/
+else
+    cp ${conda_env}/bin_tmp/pyside2-rcc ${conda_env}/bin/
+fi
 cp ${conda_env}/bin_tmp/gmsh ${conda_env}/bin/
 cp ${conda_env}/bin_tmp/dot ${conda_env}/bin/
 cp ${conda_env}/bin_tmp/unflatten ${conda_env}/bin/
 sed -i '1s|.*|#!/usr/bin/env python|' ${conda_env}/bin/pip
 rm -rf ${conda_env}/bin_tmp
 
-echo -e "\nCopy qt.conf"
-cp qt.conf ${conda_env}/bin/
-cp qt.conf ${conda_env}/libexec/
+echo -e "\nCopy qt6.conf"
+cp qt6.conf ${conda_env}/bin/
+cp qt6.conf ${conda_env}/libexec/
 
 echo -e "\nCopying Icon and Desktop file"
 cp ${conda_env}/share/applications/org.freecad.FreeCAD.desktop AppDir/
