@@ -13,7 +13,6 @@ mamba create --copy -p ${conda_env} \
   freecad[*dev] \
   python=3.11 \
   noqt5 \
-  appimage-updater-bridge \
   blas=*=openblas \
   blinker \
   calculix \
