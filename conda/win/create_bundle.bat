@@ -8,7 +8,7 @@ call mamba create --copy -y -p %conda_env% ^
   -c conda-forge ^
   freecad[*dev] ^
   python=3.11 ^
-  noqt6 ^
+  noqt5 ^
   blinker ^
   calculix ^
   docutils ^

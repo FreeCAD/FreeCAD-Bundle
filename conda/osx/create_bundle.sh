@@ -9,7 +9,7 @@ mamba create --copy -p ${conda_env} \
   -c conda-forge \
   python=3.11 \
   freecad[*dev] \
-  noqt6 \
+  noqt5 \
   blas=*=openblas \
   blinker \
   calculix \
