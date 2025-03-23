@@ -46,7 +46,12 @@ cp ${conda_env}/bin_tmp/freecadcmd ${conda_env}/bin
 cp ${conda_env}/bin_tmp/ccx ${conda_env}/bin/
 cp ${conda_env}/bin_tmp/python ${conda_env}/bin/
 cp ${conda_env}/bin_tmp/pip ${conda_env}/bin/
-cp ${conda_env}/bin_tmp/pyside2-rcc ${conda_env}/bin/
+if [ -f ${conda_env}/bin_tmp/pyside6-rcc ]
+then
+    cp ${conda_env}/bin_tmp/pyside6-rcc ${conda_env}/bin/
+else
+    cp ${conda_env}/bin_tmp/pyside2-rcc ${conda_env}/bin/
+fi
 cp ${conda_env}/bin_tmp/gmsh ${conda_env}/bin/
 cp ${conda_env}/bin_tmp/dot ${conda_env}/bin/
 cp ${conda_env}/bin_tmp/unflatten ${conda_env}/bin/
@@ -56,9 +61,9 @@ rm -rf ${conda_env}/bin_tmp
 #copy resources
 cp resources/* ${conda_env}
 
-#copy qt.conf
-cp qt.conf ${conda_env}/bin/
-cp qt.conf ${conda_env}/libexec/
+# Copy qt6.conf
+cp qt6.conf ${conda_env}/bin/
+cp qt6.conf ${conda_env}/libexec/
 
 # Remove __pycache__ folders and .pyc files
 find . -path "*/__pycache__/*" -delete
