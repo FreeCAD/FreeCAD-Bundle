@@ -67,10 +67,6 @@ cp ${conda_env}/bin_tmp/unflatten ${conda_env}/bin/
 sed -i '1s|.*|#!/usr/bin/env python|' ${conda_env}/bin/pip
 rm -rf ${conda_env}/bin_tmp
 
-echo -e "\nCopy qt.conf"
-cp qt.conf ${conda_env}/bin/
-cp qt.conf ${conda_env}/libexec/
-
 echo -e "\nCopying Icon and Desktop file"
 cp ${conda_env}/share/applications/org.freecad.FreeCAD.desktop AppDir/
 sed -i 's/Exec=FreeCAD/Exec=AppRun/g' AppDir/org.freecad.FreeCAD.desktop

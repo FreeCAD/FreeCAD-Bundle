@@ -56,10 +56,6 @@ rm -rf ${conda_env}/bin_tmp
 #copy resources
 cp resources/* ${conda_env}
 
-#copy qt.conf
-cp qt.conf ${conda_env}/bin/
-cp qt.conf ${conda_env}/libexec/
-
 # Remove __pycache__ folders and .pyc files
 find . -path "*/__pycache__/*" -delete
 find . -name "*.pyc" -type f -delete
