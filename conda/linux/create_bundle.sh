@@ -44,8 +44,8 @@ echo -e "\################"
 echo -e "version_name:  ${version_name}"
 echo -e "################"
 
-echo -e "\nInstall freecad.appimage_updater"
-mamba run -p ${conda_env} pip install https://github.com/looooo/freecad.appimage_updater/archive/master.zip
+#echo -e "\nInstall freecad.appimage_updater"
+#mamba run -p ${conda_env} pip install https://github.com/looooo/freecad.appimage_updater/archive/master.zip
 
 mamba list -p ${conda_env} > AppDir/packages.txt
 sed -i "1s/.*/\nLIST OF PACKAGES:/" AppDir/packages.txt
