@@ -69,7 +69,7 @@ REM Copy FreeCAD build
 robocopy %conda_env%\Library\bin FreeCAD* %copy_dir%\bin /XF *.pdb /MT:%NUMBER_OF_PROCESSORS% > nul
 robocopy %conda_env%\Library\data %copy_dir%\data /XF *.txt /S /MT:%NUMBER_OF_PROCESSORS% > nul
 robocopy %conda_env%\Library\Ext %copy_dir%\Ext /S /XD __pycache__ /MT:%NUMBER_OF_PROCESSORS% > nul
-robocopy %conda_env%\Library\lib %copy_dir%\lib /XF *.lib /XF *.prl /XF *.sh /MT:%NUMBER_OF_PROCESSORS% > nul
+robocopy %conda_env%\Library\lib %copy_dir%\lib /XF *.lib /XF *.prl /XF *.sh /XF *.exe /XF *.bat /XF *.cmake /S /MT:%NUMBER_OF_PROCESSORS% > nul
 robocopy %conda_env%\Library\Mod %copy_dir%\Mod /S /XD __pycache__ /MT:%NUMBER_OF_PROCESSORS% > nul
 robocopy %conda_env%\Library\doc %copy_dir%\doc ThirdPartyLibraries.html LICENSE.html /MT:%NUMBER_OF_PROCESSORS% > nul
 REM Apply Patches
