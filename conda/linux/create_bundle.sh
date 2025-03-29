@@ -29,6 +29,7 @@ mamba create --copy -p ${conda_env} \
   opencv \
   pandas \
   pycollada \
+  pythonocc-core \
   pyyaml \
   requests \
   scipy \
