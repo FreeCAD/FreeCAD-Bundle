@@ -61,8 +61,8 @@ REM Copy Conda's QT5/plugins to FreeCAD/bin
 robocopy %conda_env%\Library\plugins %copy_dir%\bin\ /S /MT:%NUMBER_OF_PROCESSORS% > nul
 robocopy %conda_env%\Library\resources %copy_dir%\resources /MT:%NUMBER_OF_PROCESSORS% > nul
 robocopy %conda_env%\Library\translations %copy_dir%\translations /MT:%NUMBER_OF_PROCESSORS% > nul
-echo [Paths] > %copy_dir%\bin\qt.conf
-echo Prefix =.. >> "%copy_dir%\bin\qt.conf"
+echo [Paths] > %copy_dir%\bin\qt6.conf
+echo Prefix = ../lib/qt6 >> "%copy_dir%\bin\qt6.conf"
 REM get all the dependency .dlls
 robocopy %conda_env%\Library\bin *.dll %copy_dir%\bin /XF *.pdb /XF api*.* /MT:%NUMBER_OF_PROCESSORS% > nul
 REM Copy FreeCAD build
