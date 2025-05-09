@@ -5,7 +5,7 @@ mkdir %copy_dir%
 
 call mamba create ^
  -p %conda_env% ^
- freecad=1.0.0 ^
+ freecad=1.0.1 ^
  python=3.11 ^
  noqt6 ^
  blinker ^

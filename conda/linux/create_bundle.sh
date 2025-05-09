@@ -10,7 +10,7 @@ echo -e "\nCreate the environment"
 mamba create --copy -y -p ${conda_env} \
   -c freecad \
   -c conda-forge \
-  freecad=1.0.0 \
+  freecad=1.0.1 \
   python=3.11 \
   noqt6 \
   appimage-updater-bridge \
@@ -103,7 +103,7 @@ export GPG_TTY=$(tty)
 chmod a+x ./AppDir/AppRun
 ../../appimagetool-$(uname -m).AppImage \
   --comp zstd --mksquashfs-opt -Xcompression-level --mksquashfs-opt 22 \
-  -u "gh-releases-zsync|FreeCAD|FreeCAD-Bundle|$tag|FreeCAD*$ARCH*.AppImage.zsync" \
+  -u "gh-releases-zsync|FreeCAD|FreeCAD|$tag|FreeCAD*$ARCH*.AppImage.zsync" \
   -s --sign-key ${GPG_KEY_ID} AppDir ${version_name}.AppImage
 
 echo -e "\nCreate hash"

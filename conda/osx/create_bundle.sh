@@ -6,7 +6,7 @@ mkdir -p $(dirname ${conda_env})
 
 mamba create -y --copy -c freecad -c conda-forge -p ${conda_env} \
     python=3.11 \
-    freecad=1.0.0 \
+    freecad=1.0.1 \
     noqt6 \
     blas=*=openblas \
     blinker \
