@@ -87,8 +87,10 @@ sed -i "" "1s/.*/\nLIST OF PACKAGES:/"  APP/FreeCAD.app/Contents/packages.txt
 mv ${conda_env}/Library ${conda_env}/../Library
 
 # create the dmg
-pip3 install --break-system-packages "dmgbuild[badge_icons]>=1.6.0,<1.7.0"
+pip3 install --break-system-packages dmgbuild pyobjc-framework-Quartz
+echo "building dmg image..."
 dmgbuild -s dmg_settings.py "FreeCAD" "${version_name}.dmg"
+[ -f "${version_name}.dmg" ] && echo "wrote ${version_name}.dmg"
 
 # create hash
 shasum -a 256 ${version_name}.dmg > ${version_name}.dmg-SHA256.txt
