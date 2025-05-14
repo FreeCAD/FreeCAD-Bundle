@@ -9,3 +9,5 @@ conda/win/FreeCAD_*
 **-SHA256.txt
 **packages.txt
 **bundle_name.txt
+**.DS_Store
+conda/osx/APP/FreeCAD.app
