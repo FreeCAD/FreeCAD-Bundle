@@ -29,6 +29,7 @@ call mamba create --copy -y -p %conda_env% ^
   requests ^
   scipy ^
   sympy ^
+  typing_extensions ^
   vtk ^
   xlutils ^
   -y
