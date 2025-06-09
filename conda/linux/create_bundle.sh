@@ -97,11 +97,17 @@ fi
 
 echo -e "\nCreate the appimage"
 export GPG_TTY=$(tty)
+export GPG_SIGN_KEY=""
+if [[ -n "${GPG_KEY_ID}" ]]; then
+  export GPG_SIGN_KEY="-s --sign-key ${GPG_KEY_ID}"
+fi
+
 chmod a+x ./AppDir/AppRun
 ../../appimagetool-$(uname -m).AppImage \
-  --comp zstd --mksquashfs-opt -Xcompression-level --mksquashfs-opt 22 \
+  -v --comp zstd --mksquashfs-opt -Xcompression-level --mksquashfs-opt 22 \
+  ${GPG_SIGN_KEY} \
   -u "gh-releases-zsync|FreeCAD|FreeCAD-Bundle|$tag|FreeCAD*$ARCH*.AppImage.zsync" \
-  -s --sign-key ${GPG_KEY_ID} AppDir ${version_name}.AppImage
+  AppDir ${version_name}.AppImage
 
 echo -e "\nCreate hash"
 shasum -a 256 ${version_name}.AppImage > ${version_name}.AppImage-SHA256.txt
