@@ -58,7 +58,7 @@ jobs:
           curl -LO https://github.com/AppImage/appimagetool/releases/download/continuous/appimagetool-$(uname -m).AppImage;
           chmod a+x appimagetool-$(uname -m).AppImage;
 
-      - if: matrix.os == 'ubuntu-latest' || matrix.os == 'ubuntu-22.04-arm' && github.event_name != 'pull_request'
+      - if: github.event_name != 'pull_request' && (matrix.os == 'ubuntu-latest' || matrix.os == 'ubuntu-22.04-arm')
         name: import GPG key
         run: echo -e $GPG_KEY | gpg --batch --import
         env:
