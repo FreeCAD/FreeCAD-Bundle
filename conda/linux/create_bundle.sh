@@ -99,7 +99,7 @@ echo -e "\nCreate the appimage"
 export GPG_TTY=$(tty)
 chmod a+x ./AppDir/AppRun
 ../../appimagetool-$(uname -m).AppImage \
-  --comp zstd --mksquashfs-opt -Xcompression-level --mksquashfs-opt 22 \
+  -v --comp zstd --mksquashfs-opt -Xcompression-level --mksquashfs-opt 22 \
   -u "gh-releases-zsync|FreeCAD|FreeCAD-Bundle|$tag|FreeCAD*$ARCH*.AppImage.zsync" \
   -s --sign-key ${GPG_KEY_ID} AppDir ${version_name}.AppImage
 
