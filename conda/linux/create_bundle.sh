@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -x
+
 if [[ -z "$ARCH" ]]; then
   # Get the architecture of the system
   export ARCH=$(uname -m)

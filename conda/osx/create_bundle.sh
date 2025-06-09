@@ -1,5 +1,7 @@
 # assume we have a working conda available
 
+set -x
+
 conda_env="APP/FreeCAD.app/Contents/Resources"
 
 mkdir -p $(dirname ${conda_env})
