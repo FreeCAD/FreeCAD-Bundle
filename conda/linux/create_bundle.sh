@@ -18,6 +18,7 @@ mamba create --copy -p ${conda_env} \
   calculix \
   docutils \
   ifcopenshell \
+  ladybug-core \
   lark \
   lxml \
   matplotlib-base \

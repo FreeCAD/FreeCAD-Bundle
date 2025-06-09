@@ -14,6 +14,7 @@ call mamba create --copy -y -p %conda_env% ^
   docutils ^
   gmsh ^
   ifcopenshell ^
+  ladybug-core ^
   lark ^ ^
   lxml ^
   matplotlib-base ^
