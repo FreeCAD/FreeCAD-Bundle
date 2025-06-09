@@ -46,7 +46,7 @@ cp ${conda_env}/bin_tmp/freecadcmd ${conda_env}/bin
 cp ${conda_env}/bin_tmp/ccx ${conda_env}/bin/
 cp ${conda_env}/bin_tmp/python ${conda_env}/bin/
 cp ${conda_env}/bin_tmp/pip ${conda_env}/bin/
-cp ${conda_env}/bin_tmp/pyside2-rcc ${conda_env}/bin/
+cp ${conda_env}/bin_tmp/pyside6-rcc ${conda_env}/bin/
 cp ${conda_env}/bin_tmp/gmsh ${conda_env}/bin/
 cp ${conda_env}/bin_tmp/dot ${conda_env}/bin/
 cp ${conda_env}/bin_tmp/unflatten ${conda_env}/bin/
