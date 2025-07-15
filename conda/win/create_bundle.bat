@@ -13,7 +13,7 @@ call mamba create ^
  docutils ^
  gmsh ^
  ifcopenshell ^
- lark ^ ^
+ lark ^
  lxml ^
  matplotlib-base ^
  nine ^
