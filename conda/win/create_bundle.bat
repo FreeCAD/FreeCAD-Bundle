@@ -17,7 +17,7 @@ call mamba create ^
  lxml ^
  matplotlib-base ^
  nine ^
- numpy ^
+ numpy=1.26 ^
  occt ^
  olefile ^
  opencamlib ^

@@ -25,7 +25,7 @@ mamba create --copy -y -p ${conda_env} \
   lxml \
   matplotlib-base \
   nine \
-  numpy \
+  numpy=1.26 \
   occt \
   olefile \
   opencamlib \
