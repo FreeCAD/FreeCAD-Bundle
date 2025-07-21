@@ -14,11 +14,11 @@ call mamba create --copy -y -p %conda_env% ^
   docutils ^
   gmsh ^
   ifcopenshell ^
-  lark ^ ^
+  lark ^
   lxml ^
   matplotlib-base ^
   nine ^
-  numpy ^
+  numpy=1.26 ^
   occt ^
   olefile ^
   opencamlib ^
@@ -33,7 +33,7 @@ call mamba create --copy -y -p %conda_env% ^
   vtk ^
   xlutils ^
   -y
-  
+
 %conda_env%\python ..\scripts\get_freecad_version.py
 set /p freecad_version_name= <bundle_name.txt
 
