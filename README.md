@@ -1,12 +1,13 @@
-# FreeCAD-Bundle[^1] 
+# FreeCAD-Bundle[^1]
 
-## ATTENTION: THIS IS *NOT* THE FREECAD BUGTRACKER[^2]
+> [!TIP]
+> Download FreeCAD weekly bundles from [FreeCAD/FreeCAD/releases](https://github.com/FreeCAD/FreeCAD/releases)
 
 > [!CAUTION]
-> This is strictly an OS/Distro related packaging repository. Weekly generated FreeCAD development builds for testing the latest features/bug fixes. Please only open *packaging or building* related issues here.
-**Do not open general issues about FreeCAD in this repository, but instead in: https://github.com/FreeCAD/FreeCAD**
-
-## 📢 Download weekly bundles from [releases/tag/weekly-builds](https://github.com/FreeCAD/FreeCAD-Bundle/releases/tag/weekly-builds)
+> This is *NOT* the FreeCAD Bugtracker[^2]
+> 
+> This is strictly an OS/Distro related packaging repository. It generates weekly FreeCAD development builds for testing purposes. Please only open *packaging or building* related issues here.
+**Do not open general issues about FreeCAD in this repository, but instead in: https://github.com/FreeCAD/FreeCAD/issues**
 
 ### Alternative Installations
 * **Snap**[^3] Package (Linux based package provides stable and nightly versions for testing)   
