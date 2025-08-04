@@ -29,14 +29,15 @@ call mamba create ^
  scipy ^
  six ^
  sympy ^
+ typing_extensions ^
  vtk ^
  xlutils ^
  --copy ^
  -c freecad ^
  -c conda-forge ^
  -y
- 
- 
+
+
 %conda_env%\python ..\scripts\get_freecad_version.py
 set /p freecad_version_name= <bundle_name.txt
 

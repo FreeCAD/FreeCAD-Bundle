@@ -31,6 +31,7 @@ mamba create -y --copy -c freecad -c conda-forge -p ${conda_env} \
     scipy \
     six \
     sympy \
+    typing_extensions \
     vtk \
     xlutils
 

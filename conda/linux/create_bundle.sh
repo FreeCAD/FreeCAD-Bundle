@@ -36,6 +36,7 @@ mamba create --copy -y -p ${conda_env} \
   scipy \
   six \
   sympy \
+  typing_extensions \
   vtk \
   xlutils
 
