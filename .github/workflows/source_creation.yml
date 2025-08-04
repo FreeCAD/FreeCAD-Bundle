@@ -14,8 +14,8 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        tag: ["1.0.1"]
-        branch: ["1.0.1"]
+        tag: ["1.0.2"]
+        branch: ["1.0.2"]
 
     steps:
       - name: create source package with submodules and version info
@@ -39,7 +39,7 @@ jobs:
              rm \$sha1.tar"
           gzip ../freecad_source.tar
           sha256sum ../freecad_source.tar.gz > ../freecad_source.tar.gz-SHA256.txt
-          
+
       - name: Upload source package to release
         uses: svenstaro/upload-release-action@v2
         with:
@@ -50,7 +50,7 @@ jobs:
           file_glob: true
 
       - name: Upload source to salsa repo
-        run: |          
+        run: |
           git clone https://salsa.debian.org/adrianinsaval/freecad.git --branch versioned-src/dummy --single-branch salsa
           cd salsa
           git checkout -B versioned-src/${{ matrix.branch }} versioned-src/dummy
