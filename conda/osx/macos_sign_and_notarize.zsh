@@ -124,3 +124,6 @@ xcrun notarytool submit --wait --keychain-profile "${KEYCHAIN_PROFILE}" "${DMG_N
 
 # Assuming that notarization succeeded, it's a good practice to staple that notarization to the DMG
 xcrun stapler staple "${DMG_NAME}"
+
+# create hash
+shasum -a 256 "${DMG_NAME}" > "${DMG_NAME}"-SHA256.txt
