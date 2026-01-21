@@ -1,3 +1,6 @@
+@REM SPDX-License-Identifier: LGPL-2.1-or-later
+@REM SPDX-FileNotice: Part of the FreeCAD project.
+
 set conda_env=".\FreeCAD_env"
 set copy_dir="FreeCAD_Conda_Build"
 

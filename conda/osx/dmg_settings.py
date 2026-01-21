@@ -1,3 +1,7 @@
+# SPDX-License-Identifier: LGPL-2.1-or-later
+# SPDX-FileNotice: Part of the FreeCAD project.
+
+
 # Ensure default values are set in defines if they are not already provided
 defines.setdefault('containing_folder', './APP')
 defines.setdefault('app_name', 'FreeCAD.app')
